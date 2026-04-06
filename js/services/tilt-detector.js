@@ -62,6 +62,7 @@ export class TiltDetector {
   #active = false;
   #handler;
   #state = 'fired'; // start as 'fired' so initial position doesn't trigger
+  #landscape = null; // locked on first orientation reading
 
   // Portrait thresholds (beta): neutral is 30..150
   #portraitLow = 30;
@@ -87,6 +88,7 @@ export class TiltDetector {
     if (this.#active) return;
     this.#active = true;
     this.#state = 'fired';
+    this.#landscape = null;
     window.addEventListener('deviceorientation', this.#handler);
   }
 
@@ -95,30 +97,29 @@ export class TiltDetector {
     window.removeEventListener('deviceorientation', this.#handler);
   }
 
-  #isLandscape() {
-    const angle = screen.orientation?.angle ?? 0;
-    return angle === 90 || angle === 270;
-  }
-
   #handleOrientation(e) {
     if (!this.#active) return;
     if (e.beta == null || e.gamma == null) return;
+
+    // Lock orientation on first valid reading: |beta| < 45 → landscape
+    if (this.#landscape === null) {
+      this.#landscape = Math.abs(e.beta) < 45;
+    }
 
     let tiltUp = false;   // nod backward → onCorrect
     let tiltDown = false;  // nod forward → onSkip
     let inNeutral = false;
     let debugExtra = '';
 
-    if (this.#isLandscape()) {
+    if (this.#landscape) {
       // Unwrap gamma: when |beta| > 90, gamma has crossed the ±90 singularity
       let g = e.gamma;
       if (Math.abs(e.beta) > 90) {
         g = g >= 0 ? -(180 - g) : (180 + g);
       }
 
-      // Normalize so both landscape orientations give ~90 at neutral
-      const angle = screen.orientation?.angle ?? 90;
-      const n = angle >= 180 ? g : -g;
+      // |unwrapped gamma| ≈ 90 at neutral regardless of landscape direction
+      const n = Math.abs(g);
 
       inNeutral = n >= this.#landscapeLow && n <= this.#landscapeHigh;
       // Nod backward: gamma toward 0 → n decreases below landscapeLow
@@ -126,7 +127,7 @@ export class TiltDetector {
       // Nod forward: gamma past ±90 → n increases above landscapeHigh
       tiltDown = n > this.#landscapeHigh;
 
-      debugExtra = `g_raw:${e.gamma.toFixed(1)} g_unwrap:${g.toFixed(1)} n:${n.toFixed(1)}`;
+      debugExtra = `g_raw:${e.gamma.toFixed(1)} g_unwrap:${g.toFixed(1)} n:${n.toFixed(1)} lck:gyro`;
     } else {
       // Portrait: beta ~90 on forehead
       const beta = e.beta;
@@ -153,7 +154,7 @@ export class TiltDetector {
       beta: e.beta?.toFixed(1),
       gamma: e.gamma?.toFixed(1),
       angle: screen.orientation?.angle ?? '?',
-      landscape: this.#isLandscape(),
+      landscape: this.#landscape,
       state: this.#state,
       tiltUp,
       tiltDown,
