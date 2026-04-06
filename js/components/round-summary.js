@@ -5,15 +5,19 @@ template.innerHTML = `
     display: flex;
     flex-direction: column;
     height: 100%;
+    overflow: hidden;
   }
   .summary {
     display: flex;
     flex-direction: column;
     align-items: center;
     height: 100%;
+    width: 100%;
     padding: 1.5rem;
+    padding-top: max(1.5rem, env(titlebar-area-height, 0px));
     gap: 1rem;
     overflow-y: auto;
+    overflow-x: hidden;
     box-sizing: border-box;
   }
   h2 {
@@ -46,6 +50,8 @@ template.innerHTML = `
     padding: 0.6rem 0.9rem;
     border-radius: 8px;
     font-size: 0.95rem;
+    min-width: 0;
+    word-break: break-word;
   }
   .results-list .icon { font-size: 1.2rem; }
   .correct-icon { color: var(--color-success, #2ecc71); }

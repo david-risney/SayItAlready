@@ -19,8 +19,6 @@ template.innerHTML = `
     align-items: center;
     justify-content: center;
     height: 100%;
-    padding: 1.5rem;
-    gap: 1rem;
     position: relative;
     overflow: hidden;
     background: var(--color-bg, #1a1a2e);
@@ -48,7 +46,7 @@ template.innerHTML = `
     font-weight: 700;
     color: var(--color-text-muted, #aaa);
     min-height: 2rem;
-    z-index: 1;
+    z-index: 3;
   }
 
   /* --- Word --- */
@@ -58,7 +56,7 @@ template.innerHTML = `
     text-align: center;
     line-height: 1.15;
     padding: 0 0.5rem;
-    z-index: 1;
+    z-index: 3;
   }
   .word.pop {
     animation: pop 200ms ease;
@@ -66,6 +64,41 @@ template.innerHTML = `
   @keyframes pop {
     0%   { transform: scale(0.8); opacity: 0; }
     100% { transform: scale(1);   opacity: 1; }
+  }
+
+  /* --- Tap zones (touch mode) --- */
+  .tap-zones {
+    display: none;
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+  }
+  .tap-zones.visible {
+    display: flex;
+  }
+  .tap-zone {
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 2.5rem;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    border: none;
+    background: none;
+    color: rgba(255 255 255 / 0.25);
+    font-size: 1.1rem;
+    font-weight: 700;
+    font-family: inherit;
+    transition: background 100ms ease;
+  }
+  .tap-zone:active.tap-skip    { background: rgba(243, 156, 18, 0.15); }
+  .tap-zone:active.tap-correct { background: rgba(46, 204, 113, 0.15); }
+  .tap-divider {
+    width: 1px;
+    align-self: stretch;
+    background: rgba(255 255 255 / 0.08);
   }
 
   /* --- Flash overlays --- */
@@ -89,7 +122,7 @@ template.innerHTML = `
   /* --- Hamburger button --- */
   .menu-btn {
     position: absolute;
-    top: 0.75rem;
+    top: max(0.75rem, env(titlebar-area-height, 0px));
     right: 0.75rem;
     z-index: 10;
     background: none;
@@ -106,57 +139,42 @@ template.innerHTML = `
     height: 3px;
     background: var(--color-text, #eee);
     border-radius: 2px;
-    transition: transform 200ms ease, opacity 200ms ease;
   }
-  .menu-btn.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-  .menu-btn.open span:nth-child(2) { opacity: 0; }
-  .menu-btn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-  /* --- Controls panel (hidden by default) --- */
-  .controls {
-    display: none;
-    flex-direction: column;
-    gap: 0.6rem;
-    z-index: 8;
-    width: 100%;
-    max-width: 280px;
-  }
-  .controls.visible {
-    display: flex;
-  }
-  .controls button {
-    font-size: 1rem;
-    font-weight: 700;
-    border: none;
-    border-radius: var(--radius, 12px);
-    padding: 0.7em 1.5em;
-    cursor: pointer;
-    color: #fff;
-    width: 100%;
-    transition: transform 200ms ease;
-  }
-  .controls button:active { transform: scale(0.96); }
-  .btn-correct { background: var(--color-success, #2ecc71); }
-  .btn-skip    { background: var(--color-skip, #f39c12); }
-  .btn-pause   { background: #5b6abf; }
-  .btn-quit    { background: var(--color-surface, #16213e); border: 1px solid #444 !important; }
 
   /* --- Pause overlay --- */
   .pause-overlay {
     display: none;
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.75);
+    background: rgba(0, 0, 0, 0.8);
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    z-index: 6;
-    font-size: 2rem;
-    font-weight: 800;
+    gap: 1.2rem;
+    z-index: 20;
     color: var(--color-text, #eee);
   }
   .pause-overlay.visible {
     display: flex;
   }
+  .pause-overlay .pause-title {
+    font-size: 2rem;
+    font-weight: 800;
+  }
+  .pause-overlay button {
+    font-size: 1.1rem;
+    font-weight: 700;
+    border: none;
+    border-radius: var(--radius, 12px);
+    padding: 0.7em 2em;
+    cursor: pointer;
+    color: #fff;
+    width: 200px;
+    transition: transform 200ms ease;
+  }
+  .pause-overlay button:active { transform: scale(0.96); }
+  .btn-resume { background: var(--color-primary, #e94560); }
+  .btn-quit   { background: var(--color-surface, #16213e); border: 1px solid #444 !important; }
 </style>
 
 <div class="game">
@@ -164,20 +182,24 @@ template.innerHTML = `
   <div class="timer-text"></div>
   <div class="word"></div>
 
-  <button class="menu-btn" aria-label="Toggle controls">
+  <div class="tap-zones">
+    <button class="tap-zone tap-skip">⏭ Skip</button>
+    <div class="tap-divider"></div>
+    <button class="tap-zone tap-correct">✅ Correct</button>
+  </div>
+
+  <button class="menu-btn" aria-label="Pause">
     <span></span><span></span><span></span>
   </button>
 
-  <div class="controls">
-    <button class="btn-correct">✅ Correct</button>
-    <button class="btn-skip">⏭️ Skip</button>
-    <button class="btn-pause">⏸ Pause</button>
-    <button class="btn-quit">🚪 Quit</button>
-  </div>
-
   <div class="flash correct">✅</div>
   <div class="flash skip">⏭️</div>
-  <div class="pause-overlay">PAUSED</div>
+
+  <div class="pause-overlay">
+    <div class="pause-title">PAUSED</div>
+    <button class="btn-resume">▶ Resume</button>
+    <button class="btn-quit">🚪 Quit</button>
+  </div>
 </div>
 `;
 
@@ -283,43 +305,38 @@ export class GameScreen extends HTMLElement {
 
   #bindControls() {
     const menuBtn = this.shadowRoot.querySelector('.menu-btn');
-    const controls = this.shadowRoot.querySelector('.controls');
+    const tapZones = this.shadowRoot.querySelector('.tap-zones');
 
-    // If tilt is unavailable, show controls by default
+    // Show tap zones when not using tilt
     if (!this.#tiltGranted) {
-      controls.classList.add('visible');
-      menuBtn.classList.add('open');
+      tapZones.classList.add('visible');
     }
 
-    // Hamburger toggle
-    menuBtn.addEventListener('click', () => {
-      const open = controls.classList.toggle('visible');
-      menuBtn.classList.toggle('open', open);
-    });
+    // Tap zone buttons
+    this.shadowRoot.querySelector('.tap-correct').addEventListener('click', () => this.#handleCorrect());
+    this.shadowRoot.querySelector('.tap-skip').addEventListener('click', () => this.#handleSkip());
 
-    // Action buttons
-    this.shadowRoot.querySelector('.btn-correct').addEventListener('click', () => this.#handleCorrect());
-    this.shadowRoot.querySelector('.btn-skip').addEventListener('click', () => this.#handleSkip());
-    this.shadowRoot.querySelector('.btn-pause').addEventListener('click', () => this.#togglePause());
+    // Hamburger pauses
+    menuBtn.addEventListener('click', () => this.#togglePause());
+
+    // Pause overlay buttons
+    this.shadowRoot.querySelector('.btn-resume').addEventListener('click', () => this.#togglePause());
     this.shadowRoot.querySelector('.btn-quit').addEventListener('click', () => this.#quit());
   }
 
   #togglePause() {
     this.#paused = !this.#paused;
-    const pauseBtn = this.shadowRoot.querySelector('.btn-pause');
     const pauseOverlay = this.shadowRoot.querySelector('.pause-overlay');
     const wordEl = this.shadowRoot.querySelector('.word');
 
     if (this.#paused) {
       this.#timer?.stop();
       this.#tilt?.stop();
-      pauseBtn.textContent = '▶ Resume';
       pauseOverlay.classList.add('visible');
       wordEl.style.visibility = 'hidden';
     } else {
       this.#timer?.start();
       if (this.#tiltGranted) this.#tilt?.start();
-      pauseBtn.textContent = '⏸ Pause';
       pauseOverlay.classList.remove('visible');
       wordEl.style.visibility = '';
     }

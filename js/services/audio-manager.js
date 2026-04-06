@@ -2,6 +2,8 @@
  * Manages sound effects and haptic feedback using the Web Audio API.
  * Generates tones programmatically — no audio files needed.
  */
+import { getSettings } from './settings.js';
+
 export class AudioManager {
   #ctx = null;
 
@@ -17,6 +19,7 @@ export class AudioManager {
 
   /** Play a short tone. */
   #playTone(frequency, duration = 0.15, type = 'sine', gain = 0.3) {
+    if (!getSettings().soundEnabled) return;
     const ctx = this.#ensureContext();
     const osc = ctx.createOscillator();
     const vol = ctx.createGain();
@@ -31,6 +34,7 @@ export class AudioManager {
   }
 
   #vibrate(pattern) {
+    if (!getSettings().vibrationEnabled) return;
     if (navigator.vibrate) {
       navigator.vibrate(pattern);
     }
