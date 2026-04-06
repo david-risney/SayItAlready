@@ -1,0 +1,369 @@
+{
+  "id": "among-us",
+  "name": "Among Us",
+  "description": "That's kinda sus!",
+  "icon": "🚀",
+  "background": "linear-gradient(135deg, #1a237e, #283593)",
+  "words": [
+    {
+      "text": "Impostor",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Crewmate",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Emergency Meeting",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Sus",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Vent",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Dead Body",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Report Body",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Eject",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Sabotage",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Kill",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Red",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Where",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Vote Them Out",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Skip Vote",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Cafeteria",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Ghost",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "I Saw Him Vent",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Trust Me Bro",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "The Skeld",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Lobby",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Electrical",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Medbay",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Admin",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Navigation",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Reactor",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Shields",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Communications",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Storage",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Weapons",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "O2",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Security",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Swipe Card",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Fix Wiring",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Download Data",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Asteroids",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Blue",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Green",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Yellow",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Purple",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Self Report",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Empty Garbage",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Simon Says",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Scan",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Third Impostor",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Marinating",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "AFK",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Speed Run",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Mini Crewmate",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Mira HQ",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Polus",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Airship",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Shapeshifter",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Guardian Angel",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Engineer",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Scientist",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "White",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Black",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Orange",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Pink",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Cyan",
+      "tags": [
+        "difficulty:2"
+      ]
+    }
+  ]
+}

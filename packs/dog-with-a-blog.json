@@ -1,0 +1,369 @@
+{
+  "id": "dog-with-a-blog",
+  "name": "Dog with a Blog",
+  "description": "Who let the dog blog?",
+  "icon": "🐕",
+  "background": "linear-gradient(135deg, #6d4c41, #a1887f)",
+  "words": [
+    {
+      "text": "Stan",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Avery Jennings",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Tyler James",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Chloe James",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Bennett James",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Ellen Jennings",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Talking Dog",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Blog",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Disney Channel",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Stan the Dog",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Blended Family",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Stan's Blog",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Dog Park",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Stan Speaks",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Secret Keeper",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Pasadena",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "G Hannelius",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Halloween Episode",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Christmas Special",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Kuma",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Nikki",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Wes",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Karl Fink",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Lindsay",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Principal Murphy",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Max",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Gracie",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Freaky Fido",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Dog Show",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Stan Runs Away",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Avery's Blog",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Tyler's Band",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Chloe's Lemonade Stand",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Bennett's Novel",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Ellen's Catering",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Disaster Date",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "The Bike",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Science Fair",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Talent Show",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "The Truck",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "The Jennings-James Family",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Blake Michael",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Francesca Capaldi",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Regan Burns",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Beth Littleford",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Mick",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Stephen Full",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Bark to the Future",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Dog Blog Awards",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Stan's Girlfriend",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Who's the Boss",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Wag the Dog",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Howloween",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Dog with a Bone",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Pup Star",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Kibble",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Fetch",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Love Triangle",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Stan's Nemesis",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Li'l Treat",
+      "tags": [
+        "difficulty:2"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,369 @@
+{
+  "id": "parks-and-rec",
+  "name": "Parks and Recreation",
+  "description": "Treat yo self to some guessing!",
+  "icon": "🌳",
+  "background": "linear-gradient(135deg, #558b2f, #9ccc65)",
+  "words": [
+    {
+      "text": "Leslie Knope",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Ron Swanson",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Pawnee",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Waffles",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Lil Sebastian",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Ben Wyatt",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Andy Dwyer",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "April Ludgate",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Treat Yo Self",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Tom Haverford",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Ann Perkins",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Chris Traeger",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Donna Meagle",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Mouse Rat",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Snake Juice",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Duke Silver",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Burt Macklin",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Champion",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "JJ's Diner",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Calzones",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Jerry Gergich",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Tammy Two",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Harvest Festival",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Entertainment 720",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Sweetums",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Eagleton",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Jean-Ralphio",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Galentines Day",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Meat Tornado",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Cones of Dunshire",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Janet Snakehole",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Pawnee Goddesses",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Bobby Newport",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Parks Department",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Knope 2012",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "The Pit",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Rent-A-Swag",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Paunch Burger",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Perd Hapley",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Johnny Karate",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Network Connectivity Problems",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Tammy One",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Lot 48",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Flu Season",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Ethel Beavers",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Eagleton Ron",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Smallest Park",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Kaboom",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "The Camel",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Camping",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Dog-with-a-Blog",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Whittling",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Bacon",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Breakfast Food",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Very Good Building Company",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Drop Dead Gorgeous",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Macklin You Son of a Bitch",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Rec Center",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Li'l Treat",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Literally",
+      "tags": [
+        "difficulty:2"
+      ]
+    }
+  ]
+}

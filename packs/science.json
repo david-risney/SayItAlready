@@ -1,0 +1,369 @@
+{
+  "id": "science",
+  "name": "Science",
+  "description": "It's not rocket sci— okay maybe it is",
+  "icon": "🔬",
+  "background": "linear-gradient(135deg, #00838f, #26c6da)",
+  "words": [
+    {
+      "text": "Gravity",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Volcano",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Dinosaur",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Rainbow",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Magnet",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Electricity",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Telescope",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Solar System",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "DNA",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Atom",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Bacteria",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Fossil",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Eclipse",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Evolution",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Earthquake",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Tornado",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Lightning",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Planet",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Microscope",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Galaxy",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Photosynthesis",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Black Hole",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Mitochondria",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Neutron",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Chromosome",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Magnetism",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Supernova",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Periodic Table",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Electron",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Hypothesis",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Solar Eclipse",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Tectonic Plates",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Antibody",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Friction",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Constellation",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Molecule",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Enzyme",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Centrifuge",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Stem Cell",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Catalyst",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Quasar",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Isotope",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Nebula",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Boson",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Heisenberg Principle",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Mitosis",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Covalent Bond",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Doppler Effect",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Enthalpy",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Hadron",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Dark Matter",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Redshift",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Ribosome",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Thermodynamics",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Planck Constant",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Fermentation",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Allele",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Synapse",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Antimatter",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Schrödinger",
+      "tags": [
+        "difficulty:2"
+      ]
+    }
+  ]
+}

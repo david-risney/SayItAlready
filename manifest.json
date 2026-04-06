@@ -1,0 +1,17 @@
+{
+  "name": "Say It Already!",
+  "short_name": "SayItAlready",
+  "description": "A Heads Up!–style party word game",
+  "start_url": ".",
+  "display": "fullscreen",
+  "orientation": "portrait",
+  "background_color": "#1a1a2e",
+  "theme_color": "#1a1a2e",
+  "icons": [
+    {
+      "src": "icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

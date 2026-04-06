@@ -1,0 +1,369 @@
+{
+  "id": "90s-nostalgia",
+  "name": "90s Nostalgia",
+  "description": "All that and a bag of chips!",
+  "icon": "📼",
+  "background": "linear-gradient(135deg, #ad1457, #f06292)",
+  "words": [
+    {
+      "text": "Tamagotchi",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Furby",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Spice Girls",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Fresh Prince",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Game Boy",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Blockbuster",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Beanie Babies",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Walkman",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Rollerblades",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Power Rangers",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Seinfeld",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Titanic",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Macarena",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Rugrats",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Nokia",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Boy Bands",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Floppy Disk",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Dial-Up Internet",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Pokemon",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Backstreet Boys",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Pogs",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Napster",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Goosebumps",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Oregon Trail",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "TRL",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "AOL Instant Messenger",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Fanny Pack",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Lisa Frank",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Yo-Yo",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Slap Bracelet",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Skip It",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Dunkaroos",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Geocities",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Beavis and Butt-Head",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Ren and Stimpy",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Clarissa Explains It All",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Daria",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Discman",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Lava Lamp",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Gak",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Moon Shoes",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Teddy Ruxpin",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "HitClips",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Sky Dancers",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Creepy Crawlers",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Bop It",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Koosh Ball",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Talkboy",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Dream Phone",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Crossfire",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Hypercolor",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "JNCO Jeans",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Socker Boppers",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Stretch Armstrong",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Super Soaker",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Crazy Bones",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Devil Sticks",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Chia Pet",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Magic Eye",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Liquid Television",
+      "tags": [
+        "difficulty:2"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,369 @@
+{
+  "id": "community",
+  "name": "Community",
+  "description": "Streets ahead!",
+  "icon": "🎓",
+  "background": "linear-gradient(135deg, #4a148c, #7c43bd)",
+  "words": [
+    {
+      "text": "Jeff Winger",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Abed Nadir",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Troy Barnes",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Britta Perry",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Annie Edison",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Shirley Bennett",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Pierce Hawthorne",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Dean Pelton",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Greendale",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Paintball",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Cool Cool Cool",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Streets Ahead",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Senor Chang",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Study Room F",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Darkest Timeline",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Troy and Abed in the Morning",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Human Being",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Six Seasons and a Movie",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Pop Pop",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Inspector Spacetime",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Blanketsburg",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Pillowtown",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Meow Meow Beenz",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Chicken Fingers",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Annie's Boobs",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Luis Guzman Statue",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Remedial Chaos Theory",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Hot Lava",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Ass Crack Bandit",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "City College",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Starburns",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Fat Neil",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Magnitude",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Subway",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Frankie Dart",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Elroy Patashnik",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Hickey",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Advanced Dungeons and Dragons",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Cooperative Calligraphy",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Modern Warfare",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Epidemiology",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Paradigms of Human Memory",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Conspiracy Theories",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Mixology Certification",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Basic Lupine Urology",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Borchert",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Vice Dean Laybourne",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Garrett",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Leonard",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Vicki",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Craig Pelton Dalmatian Costume",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Anthropology",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Dreamatorium",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Pierce's Moist Towelettes",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Evil Abed",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Changnesia",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "G.I. Jeff",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Repilot",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Todd",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Bus Driver Jeff",
+      "tags": [
+        "difficulty:2"
+      ]
+    }
+  ]
+}

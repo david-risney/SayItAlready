@@ -1,0 +1,369 @@
+{
+  "id": "disney-parks",
+  "name": "Disney Parks",
+  "description": "The happiest guessing game on Earth!",
+  "icon": "🏰",
+  "background": "linear-gradient(135deg, #1565c0, #7b1fa2)",
+  "words": [
+    {
+      "text": "Space Mountain",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Pirates of the Caribbean",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Haunted Mansion",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "It's a Small World",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Jungle Cruise",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Magic Kingdom",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Epcot",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Disneyland",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Cinderella Castle",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Mickey Ears",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Fireworks",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Main Street USA",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Tomorrowland",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Fantasyland",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Splash Mountain",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Dole Whip",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Turkey Leg",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Churro",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Monorail",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Walt Disney",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Big Thunder Mountain",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Indiana Jones Adventure",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Tower of Terror",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Rock 'n' Roller Coaster",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Expedition Everest",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Test Track",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Soarin'",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Radiator Springs Racers",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Rise of the Resistance",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Millennium Falcon Smugglers Run",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Hollywood Studios",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Animal Kingdom",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "California Adventure",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Adventureland",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Frontierland",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Galaxy's Edge",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Sleeping Beauty Castle",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "World Showcase",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Matterhorn Bobsleds",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Star Tours",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Spaceship Earth",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "FastPass",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Genie Plus",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Lightning Lane",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Magic Band",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Park Hopper",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Imagineering",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Audio Animatronics",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Hidden Mickey",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Club 33",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Fantasmic",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Tiki Room",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Country Bear Jamboree",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Carousel of Progress",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "PeopleMover",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Buzz Lightyear",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Dumbo",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Mad Tea Party",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Guardians of the Galaxy Mission Breakout",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Kilimanjaro Safaris",
+      "tags": [
+        "difficulty:2"
+      ]
+    }
+  ]
+}

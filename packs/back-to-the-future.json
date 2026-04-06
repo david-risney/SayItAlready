@@ -1,0 +1,369 @@
+{
+  "id": "back-to-the-future",
+  "name": "Back to the Future",
+  "description": "Great Scott! Guess the reference!",
+  "icon": "⚡",
+  "background": "linear-gradient(135deg, #1565c0, #0d47a1)",
+  "words": [
+    {
+      "text": "DeLorean",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Marty McFly",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Doc Brown",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Flux Capacitor",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Time Machine",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Hoverboard",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Clock Tower",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Biff Tannen",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Hill Valley",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Lightning",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Skateboard",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Jennifer Parker",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "George McFly",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Lorraine",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Time Travel",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "88 Miles Per Hour",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Power of Love",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Johnny B. Goode",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Twin Pines Mall",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Enchantment Under the Sea",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Plutonium",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Time Circuit",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Almanac",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Mr. Fusion",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Lone Pine Mall",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Einstein",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Libyans",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Life Preserver",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Manure Truck",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Western Union",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Clara Clayton",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Mad Dog Tannen",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Time Train",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Griff Tannen",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Goldie Wilson",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Cafe 80s",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Pepsi Perfect",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Jaws 19",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Zemeckis",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Huey Lewis",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Strickland",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Re-Elect Mayor Goldie Wilson",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Baines",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Lou's Cafe",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Statler Toyota",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Chicken",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Matchbox Car",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Sleep Walking",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Lydia",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Peabody Farm",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Douglas Needles",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Hilldale",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Pleasure Paradise",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Blast from the Past",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Pointed Shoes",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Uncle Joey",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Dave McFly",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Linda McFly",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Marvin Berry",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Blacksmith",
+      "tags": [
+        "difficulty:2"
+      ]
+    }
+  ]
+}

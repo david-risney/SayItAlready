@@ -1,0 +1,369 @@
+{
+  "id": "simpsons",
+  "name": "The Simpsons",
+  "description": "D'oh! Guess the reference!",
+  "icon": "🍩",
+  "background": "linear-gradient(135deg, #f9a825, #fdd835)",
+  "words": [
+    {
+      "text": "Homer Simpson",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Marge Simpson",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Bart Simpson",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Lisa Simpson",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Maggie Simpson",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Ned Flanders",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Mr. Burns",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Krusty the Clown",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Moe Szyslak",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Duff Beer",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Springfield",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Couch Gag",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Eat My Shorts",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "D'oh",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Itchy and Scratchy",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Milhouse",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Nelson Muntz",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Chief Wiggum",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Apu",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Principal Skinner",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Smithers",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Barney Gumble",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Ralph Wiggum",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Sideshow Bob",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Comic Book Guy",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Groundskeeper Willie",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Patty and Selma",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Hans Moleman",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Troy McClure",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Lenny and Carl",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Treehouse of Horror",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Radioactive Man",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Monorail",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Steamed Hams",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Spider Pig",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "El Barto",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Dental Plan",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Power Plant",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Kwik-E-Mart",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Edna Krabappel",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Stonecutters",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Saxamaphone",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Three Eyed Fish",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Shelbyville",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Tomacco",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Max Power",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Hank Scorpio",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Frank Grimes",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Lionel Hutz",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Dr. Nick",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Cletus",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Fat Tony",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Snake Jailbird",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Disco Stu",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Gil Gunderson",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Professor Frink",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Jebediah Springfield",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Inanimate Carbon Rod",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Worst Episode Ever",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Flanders Mustache",
+      "tags": [
+        "difficulty:2"
+      ]
+    }
+  ]
+}

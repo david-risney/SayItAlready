@@ -1,0 +1,369 @@
+{
+  "id": "animals",
+  "name": "Animals",
+  "description": "Guess the animal!",
+  "icon": "🐾",
+  "background": "linear-gradient(135deg, #2d6a4f, #40916c)",
+  "words": [
+    {
+      "text": "Dog",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Cat",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Elephant",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Penguin",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Dolphin",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Giraffe",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Lion",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Monkey",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Horse",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Rabbit",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Bear",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Shark",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Eagle",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Frog",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Turtle",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Kangaroo",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Flamingo",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Parrot",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Koala",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Gorilla",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Chameleon",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Octopus",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Hedgehog",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Cheetah",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Jellyfish",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Crocodile",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Sloth",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Peacock",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Starfish",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Seahorse",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Toucan",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Otter",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Hamster",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Lobster",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Porcupine",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Wolverine",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Bison",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Vulture",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Iguana",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Stingray",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Platypus",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Armadillo",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Axolotl",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Narwhal",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Tapir",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Pangolin",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Capybara",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Okapi",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Quokka",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Fennec Fox",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Mandrill",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Komodo Dragon",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Manatee",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Chinchilla",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Dugong",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Binturong",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Cassowary",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Gharial",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Kakapo",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Numbat",
+      "tags": [
+        "difficulty:2"
+      ]
+    }
+  ]
+}

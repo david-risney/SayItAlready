@@ -1,0 +1,369 @@
+{
+  "id": "fast-food",
+  "name": "Fast Food Restaurants",
+  "description": "Would you like fries with that guess?",
+  "icon": "🍔",
+  "background": "linear-gradient(135deg, #c62828, #ef6c00)",
+  "words": [
+    {
+      "text": "McDonald's",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Burger King",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Wendy's",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Taco Bell",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Chick-fil-A",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "KFC",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Subway",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Starbucks",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Domino's",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Pizza Hut",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Dunkin'",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Chipotle",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Popeyes",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Sonic Drive-In",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Dairy Queen",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Five Guys",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Panda Express",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Little Caesars",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Papa Johns",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Krispy Kreme",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "In-N-Out Burger",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Whataburger",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Jack in the Box",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Carl's Jr",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Hardee's",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Raising Cane's",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Culver's",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Shake Shack",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Wingstop",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Zaxby's",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Jersey Mike's",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Jimmy John's",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Firehouse Subs",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Panera Bread",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Arby's",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "White Castle",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Checkers",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Bojangles",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Waffle House",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Dutch Bros",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "El Pollo Loco",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Del Taco",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Rally's",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Church's Chicken",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Long John Silver's",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Captain D's",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Wawa",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Sheetz",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Buc-ee's",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Jollibee",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Nando's",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Tim Hortons",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "A&W",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Steak 'n Shake",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Portillo's",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Cookout",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Freddy's",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Habit Burger",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Smashburger",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Tropical Smoothie",
+      "tags": [
+        "difficulty:2"
+      ]
+    }
+  ]
+}

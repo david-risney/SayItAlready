@@ -1,0 +1,369 @@
+{
+  "id": "food",
+  "name": "Food & Drink",
+  "description": "Delicious guessing!",
+  "icon": "🍕",
+  "background": "linear-gradient(135deg, #e65100, #ff8f00)",
+  "words": [
+    {
+      "text": "Pizza",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Hamburger",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Sushi",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Pancakes",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Ice Cream",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "French Fries",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Tacos",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Chocolate",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Spaghetti",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Waffles",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Hot Dog",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Popcorn",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Burrito",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Avocado",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Nachos",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Smoothie",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Doughnut",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Pretzel",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Mac and Cheese",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Ramen",
+      "tags": [
+        "difficulty:0"
+      ]
+    },
+    {
+      "text": "Croissant",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Tiramisu",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Guacamole",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Espresso",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Kimchi",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Lasagna",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Dumpling",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Cheesecake",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Falafel",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Gelato",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Churros",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Fondue",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Bruschetta",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Mozzarella",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Edamame",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Poutine",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Mimosa",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Pad Thai",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Gyoza",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Biscotti",
+      "tags": [
+        "difficulty:1"
+      ]
+    },
+    {
+      "text": "Soufflé",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Paella",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Ceviche",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Macaron",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Gnocchi",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Bibimbap",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Bouillabaisse",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Crème Brûlée",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Shakshuka",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Pho",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Tagine",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Pierogi",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Baba Ganoush",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Arancini",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Tzatziki",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Charcuterie",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Tempura",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Mole",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Baklava",
+      "tags": [
+        "difficulty:2"
+      ]
+    },
+    {
+      "text": "Affogato",
+      "tags": [
+        "difficulty:2"
+      ]
+    }
+  ]
+}
