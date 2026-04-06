@@ -8,6 +8,7 @@ import { requestTiltPermission, probeTiltAvailable } from './services/tilt-detec
 
 const app = document.getElementById('app');
 let allDecks = null;
+let routing = false; // true while handling popstate, suppresses URL side-effects
 
 async function ensureDecks() {
   if (!allDecks) allDecks = await loadAllDecks();
@@ -56,13 +57,14 @@ function showHome(opts = {}) {
   }
 }
 
-function showGame(deck, tiltGranted = false, difficulty = 2) {
+function showGame(deck, tiltGranted = false, difficulty = 2, controlMode = 'touch') {
   lockLandscape();
   app.innerHTML = '';
   const game = document.createElement('game-screen');
   game.deck = deck;
   game.duration = 60;
   game.tiltGranted = tiltGranted;
+  game.controlMode = controlMode;
   game.difficulty = difficulty;
   app.appendChild(game);
 }
@@ -75,24 +77,28 @@ function showSummary(deck, results) {
   app.appendChild(summary);
 }
 
-async function startGameFromDeckId(deckId) {
+async function startGameFromDeckId(deckId, startPaused = false) {
   const decks = await ensureDecks();
   const deck = findDeck(decks, deckId);
   if (!deck) { replaceView({ view: 'main' }); showHome(); return; }
-  const useGyro = getSettings().controlMode === 'gyro';
+  const controlMode = getSettings().controlMode;
   let tiltAvailable = false;
-  if (useGyro) {
+  if (controlMode === 'gyro') {
     const permGranted = await requestTiltPermission();
     tiltAvailable = permGranted ? await probeTiltAvailable(1500) : false;
   }
-  showGame(deck, tiltAvailable);
+  showGame(deck, tiltAvailable, 2, controlMode);
+  if (startPaused) {
+    const game = app.querySelector('game-screen');
+    game?.showPause();
+  }
 }
 
 /* ---- Event delegation ---- */
 app.addEventListener('start-game', (e) => {
-  const { deck, tiltGranted, difficulty } = e.detail;
+  const { deck, tiltGranted, difficulty, controlMode } = e.detail;
   pushView({ view: 'game', deck: deck.id });
-  showGame(deck, tiltGranted, difficulty);
+  showGame(deck, tiltGranted, difficulty, controlMode);
 });
 
 app.addEventListener('round-end', (e) => {
@@ -117,8 +123,24 @@ app.addEventListener('settings-open', () => {
   pushView({ view: 'settings' });
 });
 
+app.addEventListener('game-paused', () => {
+  if (routing) return;
+  const game = app.querySelector('game-screen');
+  const deckId = game?.deck?.id;
+  if (deckId) pushView({ view: 'game-paused', deck: deckId });
+});
+
+app.addEventListener('game-resumed', () => {
+  if (routing) return;
+  // Pop back to the game URL — but only if we're on game-paused
+  const p = getViewParams();
+  if (p.view === 'game-paused') history.back();
+});
+
 /* ---- Back button ---- */
 window.addEventListener('popstate', async () => {
+  routing = true;
+  try {
   const p = getViewParams();
   const home = app.querySelector('home-screen');
   switch (p.view) {
@@ -143,14 +165,37 @@ window.addEventListener('popstate', async () => {
       if (home) { home.closeDialogs(); } else { showHome(); }
       break;
     }
+    case 'game-paused': {
+      const game = app.querySelector('game-screen');
+      if (game) {
+        // Already on game screen with pause overlay — ensure it's shown
+        game.showPause();
+      } else if (p.deck) {
+        // No game in progress, start a new one paused
+        await startGameFromDeckId(p.deck, true);
+      } else {
+        showHome();
+      }
+      break;
+    }
     case 'game': {
-      if (p.deck) { await startGameFromDeckId(p.deck); }
-      else if (home) { home.closeDialogs(); } else { showHome(); }
+      const game = app.querySelector('game-screen');
+      if (game) {
+        // Back from pause overlay → resume
+        game.hidePause();
+      } else if (p.deck) {
+        await startGameFromDeckId(p.deck);
+      } else if (home) {
+        home.closeDialogs();
+      } else {
+        showHome();
+      }
       break;
     }
     default:
       if (home) { home.closeDialogs(); } else { showHome(); }
   }
+  } finally { routing = false; }
 });
 
 /* ---- Orientation helpers ---- */
@@ -201,6 +246,15 @@ if ('serviceWorker' in navigator) {
       if (p.deck) {
         replaceView({ view: 'game', deck: p.deck });
         await startGameFromDeckId(p.deck);
+      } else {
+        replaceView({ view: 'main' });
+        showHome();
+      }
+      break;
+    case 'game-paused':
+      if (p.deck) {
+        replaceView({ view: 'game-paused', deck: p.deck });
+        await startGameFromDeckId(p.deck, true);
       } else {
         replaceView({ view: 'main' });
         showHome();

@@ -175,6 +175,22 @@ template.innerHTML = `
   .pause-overlay button:active { transform: scale(0.96); }
   .btn-resume { background: var(--color-primary, #e94560); }
   .btn-quit   { background: var(--color-surface, #16213e); border: 1px solid #444 !important; }
+
+  /* --- Swipe mode hint --- */
+  .swipe-hint {
+    display: none;
+    position: absolute;
+    bottom: 2rem;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: rgba(255 255 255 / 0.25);
+    font-size: 1rem;
+    font-weight: 700;
+    z-index: 3;
+    pointer-events: none;
+  }
+  .swipe-hint.visible { display: block; }
 </style>
 
 <div class="game">
@@ -200,6 +216,8 @@ template.innerHTML = `
     <button class="btn-resume">▶ Resume</button>
     <button class="btn-quit">🚪 Quit</button>
   </div>
+
+  <div class="swipe-hint">⟵ Skip · Correct ⟶</div>
 </div>
 `;
 
@@ -212,10 +230,12 @@ export class GameScreen extends HTMLElement {
   #tilt = null;
   #audio = new AudioManager();
   #duration = 60;
-  #tiltGranted = false;
+  #controlMode = 'touch'; // 'gyro' | 'touch' | 'swipe'
   #paused = false;
   #wakeLock = null;
   #difficulty = 2;
+  #swipeStartX = 0;
+  #swipeStartY = 0;
 
   constructor() {
     super();
@@ -228,12 +248,20 @@ export class GameScreen extends HTMLElement {
     this.#deck = d;
   }
 
+  get deck() {
+    return this.#deck;
+  }
+
   set duration(val) {
     this.#duration = val;
   }
 
   set tiltGranted(val) {
-    this.#tiltGranted = val;
+    if (val) this.#controlMode = 'gyro';
+  }
+
+  set controlMode(val) {
+    this.#controlMode = val;
   }
 
   set difficulty(val) {
@@ -295,7 +323,7 @@ export class GameScreen extends HTMLElement {
 
   /* ---- Tilt ---- */
   #startTilt() {
-    if (!this.#tiltGranted) return; // no permission or no sensor
+    if (this.#controlMode !== 'gyro') return;
     this.#tilt = new TiltDetector({
       onCorrect: () => this.#handleCorrect(),
       onSkip: () => this.#handleSkip(),
@@ -307,9 +335,15 @@ export class GameScreen extends HTMLElement {
     const menuBtn = this.shadowRoot.querySelector('.menu-btn');
     const tapZones = this.shadowRoot.querySelector('.tap-zones');
 
-    // Show tap zones when not using tilt
-    if (!this.#tiltGranted) {
+    // Show tap zones when using touch mode
+    if (this.#controlMode === 'touch') {
       tapZones.classList.add('visible');
+    }
+
+    // Show swipe hint when using swipe mode
+    if (this.#controlMode === 'swipe') {
+      this.shadowRoot.querySelector('.swipe-hint').classList.add('visible');
+      this.#bindSwipe();
     }
 
     // Tap zone buttons
@@ -324,6 +358,34 @@ export class GameScreen extends HTMLElement {
     this.shadowRoot.querySelector('.btn-quit').addEventListener('click', () => this.#quit());
   }
 
+  /* ---- Swipe gesture ---- */
+  #bindSwipe() {
+    const el = this.shadowRoot.querySelector('.game');
+    const MIN_DX = 60;   // minimum horizontal travel in px
+    const MAX_DY_RATIO = 0.7; // max vertical/horizontal ratio to count as horizontal swipe
+
+    el.addEventListener('touchstart', (e) => {
+      if (this.#paused) return;
+      const t = e.changedTouches[0];
+      this.#swipeStartX = t.clientX;
+      this.#swipeStartY = t.clientY;
+    }, { passive: true });
+
+    el.addEventListener('touchend', (e) => {
+      if (this.#paused) return;
+      const t = e.changedTouches[0];
+      const dx = t.clientX - this.#swipeStartX;
+      const dy = Math.abs(t.clientY - this.#swipeStartY);
+      if (Math.abs(dx) < MIN_DX) return;
+      if (dy / Math.abs(dx) > MAX_DY_RATIO) return;
+      if (dx > 0) {
+        this.#handleCorrect();
+      } else {
+        this.#handleSkip();
+      }
+    }, { passive: true });
+  }
+
   #togglePause() {
     this.#paused = !this.#paused;
     const pauseOverlay = this.shadowRoot.querySelector('.pause-overlay');
@@ -334,11 +396,13 @@ export class GameScreen extends HTMLElement {
       this.#tilt?.stop();
       pauseOverlay.classList.add('visible');
       wordEl.style.visibility = 'hidden';
+      this.dispatchEvent(new CustomEvent('game-paused', { bubbles: true, composed: true }));
     } else {
       this.#timer?.start();
-      if (this.#tiltGranted) this.#tilt?.start();
+      if (this.#controlMode === 'gyro') this.#tilt?.start();
       pauseOverlay.classList.remove('visible');
       wordEl.style.visibility = '';
+      this.dispatchEvent(new CustomEvent('game-resumed', { bubbles: true, composed: true }));
     }
   }
 
@@ -346,6 +410,15 @@ export class GameScreen extends HTMLElement {
     this.#timer?.stop();
     this.#tilt?.stop();
     this.dispatchEvent(new CustomEvent('go-home', { bubbles: true, composed: true }));
+  }
+
+  /* ---- Public pause API for router ---- */
+  showPause() {
+    if (!this.#paused) this.#togglePause();
+  }
+
+  hidePause() {
+    if (this.#paused) this.#togglePause();
   }
 
   /* ---- Game logic ---- */

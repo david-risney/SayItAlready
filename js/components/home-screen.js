@@ -584,10 +584,15 @@ template.innerHTML = `
         <span class="status gyro-status">…</span>
         <span class="label">Tilt</span>
       </label>
+      <label class="control-row control-swipe">
+        <input type="radio" name="control-mode" value="swipe">
+        <span class="status swipe-status">…</span>
+        <span class="label">Swipe</span>
+      </label>
       <label class="control-row control-touch">
         <input type="radio" name="control-mode" value="touch">
-        <span class="status">👆</span>
-        <span class="label">Touch Buttons</span>
+        <span class="status">�</span>
+        <span class="label">Buttons</span>
       </label>
       <div class="kb-section">
         <span class="status">⌨️</span>
@@ -689,7 +694,9 @@ export class HomeScreen extends HTMLElement {
     const chkVibration = this.shadowRoot.querySelector('.chk-vibration');
     const radioGyro = this.shadowRoot.querySelector('input[value="gyro"]');
     const radioTouch = this.shadowRoot.querySelector('input[value="touch"]');
+    const radioSwipe = this.shadowRoot.querySelector('input[value="swipe"]');
     const gyroRow = this.shadowRoot.querySelector('.control-gyro');
+    const swipeRow = this.shadowRoot.querySelector('.control-swipe');
 
     // Load saved settings
     const settings = getSettings();
@@ -697,6 +704,8 @@ export class HomeScreen extends HTMLElement {
     chkVibration.checked = settings.vibrationEnabled;
     if (settings.controlMode === 'touch') {
       radioTouch.checked = true;
+    } else if (settings.controlMode === 'swipe') {
+      radioSwipe.checked = true;
     } else {
       radioGyro.checked = true;
     }
@@ -718,6 +727,7 @@ export class HomeScreen extends HTMLElement {
 
     radioGyro.addEventListener('change', () => { if (radioGyro.checked) updateSettings({ controlMode: 'gyro' }); });
     radioTouch.addEventListener('change', () => { if (radioTouch.checked) updateSettings({ controlMode: 'touch' }); });
+    radioSwipe.addEventListener('change', () => { if (radioSwipe.checked) updateSettings({ controlMode: 'swipe' }); });
     chkSound.addEventListener('change', () => updateSettings({ soundEnabled: chkSound.checked }));
     chkVibration.addEventListener('change', () => updateSettings({ vibrationEnabled: chkVibration.checked }));
     this.shadowRoot.querySelector('.btn-reset').addEventListener('click', () => {
@@ -731,14 +741,35 @@ export class HomeScreen extends HTMLElement {
     const backdrop = this.shadowRoot.querySelector('.settings-backdrop');
     const radioGyro = this.shadowRoot.querySelector('input[value="gyro"]');
     const radioTouch = this.shadowRoot.querySelector('input[value="touch"]');
+    const radioSwipe = this.shadowRoot.querySelector('input[value="swipe"]');
     const gyroRow = this.shadowRoot.querySelector('.control-gyro');
+    const swipeRow = this.shadowRoot.querySelector('.control-swipe');
     backdrop.classList.add('open');
+
+    // Probe touch support for swipe
+    const touchSupported = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    const swipeStatus = this.shadowRoot.querySelector('.swipe-status');
+    swipeStatus.textContent = touchSupported ? '👆' : '❌';
+    if (!touchSupported) {
+      radioSwipe.disabled = true;
+      swipeRow.classList.add('disabled');
+      if (getSettings().controlMode === 'swipe') {
+        radioTouch.checked = true;
+        updateSettings({ controlMode: 'touch' });
+      }
+    } else {
+      radioSwipe.disabled = false;
+      swipeRow.classList.remove('disabled');
+    }
+
     const gyroAvailable = await this.#probeGyro();
     if (!gyroAvailable) {
       radioGyro.disabled = true;
       gyroRow.classList.add('disabled');
-      radioTouch.checked = true;
-      updateSettings({ controlMode: 'touch' });
+      if (getSettings().controlMode === 'gyro') {
+        radioTouch.checked = true;
+        updateSettings({ controlMode: 'touch' });
+      }
     } else {
       radioGyro.disabled = false;
       gyroRow.classList.remove('disabled');
@@ -834,9 +865,9 @@ export class HomeScreen extends HTMLElement {
   async #startGame() {
     if (!this.#selectedDeck) return;
     recordPlay(this.#selectedDeck.id);
-    const useGyro = getSettings().controlMode === 'gyro';
+    const controlMode = getSettings().controlMode;
     let tiltAvailable = false;
-    if (useGyro) {
+    if (controlMode === 'gyro') {
       const permGranted = await requestTiltPermission();
       tiltAvailable = permGranted ? await probeTiltAvailable(1500) : false;
     }
@@ -844,7 +875,12 @@ export class HomeScreen extends HTMLElement {
       new CustomEvent('start-game', {
         bubbles: true,
         composed: true,
-        detail: { deck: this.#selectedDeck, tiltGranted: tiltAvailable, difficulty: this.#selectedDifficulty },
+        detail: {
+          deck: this.#selectedDeck,
+          tiltGranted: tiltAvailable,
+          controlMode,
+          difficulty: this.#selectedDifficulty,
+        },
       })
     );
   }

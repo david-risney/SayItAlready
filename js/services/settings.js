@@ -3,7 +3,7 @@ const SETTINGS_KEY = 'sayitalready-settings';
 const DEFAULTS = {
   soundEnabled: true,
   vibrationEnabled: true,
-  controlMode: 'gyro', // 'gyro' | 'touch'
+  controlMode: 'gyro', // 'gyro' | 'touch' | 'swipe'
 };
 
 let cache = null;
