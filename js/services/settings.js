@@ -4,6 +4,7 @@ const DEFAULTS = {
   soundEnabled: true,
   vibrationEnabled: true,
   controlMode: 'gyro', // 'gyro' | 'touch' | 'swipe'
+  debugOverlay: false,
 };
 
 let cache = null;

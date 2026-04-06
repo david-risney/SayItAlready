@@ -65,6 +65,7 @@ export function probeTiltAvailable(timeoutMs = 1500) {
 export class TiltDetector {
   #onCorrect;
   #onSkip;
+  #onDebug;
   #active = false;
   #thresholdLow;
   #thresholdHigh;
@@ -81,9 +82,10 @@ export class TiltDetector {
    * @param {number}   opts.thresholdHigh – beta above this = skip in portrait (default 150)
    * @param {number}   opts.gammaThreshold – |gamma| above this triggers in landscape (default 30)
    */
-  constructor({ onCorrect, onSkip, thresholdLow = 30, thresholdHigh = 150, gammaThreshold = 30 }) {
+  constructor({ onCorrect, onSkip, onDebug, thresholdLow = 30, thresholdHigh = 150, gammaThreshold = 30 }) {
     this.#onCorrect = onCorrect;
     this.#onSkip = onSkip;
+    this.#onDebug = onDebug;
     this.#thresholdLow = thresholdLow;
     this.#thresholdHigh = thresholdHigh;
     this.#gammaThreshold = gammaThreshold;
@@ -151,5 +153,17 @@ export class TiltDetector {
         this.#onSkip?.();
       }
     }
+
+    this.#onDebug?.({
+      alpha: e.alpha?.toFixed(1),
+      beta: e.beta?.toFixed(1),
+      gamma: e.gamma?.toFixed(1),
+      angle: screen.orientation?.angle ?? '?',
+      landscape: this.#isLandscape(),
+      state: this.#state,
+      tiltUp,
+      tiltDown,
+      inNeutral,
+    });
   }
 }

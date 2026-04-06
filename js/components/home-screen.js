@@ -625,6 +625,9 @@ template.innerHTML = `
       <div class="setting-row">
         <label><input type="checkbox" class="chk-vibration" checked> Vibration</label>
       </div>
+      <div class="setting-row">
+        <label><input type="checkbox" class="chk-debug"> Debug overlay</label>
+      </div>
     </div>
 
     <div class="settings-section">
@@ -704,6 +707,7 @@ export class HomeScreen extends HTMLElement {
     const backdrop = this.shadowRoot.querySelector('.settings-backdrop');
     const chkSound = this.shadowRoot.querySelector('.chk-sound');
     const chkVibration = this.shadowRoot.querySelector('.chk-vibration');
+    const chkDebug = this.shadowRoot.querySelector('.chk-debug');
     const radioGyro = this.shadowRoot.querySelector('input[value="gyro"]');
     const radioTouch = this.shadowRoot.querySelector('input[value="touch"]');
     const radioSwipe = this.shadowRoot.querySelector('input[value="swipe"]');
@@ -714,6 +718,7 @@ export class HomeScreen extends HTMLElement {
     const settings = getSettings();
     chkSound.checked = settings.soundEnabled;
     chkVibration.checked = settings.vibrationEnabled;
+    chkDebug.checked = settings.debugOverlay;
     if (settings.controlMode === 'touch') {
       radioTouch.checked = true;
     } else if (settings.controlMode === 'swipe') {
@@ -742,6 +747,7 @@ export class HomeScreen extends HTMLElement {
     radioSwipe.addEventListener('change', () => { if (radioSwipe.checked) updateSettings({ controlMode: 'swipe' }); });
     chkSound.addEventListener('change', () => updateSettings({ soundEnabled: chkSound.checked }));
     chkVibration.addEventListener('change', () => updateSettings({ vibrationEnabled: chkVibration.checked }));
+    chkDebug.addEventListener('change', () => updateSettings({ debugOverlay: chkDebug.checked }));
     this.shadowRoot.querySelector('.btn-reset').addEventListener('click', () => {
       if (confirm('This will erase all play history and custom decks. Continue?')) {
         resetAllState();

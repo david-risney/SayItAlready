@@ -2,6 +2,7 @@ import { shuffle, wordText, filterByDifficulty } from '../models/deck.js';
 import { Timer } from '../services/timer.js';
 import { TiltDetector } from '../services/tilt-detector.js';
 import { AudioManager } from '../services/audio-manager.js';
+import { getSettings } from '../services/settings.js';
 
 const template = document.createElement('template');
 template.innerHTML = `
@@ -191,6 +192,26 @@ template.innerHTML = `
     pointer-events: none;
   }
   .swipe-hint.visible { display: block; }
+
+  /* --- Debug overlay --- */
+  .debug-overlay {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 30;
+    background: rgba(0,0,0,0.75);
+    color: #0f0;
+    font-family: monospace;
+    font-size: 0.65rem;
+    line-height: 1.4;
+    padding: 0.3rem 0.5rem;
+    pointer-events: none;
+    white-space: pre;
+    border-radius: 0 0 6px 0;
+    max-width: 50%;
+  }
+  .debug-overlay.visible { display: block; }
 </style>
 
 <div class="game">
@@ -218,6 +239,7 @@ template.innerHTML = `
   </div>
 
   <div class="swipe-hint">⟵ Skip · Correct ⟶</div>
+  <div class="debug-overlay"></div>
 </div>
 `;
 
@@ -324,9 +346,20 @@ export class GameScreen extends HTMLElement {
   /* ---- Tilt ---- */
   #startTilt() {
     if (this.#controlMode !== 'gyro') return;
+    const debugEl = this.shadowRoot.querySelector('.debug-overlay');
+    const showDebug = getSettings().debugOverlay;
+    if (showDebug) debugEl.classList.add('visible');
+
     this.#tilt = new TiltDetector({
       onCorrect: () => this.#handleCorrect(),
       onSkip: () => this.#handleSkip(),
+      onDebug: showDebug ? (d) => {
+        debugEl.textContent =
+          `a:${d.alpha} b:${d.beta} g:${d.gamma}\n` +
+          `angle:${d.angle} land:${d.landscape}\n` +
+          `state:${d.state}\n` +
+          `up:${d.tiltUp} dn:${d.tiltDown} neut:${d.inNeutral}`;
+      } : undefined,
     });
     this.#tilt.start();
   }
