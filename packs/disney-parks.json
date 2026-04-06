@@ -206,13 +206,13 @@
     {
       "text": "Adventureland",
       "tags": [
-        "difficulty:1"
+        "difficulty:2"
       ]
     },
     {
       "text": "Frontierland",
       "tags": [
-        "difficulty:1"
+        "difficulty:2"
       ]
     },
     {
@@ -338,13 +338,13 @@
     {
       "text": "Buzz Lightyear",
       "tags": [
-        "difficulty:2"
+        "difficulty:1"
       ]
     },
     {
       "text": "Dumbo",
       "tags": [
-        "difficulty:2"
+        "difficulty:1"
       ]
     },
     {
@@ -354,7 +354,7 @@
       ]
     },
     {
-      "text": "Guardians of the Galaxy Mission Breakout",
+      "text": "Mission Breakout",
       "tags": [
         "difficulty:2"
       ]

@@ -1,4 +1,4 @@
-import { shuffle, wordText, filterByDifficulty } from '../models/deck.js';
+import { shuffle, wordText, wordDifficulty, filterByDifficulty } from '../models/deck.js';
 import { Timer } from '../services/timer.js';
 import { TiltDetector } from '../services/tilt-detector.js';
 import { AudioManager } from '../services/audio-manager.js';
@@ -455,6 +455,49 @@ export class GameScreen extends HTMLElement {
   }
 
   /* ---- Game logic ---- */
+
+  /** Pick the next word index based on recent performance. */
+  #pickNext() {
+    // Already past the end
+    if (this.#index >= this.#words.length - 1) {
+      this.#index = this.#words.length;
+      return;
+    }
+
+    const len = this.#results.length;
+    const last = len > 0 ? this.#results[len - 1] : null;
+    const prev = len > 1 ? this.#results[len - 2] : null;
+
+    let preferredDir = 0; // 0 = no preference
+    if (last?.result === 'skipped') preferredDir = -1;         // skipped → try easier
+    if (last?.result === 'correct' && prev?.result === 'correct') preferredDir = 1; // two correct → try harder
+
+    if (preferredDir === 0) {
+      this.#index++;
+      return;
+    }
+
+    const curDiff = wordDifficulty(this.#words[this.#index]);
+    const targetDiff = Math.max(0, Math.min(this.#difficulty, curDiff + preferredDir));
+
+    // Search remaining words for one at targetDiff
+    let best = -1;
+    for (let i = this.#index + 1; i < this.#words.length; i++) {
+      if (wordDifficulty(this.#words[i]) === targetDiff) {
+        best = i;
+        break;
+      }
+    }
+
+    if (best !== -1 && best !== this.#index + 1) {
+      // Swap the found word into the next position
+      const tmp = this.#words[this.#index + 1];
+      this.#words[this.#index + 1] = this.#words[best];
+      this.#words[best] = tmp;
+    }
+    this.#index++;
+  }
+
   #showWord() {
     const wordEl = this.shadowRoot.querySelector('.word');
     if (this.#index >= this.#words.length) {
@@ -470,19 +513,19 @@ export class GameScreen extends HTMLElement {
 
   #handleCorrect() {
     if (this.#index >= this.#words.length) return;
-    this.#results.push({ word: wordText(this.#words[this.#index]), result: 'correct' });
+    this.#results.push({ word: wordText(this.#words[this.#index]), difficulty: wordDifficulty(this.#words[this.#index]), result: 'correct' });
     this.#audio.correct();
     this.#flashFeedback('correct');
-    this.#index++;
+    this.#pickNext();
     this.#showWord();
   }
 
   #handleSkip() {
     if (this.#index >= this.#words.length) return;
-    this.#results.push({ word: wordText(this.#words[this.#index]), result: 'skipped' });
+    this.#results.push({ word: wordText(this.#words[this.#index]), difficulty: wordDifficulty(this.#words[this.#index]), result: 'skipped' });
     this.#audio.skip();
     this.#flashFeedback('skip');
-    this.#index++;
+    this.#pickNext();
     this.#showWord();
   }
 
@@ -497,7 +540,7 @@ export class GameScreen extends HTMLElement {
     this.#tilt?.stop();
     // Record the word that was showing when time ran out as skipped
     if (this.#index < this.#words.length) {
-      this.#results.push({ word: wordText(this.#words[this.#index]), result: 'skipped' });
+      this.#results.push({ word: wordText(this.#words[this.#index]), difficulty: wordDifficulty(this.#words[this.#index]), result: 'skipped' });
     }
     this.#audio.timesUp();
     this.dispatchEvent(
