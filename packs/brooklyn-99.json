@@ -1,0 +1,249 @@
+{
+  "id": "brooklyn-99",
+  "name": "Brooklyn Nine-Nine",
+  "description": "Nine-Nine!",
+  "icon": "🚔",
+  "background": "linear-gradient(135deg, #1565c0, #42a5f5)",
+  "words": [
+    {
+      "text": "Jake Peralta",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Amy Santiago",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Captain Holt",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Rosa Diaz",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Charles Boyle",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Terry Jeffords",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Gina Linetti",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Hitchcock and Scully",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Nine-Nine!",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Noice",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Smort",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Cool Cool Cool",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Title of Your Sex Tape",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Toit",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Die Hard",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Halloween Heist",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Cheddar",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Terry Loves Yogurt",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Precinct",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Brooklyn",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "The Vulture",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Doug Judy",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Pimento",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Kevin Cozner",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Wuntch",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Nikolaj",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "The Jimmy Jab Games",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Bone",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Full Bullpen",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Beach House",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Amy's Binder",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Boyle Cousin",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Sergeant Peanut Butter",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Shaw's Bar",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Florida",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Holt's Robot Voice",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "The Box",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Cinco de Mayo",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Rosa's Apartment",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Mlepnos",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Caleb the Cannibal",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Commissioner Kelly",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "CJ",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Teddy Wells",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Figgis",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Operation Broken Feather",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "The Bet",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Tactical Village",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "The Oolong Slayer",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "The Disco Strangler",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Flat Top and the Freak",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Trudy Judy",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "The 9-8",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "The Ebony Falcon",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Holt's Paintings",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Gina's Dance Troupe",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Boyle's Food Blog",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Terry's Twin Daughters",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "NutriBoom",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "The Swedes",
+      "tags": ["difficulty:2"]
+    }
+  ]
+}

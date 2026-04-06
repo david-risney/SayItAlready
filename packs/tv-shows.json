@@ -1,0 +1,249 @@
+{
+  "id": "tv-shows",
+  "name": "TV Shows",
+  "description": "Must-see TV!",
+  "icon": "📺",
+  "background": "linear-gradient(135deg, #4a148c, #ce93d8)",
+  "words": [
+    {
+      "text": "Friends",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "The Office",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Seinfeld",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "The Simpsons",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Breaking Bad",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Game of Thrones",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Stranger Things",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "SpongeBob SquarePants",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Grey's Anatomy",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "The Walking Dead",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Family Guy",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "How I Met Your Mother",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "The Big Bang Theory",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Squid Game",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "The Fresh Prince of Bel-Air",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "South Park",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Full House",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Scooby-Doo",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "The Bachelor",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Jeopardy!",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Dexter",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Lost",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Succession",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "The Mandalorian",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Arrested Development",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Ted Lasso",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Schitt's Creek",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Ozark",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Peaky Blinders",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Yellowstone",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "The Sopranos",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Gilmore Girls",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "House of the Dragon",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Cobra Kai",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "The Great British Bake Off",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Downton Abbey",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Bridgerton",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Fargo",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "The Witcher",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Buffy the Vampire Slayer",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Fleabag",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "The Americans",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Orphan Black",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Mr. Robot",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Halt and Catch Fire",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "The Leftovers",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Battlestar Galactica",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Twin Peaks",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "The Wire",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Fringe",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Hannibal",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Legion",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Mindhunter",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Better Call Saul",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Dark",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Severance",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "The Expanse",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Justified",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Rectify",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Deadwood",
+      "tags": ["difficulty:2"]
+    }
+  ]
+}

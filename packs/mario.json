@@ -1,0 +1,249 @@
+{
+  "id": "mario",
+  "name": "Super Mario",
+  "description": "It's-a me! Guess-a the reference!",
+  "icon": "🍄",
+  "background": "linear-gradient(135deg, #c62828, #1565c0)",
+  "words": [
+    {
+      "text": "Mario",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Luigi",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Princess Peach",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Bowser",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Toad",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Yoshi",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Mushroom Kingdom",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Super Star",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Fire Flower",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Green Pipe",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Princess Is in Another Castle",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Mario Kart",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Super Smash Bros.",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Mario Party",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Coin Block",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Goomba",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Koopa Troopa",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Donkey Kong",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Rainbow Road",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "1-Up Mushroom",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Wario",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Waluigi",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Princess Daisy",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Bowser Jr.",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Boo",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Chain Chomp",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Bullet Bill",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Blue Shell",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Banana Peel",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Lakitu",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Bob-omb",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Piranha Plant",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Thwomp",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Cape Feather",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Super Mario 64",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Super Mario Galaxy",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Paper Mario",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Rosalina",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Tanooki Suit",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Shy Guy",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Koopalings",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Kamek",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "King Boo",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Petey Piranha",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Hammer Bro",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Dry Bones",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Blooper",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Wiggler",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Frog Suit",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "F.L.U.D.D.",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Isle Delfino",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Luma",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Cap Kingdom",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Cappy",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Poltergust",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Minus World",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Warp Whistle",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Mega Mushroom",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Shine Sprite",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Power Moon",
+      "tags": ["difficulty:2"]
+    }
+  ]
+}

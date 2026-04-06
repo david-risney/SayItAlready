@@ -1,0 +1,249 @@
+{
+  "id": "video-game-characters",
+  "name": "Video Game Characters",
+  "description": "Press start to guess!",
+  "icon": "🎮",
+  "background": "linear-gradient(135deg, #6a1b9a, #ab47bc)",
+  "words": [
+    {
+      "text": "Mario",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Sonic the Hedgehog",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Link",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Pikachu",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Pac-Man",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Donkey Kong",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Lara Croft",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Master Chief",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Minecraft Steve",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Kirby",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Crash Bandicoot",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Mega Man",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Yoshi",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Princess Peach",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Bowser",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Kratos",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Tails",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Creeper",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Luigi",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Zelda",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Samus Aran",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Cloud Strife",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Solid Snake",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Ryu",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Nathan Drake",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Geralt of Rivia",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Cortana",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Toad",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Ganondorf",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Jill Valentine",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Ellie",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "GLaDOS",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Sub-Zero",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Scorpion",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Spyro",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Wario",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Tom Nook",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Agent 47",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Sephiroth",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Dovahkiin",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Fox McCloud",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Captain Falcon",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Ness",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Bayonetta",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Aloy",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Commander Shepard",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Big Daddy",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Ezio Auditore",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Chun-Li",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Rayman",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Banjo-Kazooie",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Earthworm Jim",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Leisure Suit Larry",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Dante",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Isaac Clarke",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Gordon Freeman",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Shovel Knight",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Sans",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Sora",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Marcus Fenix",
+      "tags": ["difficulty:2"]
+    }
+  ]
+}

@@ -1,0 +1,249 @@
+{
+  "id": "brands-and-logos",
+  "name": "Brands & Logos",
+  "description": "Name that brand!",
+  "icon": "™️",
+  "background": "linear-gradient(135deg, #00695c, #26a69a)",
+  "words": [
+    {
+      "text": "Apple",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Nike",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Google",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "McDonald's",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Coca-Cola",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Amazon",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Disney",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Netflix",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Microsoft",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Adidas",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Samsung",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "LEGO",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Target",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Starbucks",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "YouTube",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "IKEA",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Pepsi",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Toyota",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Walmart",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Instagram",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Ferrari",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Porsche",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Gucci",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Rolex",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Louis Vuitton",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Red Bull",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "FedEx",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Spotify",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Tesla",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Pringles",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Chanel",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Columbia Sportswear",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Converse",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Visa",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Airbnb",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Costco",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Xbox",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "PlayStation",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Ray-Ban",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Oreo",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Patagonia",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Burberry",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Hermès",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Cartier",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Unilever",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Siemens",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Caterpillar",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Swarovski",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Bose",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Dyson",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Philips",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Michelin",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Bridgestone",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Under Armour",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Timberland",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "New Balance",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Panasonic",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Nespresso",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Hennessy",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Bang & Olufsen",
+      "tags": ["difficulty:2"]
+    }
+  ]
+}
