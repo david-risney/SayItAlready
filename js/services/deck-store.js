@@ -70,3 +70,32 @@ export async function loadAllDecks() {
   ]);
   return [...builtIn, ...custom];
 }
+
+const HISTORY_KEY = 'sayitalready-play-history';
+
+/** Get play history as { deckId: timestamp } map. */
+export function getPlayHistory() {
+  try {
+    return JSON.parse(localStorage.getItem(HISTORY_KEY)) || {};
+  } catch { return {}; }
+}
+
+/** Record that a deck was just played. */
+export function recordPlay(deckId) {
+  const history = getPlayHistory();
+  history[deckId] = Date.now();
+  localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
+}
+
+/** Sort decks: recently played first (most recent first), then unplayed alphabetically. */
+export function sortDecksByRecency(decks) {
+  const history = getPlayHistory();
+  return [...decks].sort((a, b) => {
+    const aTime = history[a.id] || 0;
+    const bTime = history[b.id] || 0;
+    if (aTime && bTime) return bTime - aTime;
+    if (aTime) return -1;
+    if (bTime) return 1;
+    return (a.name || '').localeCompare(b.name || '');
+  });
+}

@@ -1,4 +1,4 @@
-import { loadAllDecks } from '../services/deck-store.js';
+import { loadAllDecks, recordPlay, sortDecksByRecency } from '../services/deck-store.js';
 import { requestTiltPermission, probeTiltAvailable } from '../services/tilt-detector.js';
 import { wordText, hasDifficultyTags, filterByDifficulty } from '../models/deck.js';
 
@@ -39,10 +39,29 @@ template.innerHTML = `
     box-sizing: border-box;
     padding: 1.5rem 1rem 1rem;
     font-size: 1rem;
+    position: relative;
     animation: shrink-inner linear both;
     animation-timeline: --home-scroll;
     animation-range: 0px 80px;
   }
+  .about-btn {
+    position: absolute;
+    top: 0.6em;
+    right: 0.6em;
+    background: rgba(255 255 255 / 0.1);
+    border: none;
+    color: var(--color-text-muted, #aaa);
+    font-size: 1.1em;
+    width: 1.8em;
+    height: 1.8em;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 150ms ease;
+  }
+  .about-btn:hover { background: rgba(255 255 255 / 0.2); color: #fff; }
   h1 {
     font-size: 2.5em;
     font-weight: 800;
@@ -284,11 +303,52 @@ template.innerHTML = `
   }
   .modal-start:hover { background: var(--color-primary-hover, #ff6b81); }
   .modal-start:active { transform: scale(0.96); }
+
+  /* --- About modal --- */
+  .about-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+  }
+  .about-backdrop.open { display: flex; }
+  .about-dialog {
+    background: var(--color-surface, #16213e);
+    border-radius: var(--radius, 12px);
+    padding: 1.5rem;
+    max-width: 320px;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    animation: modal-in 250ms ease;
+    border: 1px solid rgba(255 255 255 / 0.12);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+  }
+  .about-dialog h2 { font-size: 1.4rem; font-weight: 800; margin: 0; }
+  .about-dialog p { color: var(--color-text-muted, #aaa); font-size: 0.9rem; margin: 0; line-height: 1.4; }
+  .about-dialog a { color: var(--color-primary, #e94560); text-decoration: none; }
+  .about-dialog a:hover { text-decoration: underline; }
+  .about-close {
+    background: none;
+    border: none;
+    color: var(--color-text-muted, #aaa);
+    font-size: 0.9rem;
+    cursor: pointer;
+    padding: 0.4em;
+  }
+  .about-close:hover { color: var(--color-text, #eee); }
 </style>
 
 <div class="home">
   <div class="header">
     <div class="header-inner">
+      <button class="about-btn" aria-label="About">ℹ</button>
       <h1>Say It <span>Already!</span></h1>
       <p class="subtitle">Pick a deck and get guessing</p>
     </div>
@@ -318,6 +378,16 @@ template.innerHTML = `
     </div>
   </div>
 </div>
+
+<div class="about-backdrop">
+  <div class="about-dialog">
+    <h2>Say It Already!</h2>
+    <p>A Heads Up!-style party word game. Hold your phone to your forehead and tilt to answer!</p>
+    <p>Built with Web Components, no frameworks.</p>
+    <p><a href="https://github.com/david-risney/SayItAlready" target="_blank" rel="noopener">View on GitHub</a></p>
+    <button class="about-close">Close</button>
+  </div>
+</div>
 `;
 
 export class HomeScreen extends HTMLElement {
@@ -335,10 +405,11 @@ export class HomeScreen extends HTMLElement {
     this.#loadDecks();
     this.#bindModal();
     this.#bindFilter();
+    this.#bindAbout();
   }
 
   async #loadDecks() {
-    this.#decks = await loadAllDecks();
+    this.#decks = sortDecksByRecency(await loadAllDecks());
     this.#renderDecks();
   }
 
@@ -369,6 +440,15 @@ export class HomeScreen extends HTMLElement {
   #bindFilter() {
     const input = this.shadowRoot.querySelector('.filter-input');
     input.addEventListener('input', () => this.#renderDecks(input.value));
+  }
+
+  #bindAbout() {
+    const backdrop = this.shadowRoot.querySelector('.about-backdrop');
+    this.shadowRoot.querySelector('.about-btn').addEventListener('click', () => backdrop.classList.add('open'));
+    this.shadowRoot.querySelector('.about-close').addEventListener('click', () => backdrop.classList.remove('open'));
+    backdrop.addEventListener('click', (e) => {
+      if (e.target === backdrop) backdrop.classList.remove('open');
+    });
   }
 
   #bindModal() {
@@ -428,6 +508,7 @@ export class HomeScreen extends HTMLElement {
 
   async #startGame() {
     if (!this.#selectedDeck) return;
+    recordPlay(this.#selectedDeck.id);
     const permGranted = await requestTiltPermission();
     const tiltAvailable = permGranted ? await probeTiltAvailable(1500) : false;
     this.dispatchEvent(

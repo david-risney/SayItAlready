@@ -7,11 +7,28 @@
   "orientation": "portrait",
   "background_color": "#1a1a2e",
   "theme_color": "#1a1a2e",
+  "categories": ["games", "entertainment"],
   "icons": [
     {
       "src": "icons/icon.svg",
       "sizes": "any",
       "type": "image/svg+xml"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "icons/screenshots/home-screen.png",
+      "sizes": "750x1131",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Home screen showing available word packs"
+    },
+    {
+      "src": "icons/screenshots/deck-modal.png",
+      "sizes": "750x1131",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Deck detail modal with difficulty options"
     }
   ]
 }

@@ -29,6 +29,8 @@ const PRECACHE_URLS = [
   './packs/disney-parks.json',
   './packs/fast-food.json',
   './icons/icon.svg',
+  './icons/screenshots/home-screen.png',
+  './icons/screenshots/deck-modal.png',
 ];
 
 self.addEventListener('install', (event) => {
