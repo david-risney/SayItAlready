@@ -1,4 +1,4 @@
-const CACHE_NAME = 'sayitalready-v3';
+const CACHE_NAME = 'sayitalready-v1.2.0';
 
 const PRECACHE_URLS = [
   './',
@@ -16,6 +16,7 @@ const PRECACHE_URLS = [
   './js/services/timer.js',
   './js/services/deck-store.js',
   './js/services/settings.js',
+  './js/version.js',
   './packs/animals.json',
   './packs/movies.json',
   './packs/food.json',
@@ -55,6 +56,11 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
+  // Skip cache for requests with cache=off (used for version checks)
+  const url = new URL(event.request.url);
+  if (url.searchParams.get('cache') === 'off') {
+    return; // fall through to default browser fetch
+  }
   event.respondWith(
     caches.match(event.request).then((cached) => cached || fetch(event.request))
   );

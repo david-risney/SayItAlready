@@ -2,6 +2,7 @@ import { loadAllDecks, recordPlay, sortDecksByRecency } from '../services/deck-s
 import { requestTiltPermission, probeTiltAvailable } from '../services/tilt-detector.js';
 import { wordText, hasDifficultyTags, filterByDifficulty } from '../models/deck.js';
 import { getSettings, updateSettings, resetAllState } from '../services/settings.js';
+import { APP_VERSION } from '../version.js';
 
 const template = document.createElement('template');
 template.innerHTML = `
@@ -509,6 +510,17 @@ template.innerHTML = `
     font-size: 0.75rem;
     color: var(--color-text-muted, #aaa);
   }
+  .settings-about .update-badge {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #fff;
+    background: var(--color-primary, #e94560);
+    border-radius: 6px;
+    padding: 0.15em 0.5em;
+    margin-left: 0.4em;
+    vertical-align: middle;
+  }
   .settings-about a {
     color: var(--color-primary, #e94560);
     text-decoration: none;
@@ -624,7 +636,7 @@ template.innerHTML = `
 
     <div class="settings-about">
       <div class="app-name">Say It Already!</div>
-      <div class="app-version">v1.0.0</div>
+      <div class="app-version">v${APP_VERSION} <span class="update-check"></span></div>
       <a href="https://github.com/david-risney/SayItAlready" target="_blank" rel="noopener">View on GitHub</a>
     </div>
 
@@ -774,6 +786,28 @@ export class HomeScreen extends HTMLElement {
       radioGyro.disabled = false;
       gyroRow.classList.remove('disabled');
     }
+
+    // Check for newer version
+    this.#checkForUpdate();
+  }
+
+  async #checkForUpdate() {
+    const el = this.shadowRoot.querySelector('.update-check');
+    el.textContent = '';
+    try {
+      const url = `./js/version.js?cache=off&uid=${Date.now()}`;
+      const resp = await fetch(url);
+      if (!resp.ok) return;
+      const text = await resp.text();
+      const match = text.match(/APP_VERSION\s*=\s*'([^']+)'/);
+      if (!match) return;
+      const remote = match[1];
+      if (remote !== APP_VERSION) {
+        el.innerHTML = `<span class="update-badge">v${remote} available \u2014 reload</span>`;
+        el.style.cursor = 'pointer';
+        el.addEventListener('click', () => location.reload(), { once: true });
+      }
+    } catch { /* offline or fetch failed \u2014 silently skip */ }
   }
 
   async #probeGyro() {
