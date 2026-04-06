@@ -343,6 +343,35 @@ template.innerHTML = `
   .modal-start:hover { background: var(--color-primary-hover, #ff6b81); }
   .modal-start:active { transform: scale(0.96); }
 
+  /* Landscape: side-by-side layout */
+  @media (orientation: landscape) {
+    .modal {
+      flex-direction: row;
+      max-width: 520px;
+      max-height: 90vh;
+    }
+    .modal-card {
+      aspect-ratio: auto;
+      flex: 1 1 55%;
+      min-height: 0;
+      padding: 1rem 0.75rem;
+      gap: 0.3rem;
+    }
+    .modal-icon { font-size: 2.5rem; }
+    .modal-name { font-size: 1.1rem; }
+    .modal-desc { font-size: 0.75rem; }
+    .modal-examples { margin-top: 0.4rem; }
+    .modal-actions {
+      flex: 1 1 45%;
+      justify-content: center;
+      padding: 0.75rem 1rem;
+    }
+    .modal-start {
+      font-size: 1.1rem;
+      padding: 0.6em 1.5em;
+    }
+  }
+
   /* --- Settings modal --- */
   .settings-backdrop {
     display: none;

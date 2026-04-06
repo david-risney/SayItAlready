@@ -96,7 +96,8 @@ async function startGameFromDeckId(deckId, startPaused = false) {
 
 /* ---- Event delegation ---- */
 app.addEventListener('start-game', (e) => {
-  const { deck, tiltGranted, difficulty, controlMode } = e.detail;
+  const { deck, tiltGranted, difficulty } = e.detail;
+  const controlMode = e.detail.controlMode ?? getSettings().controlMode;
   pushView({ view: 'game', deck: deck.id });
   showGame(deck, tiltGranted, difficulty, controlMode);
 });

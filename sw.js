@@ -1,4 +1,4 @@
-const CACHE_NAME = 'sayitalready-v1.7.0';
+const CACHE_NAME = 'sayitalready-v1.8.0';
 
 const PRECACHE_URLS = [
   './',
