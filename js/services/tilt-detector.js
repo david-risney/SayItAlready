@@ -3,13 +3,15 @@
  * - Tilt down (toward ground) → 'correct'
  * - Tilt up (away from player) → 'skip'
  *
- * Expects the phone to be held in portrait, screen facing away from the player
- * (like holding it on your forehead).
+ * Expects the phone held screen-facing-away (forehead position).
  *
- * Beta axis: ~0° when flat, ~90° when upright/forehead position.
- * We detect deviations from the "forehead neutral" (~70-110°).
- * - beta < threshold-low  → tilted down → correct
- * - beta > threshold-high → tilted up   → skip
+ * In portrait: uses beta axis (~0° flat, ~90° upright).
+ * In landscape: uses gamma axis (±90° range), since the physical
+ * axes rotate with screen orientation.
+ *
+ * We detect deviations from "forehead neutral":
+ * Portrait:  beta < thresholdLow → tilt down → correct;  beta > thresholdHigh → tilt up → skip
+ * Landscape: |gamma| past threshold → tilt; sign depends on landscape-primary vs secondary.
  */
 /**
  * Request permission for DeviceOrientationEvent (iOS 13+).
@@ -66,6 +68,7 @@ export class TiltDetector {
   #active = false;
   #thresholdLow;
   #thresholdHigh;
+  #gammaThreshold;
   #handler;
   // State: 'neutral' = in normal range, 'fired' = gesture detected, waiting for return to neutral
   #state = 'fired'; // start as 'fired' so initial tilted position doesn't trigger
@@ -74,14 +77,16 @@ export class TiltDetector {
    * @param {object} opts
    * @param {function} opts.onCorrect
    * @param {function} opts.onSkip
-   * @param {number}   opts.thresholdLow  – beta below this = correct (default 30)
-   * @param {number}   opts.thresholdHigh – beta above this = skip (default 150)
+   * @param {number}   opts.thresholdLow  – beta below this = correct in portrait (default 30)
+   * @param {number}   opts.thresholdHigh – beta above this = skip in portrait (default 150)
+   * @param {number}   opts.gammaThreshold – |gamma| above this triggers in landscape (default 30)
    */
-  constructor({ onCorrect, onSkip, thresholdLow = 30, thresholdHigh = 150 }) {
+  constructor({ onCorrect, onSkip, thresholdLow = 30, thresholdHigh = 150, gammaThreshold = 30 }) {
     this.#onCorrect = onCorrect;
     this.#onSkip = onSkip;
     this.#thresholdLow = thresholdLow;
     this.#thresholdHigh = thresholdHigh;
+    this.#gammaThreshold = gammaThreshold;
     this.#handler = (e) => this.#handleOrientation(e);
   }
 
@@ -98,22 +103,50 @@ export class TiltDetector {
     window.removeEventListener('deviceorientation', this.#handler);
   }
 
+  #isLandscape() {
+    const angle = screen.orientation?.angle ?? 0;
+    return angle === 90 || angle === 270;
+  }
+
   #handleOrientation(e) {
     if (!this.#active) return;
-    const beta = e.beta; // -180 to 180
-    if (beta == null) return;
+    if (e.beta == null) return;
 
-    const inNeutral = beta >= this.#thresholdLow && beta <= this.#thresholdHigh;
+    let tiltDown = false; // toward ground → correct
+    let tiltUp = false;   // away from player → skip
+    let inNeutral = false;
+
+    if (this.#isLandscape()) {
+      // In landscape the physical tilt axis maps to gamma (-90 to 90).
+      // orientation.angle 90 = rotated clockwise (left edge up):
+      //   tilt phone down → gamma goes negative
+      //   tilt phone up   → gamma goes positive
+      // orientation.angle 270 = rotated counter-clockwise (right edge up):
+      //   signs are inverted
+      const gamma = e.gamma;
+      if (gamma == null) return;
+      const angle = screen.orientation?.angle ?? 90;
+      const sign = angle >= 180 ? -1 : 1;
+      const g = gamma * sign;
+
+      inNeutral = Math.abs(g) <= this.#gammaThreshold;
+      tiltDown = g < -this.#gammaThreshold;
+      tiltUp = g > this.#gammaThreshold;
+    } else {
+      // Portrait: use beta as before
+      const beta = e.beta; // -180 to 180
+      inNeutral = beta >= this.#thresholdLow && beta <= this.#thresholdHigh;
+      tiltDown = beta < this.#thresholdLow;
+      tiltUp = beta > this.#thresholdHigh;
+    }
 
     if (this.#state === 'fired') {
-      // Wait until user returns to neutral position
       if (inNeutral) this.#state = 'neutral';
     } else {
-      // state === 'neutral' — check for tilt gesture
-      if (beta > this.#thresholdHigh) {
+      if (tiltUp) {
         this.#state = 'fired';
         this.#onCorrect?.();
-      } else if (beta < this.#thresholdLow) {
+      } else if (tiltDown) {
         this.#state = 'fired';
         this.#onSkip?.();
       }
