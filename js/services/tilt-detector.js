@@ -1,32 +1,21 @@
 /**
- * Detects phone tilt gestures using the accelerometer (DeviceMotionEvent).
- * Uses accelerationIncludingGravity.z — the component perpendicular to the
- * screen surface. Works identically in portrait and landscape with no
- * gimbal lock issues.
+ * Detects phone tilt gestures using DeviceOrientationEvent.
  *
- * Phone on forehead (screen facing away): z ≈ 0
- * Tilt down (screen faces ground):        z < 0  → correct
- * Tilt up (screen faces sky):             z > 0  → skip
+ * Portrait: uses beta (range -180..180). Neutral ~90° on forehead.
+ * Landscape: uses gamma, but gamma wraps at ±90° (exactly where the
+ * forehead position sits). We unwrap gamma using beta as the flip
+ * indicator: when |beta| > 90, gamma has crossed the ±90 singularity.
+ * The unwrapped value is then normalized so ~90 = neutral in both
+ * landscape orientations (angle 90 or 270).
  */
 
 /**
- * Request permission for DeviceMotionEvent (iOS 13+).
+ * Request permission for DeviceOrientationEvent (iOS 13+).
  * Must be called from a user gesture (click/tap handler).
- * Returns true if granted or if permission API doesn't exist (Android/desktop).
  */
 export async function requestTiltPermission() {
-  if (typeof DeviceMotionEvent !== 'undefined' &&
-      typeof DeviceMotionEvent.requestPermission === 'function') {
-    try {
-      const perm = await DeviceMotionEvent.requestPermission();
-      return perm === 'granted';
-    } catch {
-      return false;
-    }
-  }
-  // Fallback: try DeviceOrientationEvent permission (older iOS)
-  if (typeof DeviceOrientationEvent !== 'undefined' &&
-      typeof DeviceOrientationEvent.requestPermission === 'function') {
+  if (typeof DeviceOrientationEvent === 'undefined') return false;
+  if (typeof DeviceOrientationEvent.requestPermission === 'function') {
     try {
       const perm = await DeviceOrientationEvent.requestPermission();
       return perm === 'granted';
@@ -34,34 +23,32 @@ export async function requestTiltPermission() {
       return false;
     }
   }
-  // No permission API needed (Android/desktop) — check if API exists
-  return typeof DeviceMotionEvent !== 'undefined';
+  return true;
 }
 
 /**
- * Probe whether the device actually has an accelerometer.
- * Listens for a real DeviceMotionEvent with non-null z for up to `timeoutMs`.
+ * Probe whether the device actually has a gyroscope / orientation sensor.
+ * Listens for a DeviceOrientationEvent with non-null beta for up to `timeoutMs`.
  */
 export function probeTiltAvailable(timeoutMs = 1500) {
   return new Promise((resolve) => {
-    if (typeof DeviceMotionEvent === 'undefined') {
+    if (typeof DeviceOrientationEvent === 'undefined') {
       resolve(false);
       return;
     }
     let resolved = false;
     const handler = (e) => {
-      const a = e.accelerationIncludingGravity;
-      if (a && a.z != null && !resolved) {
+      if (e.beta != null && !resolved) {
         resolved = true;
-        window.removeEventListener('devicemotion', handler);
+        window.removeEventListener('deviceorientation', handler);
         resolve(true);
       }
     };
-    window.addEventListener('devicemotion', handler);
+    window.addEventListener('deviceorientation', handler);
     setTimeout(() => {
       if (!resolved) {
         resolved = true;
-        window.removeEventListener('devicemotion', handler);
+        window.removeEventListener('deviceorientation', handler);
         resolve(false);
       }
     }, timeoutMs);
@@ -73,68 +60,105 @@ export class TiltDetector {
   #onSkip;
   #onDebug;
   #active = false;
-  #threshold;
   #handler;
   #state = 'fired'; // start as 'fired' so initial position doesn't trigger
 
+  // Portrait thresholds (beta): neutral is 30..150
+  #portraitLow = 30;
+  #portraitHigh = 150;
+  // Landscape thresholds (normalized unwrapped gamma): neutral is 60..120
+  #landscapeLow = 60;
+  #landscapeHigh = 120;
+
   /**
    * @param {object} opts
-   * @param {function} opts.onCorrect  – called on tilt-down (face ground)
-   * @param {function} opts.onSkip     – called on tilt-up (face sky)
-   * @param {function} [opts.onDebug]  – called every motion event with debug data
-   * @param {number}   [opts.threshold=4] – z-accel in m/s² to trigger (~25° from vertical)
+   * @param {function} opts.onCorrect  – nod backward (face sky)
+   * @param {function} opts.onSkip     – nod forward (face ground)
+   * @param {function} [opts.onDebug]  – called every event with debug data
    */
-  constructor({ onCorrect, onSkip, onDebug, threshold = 4 }) {
+  constructor({ onCorrect, onSkip, onDebug }) {
     this.#onCorrect = onCorrect;
     this.#onSkip = onSkip;
     this.#onDebug = onDebug;
-    this.#threshold = threshold;
-    this.#handler = (e) => this.#handleMotion(e);
+    this.#handler = (e) => this.#handleOrientation(e);
   }
 
   start() {
     if (this.#active) return;
     this.#active = true;
     this.#state = 'fired';
-    window.addEventListener('devicemotion', this.#handler);
+    window.addEventListener('deviceorientation', this.#handler);
   }
 
   stop() {
     this.#active = false;
-    window.removeEventListener('devicemotion', this.#handler);
+    window.removeEventListener('deviceorientation', this.#handler);
   }
 
-  #handleMotion(e) {
-    if (!this.#active) return;
-    const a = e.accelerationIncludingGravity;
-    if (!a || a.z == null) return;
+  #isLandscape() {
+    const angle = screen.orientation?.angle ?? 0;
+    return angle === 90 || angle === 270;
+  }
 
-    const z = a.z;
-    const inNeutral = Math.abs(z) <= this.#threshold;
-    const tiltDown = z < -this.#threshold;  // screen faces ground → correct
-    const tiltUp = z > this.#threshold;     // screen faces sky → skip
+  #handleOrientation(e) {
+    if (!this.#active) return;
+    if (e.beta == null || e.gamma == null) return;
+
+    let tiltUp = false;   // nod backward → onCorrect
+    let tiltDown = false;  // nod forward → onSkip
+    let inNeutral = false;
+    let debugExtra = '';
+
+    if (this.#isLandscape()) {
+      // Unwrap gamma: when |beta| > 90, gamma has crossed the ±90 singularity
+      let g = e.gamma;
+      if (Math.abs(e.beta) > 90) {
+        g = g >= 0 ? -(180 - g) : (180 + g);
+      }
+
+      // Normalize so both landscape orientations give ~90 at neutral
+      const angle = screen.orientation?.angle ?? 90;
+      const n = angle >= 180 ? g : -g;
+
+      inNeutral = n >= this.#landscapeLow && n <= this.#landscapeHigh;
+      // Nod backward: gamma toward 0 → n decreases below landscapeLow
+      tiltUp = n < this.#landscapeLow;
+      // Nod forward: gamma past ±90 → n increases above landscapeHigh
+      tiltDown = n > this.#landscapeHigh;
+
+      debugExtra = `g_raw:${e.gamma.toFixed(1)} g_unwrap:${g.toFixed(1)} n:${n.toFixed(1)}`;
+    } else {
+      // Portrait: beta ~90 on forehead
+      const beta = e.beta;
+      inNeutral = beta >= this.#portraitLow && beta <= this.#portraitHigh;
+      tiltUp = beta > this.#portraitHigh;
+      tiltDown = beta < this.#portraitLow;
+
+      debugExtra = `beta:${e.beta.toFixed(1)}`;
+    }
 
     if (this.#state === 'fired') {
       if (inNeutral) this.#state = 'neutral';
     } else {
-      if (tiltDown) {
+      if (tiltUp) {
         this.#state = 'fired';
         this.#onCorrect?.();
-      } else if (tiltUp) {
+      } else if (tiltDown) {
         this.#state = 'fired';
         this.#onSkip?.();
       }
     }
 
     this.#onDebug?.({
-      x: a.x?.toFixed(1),
-      y: a.y?.toFixed(1),
-      z: a.z?.toFixed(1),
-      thresh: this.#threshold,
+      beta: e.beta?.toFixed(1),
+      gamma: e.gamma?.toFixed(1),
+      angle: screen.orientation?.angle ?? '?',
+      landscape: this.#isLandscape(),
       state: this.#state,
       tiltUp,
       tiltDown,
       inNeutral,
+      extra: debugExtra,
     });
   }
 }

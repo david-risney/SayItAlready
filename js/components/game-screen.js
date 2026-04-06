@@ -355,8 +355,9 @@ export class GameScreen extends HTMLElement {
       onSkip: () => this.#handleSkip(),
       onDebug: showDebug ? (d) => {
         debugEl.textContent =
-          `accel x:${d.x} y:${d.y} z:${d.z}\n` +
-          `thresh:${d.thresh} state:${d.state}\n` +
+          `${d.extra}\n` +
+          `land:${d.landscape} angle:${d.angle}\n` +
+          `state:${d.state}\n` +
           `up:${d.tiltUp} dn:${d.tiltDown} neut:${d.inNeutral}`;
       } : undefined,
     });
