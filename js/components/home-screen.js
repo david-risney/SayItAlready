@@ -809,9 +809,19 @@ export class HomeScreen extends HTMLElement {
       if (!match) return;
       const remote = match[1];
       if (remote !== APP_VERSION) {
-        el.innerHTML = `<span class="update-badge">v${remote} available \u2014 reload</span>`;
+        el.innerHTML = `<span class="update-badge">v${remote} available \u2014 update</span>`;
         el.style.cursor = 'pointer';
-        el.addEventListener('click', () => location.reload(), { once: true });
+        el.addEventListener('click', async () => {
+          el.textContent = 'Updating\u2026';
+          // Clear all SW caches and unregister, then hard reload
+          if ('caches' in window) {
+            const keys = await caches.keys();
+            await Promise.all(keys.map(k => caches.delete(k)));
+          }
+          const regs = await navigator.serviceWorker?.getRegistrations() ?? [];
+          await Promise.all(regs.map(r => r.unregister()));
+          location.reload();
+        }, { once: true });
       }
     } catch { /* offline or fetch failed \u2014 silently skip */ }
   }
