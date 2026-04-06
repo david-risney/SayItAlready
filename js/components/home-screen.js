@@ -1,7 +1,7 @@
 import { loadAllDecks, recordPlay, sortDecksByRecency } from '../services/deck-store.js';
 import { requestTiltPermission, probeTiltAvailable } from '../services/tilt-detector.js';
 import { wordText, hasDifficultyTags, filterByDifficulty } from '../models/deck.js';
-import { getSettings, updateSettings, resetAllState } from '../services/settings.js';
+import { getSettings, updateSettings } from '../services/settings.js';
 import { APP_VERSION } from '../version.js';
 
 const template = document.createElement('template');
@@ -104,6 +104,16 @@ template.innerHTML = `
     font-weight: 800;
     line-height: 1.1;
     margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3em;
+  }
+  .header-logo {
+    width: 1.1em;
+    height: 1.1em;
+    flex-shrink: 0;
+    border-radius: 0.2em;
   }
   h1 span {
     color: var(--color-primary, #e94560);
@@ -449,18 +459,11 @@ template.innerHTML = `
   .control-row.disabled input[type="radio"] {
     cursor: not-allowed;
   }
-  .kb-section {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    font-size: 0.9rem;
-    padding: 0.3rem 0;
+  .control-row.control-kb {
+    cursor: default;
   }
-  .kb-section .status {
-    font-size: 1rem;
-    width: 1.4em;
-    text-align: center;
-    flex-shrink: 0;
+  .control-row.control-kb input[type="radio"] {
+    cursor: default;
   }
   .keybindings {
     display: flex;
@@ -507,19 +510,6 @@ template.innerHTML = `
     cursor: pointer;
     flex-shrink: 0;
   }
-  .btn-reset {
-    background: #c0392b;
-    color: #fff;
-    font-size: 0.85rem;
-    font-weight: 700;
-    border: none;
-    border-radius: var(--radius, 12px);
-    padding: 0.6em 1.2em;
-    cursor: pointer;
-    transition: background 150ms ease;
-    width: 100%;
-  }
-  .btn-reset:hover { background: #e74c3c; }
   .settings-divider {
     border: none;
     border-top: 1px solid rgba(255 255 255 / 0.1);
@@ -530,6 +520,12 @@ template.innerHTML = `
     display: flex;
     flex-direction: column;
     gap: 0.3rem;
+  }
+  .settings-about .about-logo {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 0.75rem;
+    align-self: center;
   }
   .settings-about .app-name {
     font-size: 1.1rem;
@@ -550,12 +546,7 @@ template.innerHTML = `
     margin-left: 0.4em;
     vertical-align: middle;
   }
-  .settings-about a {
-    color: var(--color-primary, #e94560);
-    text-decoration: none;
-    font-size: 0.85rem;
-  }
-  .settings-about a:hover { text-decoration: underline; }
+
   .settings-close {
     position: absolute;
     top: 0.75rem;
@@ -582,7 +573,7 @@ template.innerHTML = `
     <div class="header-inner">
       <div class="header-title">
         <button class="settings-btn" aria-label="Settings">⚙</button>
-        <h1>Say It <span>Already!</span></h1>
+        <h1><img class="header-logo" src="icons/icon-nobg.svg" alt="" width="40" height="40">Say It <span>Already!</span></h1>
         <p class="subtitle">Pick a deck and get guessing</p>
       </div>
     </div>
@@ -635,10 +626,11 @@ template.innerHTML = `
         <span class="status">&#x1F518;</span>
         <span class="label">Buttons</span>
       </label>
-      <div class="kb-section">
+      <label class="control-row control-kb">
+        <input type="radio" name="control-kb" value="keyboard" checked disabled>
         <span class="status">⌨️</span>
         <span class="label">Keyboard</span>
-      </div>
+      </label>
       <div class="keybindings">
         <div class="kb-row"><kbd>Space</kbd> <span>Correct</span></div>
         <div class="kb-row"><kbd>Enter</kbd> <span>Skip</span></div>
@@ -659,17 +651,14 @@ template.innerHTML = `
       </div>
     </div>
 
-    <div class="settings-section">
-      <h3>Data</h3>
-      <button class="btn-reset">Reset all data</button>
-    </div>
-
     <hr class="settings-divider">
 
     <div class="settings-about">
-      <div class="app-name">Say It Already!</div>
+      <a class="about-header" href="https://github.com/david-risney/SayItAlready" target="_blank" rel="noopener">
+        <img class="about-logo" src="icons/icon-nobg.svg" alt="" width="32" height="32">
+        <span class="app-name">Say It Already!</span>
+      </a>
       <div class="app-version">v${APP_VERSION} <span class="update-check"></span></div>
-      <a href="https://github.com/david-risney/SayItAlready" target="_blank" rel="noopener">View on GitHub</a>
     </div>
 
   </div>
@@ -777,11 +766,7 @@ export class HomeScreen extends HTMLElement {
     chkSound.addEventListener('change', () => updateSettings({ soundEnabled: chkSound.checked }));
     chkVibration.addEventListener('change', () => updateSettings({ vibrationEnabled: chkVibration.checked }));
     chkDebug.addEventListener('change', () => updateSettings({ debugOverlay: chkDebug.checked }));
-    this.shadowRoot.querySelector('.btn-reset').addEventListener('click', () => {
-      if (confirm('This will erase all play history and custom decks. Continue?')) {
-        resetAllState();
-      }
-    });
+
   }
 
   async #openSettingsUI() {
