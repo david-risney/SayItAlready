@@ -591,7 +591,7 @@ template.innerHTML = `
       </label>
       <label class="control-row control-touch">
         <input type="radio" name="control-mode" value="touch">
-        <span class="status">�</span>
+        <span class="status">&#x1F518;</span>
         <span class="label">Buttons</span>
       </label>
       <div class="kb-section">
