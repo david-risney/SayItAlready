@@ -36,7 +36,7 @@ template.innerHTML = `
     z-index: 5;
     width: 100%;
     /* Fixed height = expanded size. Document flow never changes. */
-    height: 7rem;
+    height: 11rem;
     flex-shrink: 0;
     overflow: hidden;
     background: transparent;
@@ -47,11 +47,11 @@ template.innerHTML = `
     background: linear-gradient(to bottom, var(--color-bg, #1a1a2e) 60%, transparent);
     width: 100%;
     box-sizing: border-box;
-    padding: 1.5rem 1rem 1rem;
-    padding-top: max(1.5rem, env(titlebar-area-y, 0px));
+    padding: 3rem 1rem 2rem;
+    padding-top: max(3rem, env(titlebar-area-y, 0px));
     font-size: 1rem;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     position: relative;
     animation: shrink-inner linear both;
@@ -107,43 +107,36 @@ template.innerHTML = `
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.3em;
+    gap: 0.4em;
+    color: #fff;
+  }
+  .header-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
   }
   .header-logo {
-    width: 1.1em;
-    height: 1.1em;
+    width: 2.2em;
+    height: 2.2em;
     flex-shrink: 0;
-    border-radius: 0.2em;
   }
-  h1 span {
+  h1 .header-text span {
     color: var(--color-primary, #e94560);
   }
-  .subtitle {
-    color: var(--color-text-muted, #aaa);
-    font-size: 1em;
-    margin-top: 0.35em;
-    animation: fade-subtitle linear both;
-    animation-timeline: --home-scroll;
-    animation-range: 0px 50px;
-  }
+
 
   @keyframes shrink-inner {
-    from { font-size: 1rem; padding: 1.5rem 1rem 1rem; padding-top: max(1.5rem, env(titlebar-area-y, 0px));
-           align-items: center; }
-    to   { font-size: 0.55rem; padding: 1rem 1rem 0;
-           align-items: flex-start; }
+    from { font-size: 1rem; padding: 3rem 1rem 2rem; padding-top: max(3rem, env(titlebar-area-y, 0px)); }
+    to   { font-size: 0.55rem; padding: 0.5rem 1rem 0; }
   }
-  @keyframes fade-subtitle {
-    from { opacity: 1; }
-    to   { opacity: 0; }
-  }
+
 
   /* --- Filter --- */
   .filter-wrap {
     width: 100%;
     max-width: 560px;
     margin: 0 auto;
-    padding: 0.5rem 1rem 0;
+    padding: 1rem 1rem 0;
     box-sizing: border-box;
   }
   .filter-input {
@@ -573,8 +566,7 @@ template.innerHTML = `
     <div class="header-inner">
       <div class="header-title">
         <button class="settings-btn" aria-label="Settings">⚙</button>
-        <h1><img class="header-logo" src="icons/icon-nobg.svg" alt="" width="40" height="40">Say It <span>Already!</span></h1>
-        <p class="subtitle">Pick a deck and get guessing</p>
+        <h1><span class="header-text">Say It<br><span>Already</span></span><img class="header-logo" src="icons/icon-nobg.svg" alt="" width="60" height="60"></h1>
       </div>
     </div>
   </div>
