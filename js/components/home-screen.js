@@ -3,6 +3,7 @@ import { requestTiltPermission, probeTiltAvailable } from '../services/tilt-dete
 import { wordText, hasDifficultyTags, filterByDifficulty } from '../models/deck.js';
 import { getSettings, updateSettings } from '../services/settings.js';
 import { APP_VERSION } from '../version.js';
+import { getInstallPrompt, clearInstallPrompt, isInstalledPWA } from '../services/install.js';
 
 const template = document.createElement('template');
 template.innerHTML = `
@@ -561,11 +562,9 @@ template.innerHTML = `
     margin: 0;
   }
   .settings-about {
-    text-align: center;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 0.3rem;
+    gap: 0.75rem;
   }
   .settings-about .about-header {
     display: flex;
@@ -576,6 +575,7 @@ template.innerHTML = `
     font-size: 1.4rem;
     font-weight: 800;
     line-height: 1.1;
+    flex-shrink: 0;
   }
   .settings-about .about-header:hover .about-text { text-decoration: underline; }
   .settings-about .about-text {
@@ -591,20 +591,39 @@ template.innerHTML = `
     height: 2.2em;
     flex-shrink: 0;
   }
-  .settings-about .app-version {
+  .about-version {
+    margin-left: auto;
     font-size: 0.75rem;
     color: var(--color-text-muted, #aaa);
+    white-space: nowrap;
+    flex-shrink: 0;
   }
-  .settings-about .update-badge {
+  .about-status {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.3rem;
+    flex-shrink: 0;
+  }
+  .status-pill {
     display: inline-block;
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     font-weight: 700;
-    color: #fff;
-    background: var(--color-primary, #e94560);
     border-radius: 6px;
-    padding: 0.15em 0.5em;
-    margin-left: 0.4em;
-    vertical-align: middle;
+    padding: 0.2em 0.55em;
+  }
+  .status-pill.ok {
+    background: rgba(46, 204, 113, 0.2);
+    color: #2ecc71;
+  }
+  .status-pill.action {
+    background: var(--color-primary, #e94560);
+    color: #fff;
+    cursor: pointer;
+    transition: background 150ms ease;
+  }
+  .status-pill.action:hover {
+    background: var(--color-primary-hover, #ff6b81);
   }
 
   .settings-close {
@@ -1028,7 +1047,20 @@ template.innerHTML = `
 <div class="settings-backdrop">
   <div class="settings-dialog">
     <button class="settings-close" aria-label="Close">✕</button>
-    <h2>⚙ Settings</h2>
+
+    <div class="settings-about">
+      <a class="about-header" href="https://github.com/david-risney/SayItAlready" target="_blank" rel="noopener">
+        <span class="about-text">Say It<br><span class="accent">Already</span></span>
+        <img class="about-logo" src="icons/icon-nobg.svg" alt="" width="48" height="48">
+      </a>
+      <span class="about-version">v${APP_VERSION}</span>
+      <div class="about-status">
+        <span class="update-check"></span>
+        <span class="install-check" style="display:none"></span>
+      </div>
+    </div>
+
+    <hr class="settings-divider">
 
     <div class="settings-section">
       <h3>Controls</h3>
@@ -1080,16 +1112,6 @@ template.innerHTML = `
         <button data-timer="90">90 s</button>
         <button data-timer="120">120 s</button>
       </div>
-    </div>
-
-    <hr class="settings-divider">
-
-    <div class="settings-about">
-      <a class="about-header" href="https://github.com/david-risney/SayItAlready" target="_blank" rel="noopener">
-        <span class="about-text">Say It<br><span class="accent">Already</span></span>
-        <img class="about-logo" src="icons/icon-nobg.svg" alt="" width="48" height="48">
-      </a>
-      <div class="app-version">v${APP_VERSION} <span class="update-check"></span></div>
     </div>
 
   </div>
@@ -1403,11 +1425,6 @@ export class HomeScreen extends HTMLElement {
     await saveDeck(deck);
     this.#decks = sortDecksByRecency(await loadAllDecks());
     this.#renderDecks();
-    const saved = this.#decks.find(d => d.id === deck.id);
-    if (saved) {
-      this.#openModal(saved);
-      this.dispatchEvent(new CustomEvent('deck-preview-open', { bubbles: true, composed: true, detail: { deckId: saved.id } }));
-    }
   }
 
   /** Validate and import a deck from JSON string. */
@@ -1431,12 +1448,6 @@ export class HomeScreen extends HTMLElement {
     // Reload deck list
     this.#decks = sortDecksByRecency(await loadAllDecks());
     this.#renderDecks();
-    // Open the newly imported deck
-    const imported = this.#decks.find(d => d.id === deck.id);
-    if (imported) {
-      this.#openModal(imported);
-      this.dispatchEvent(new CustomEvent('deck-preview-open', { bubbles: true, composed: true, detail: { deckId: imported.id } }));
-    }
   }
 
   #bindSettings() {
@@ -1538,8 +1549,9 @@ export class HomeScreen extends HTMLElement {
       gyroRow.classList.remove('disabled');
     }
 
-    // Check for newer version
+    // Check for newer version + install status
     this.#checkForUpdate();
+    this.#updateInstallStatus();
   }
 
   async #checkForUpdate() {
@@ -1554,11 +1566,12 @@ export class HomeScreen extends HTMLElement {
       if (!match) return;
       const remote = match[1];
       if (remote !== APP_VERSION) {
-        el.innerHTML = `<span class="update-badge">v${remote} available \u2014 update</span>`;
-        el.style.cursor = 'pointer';
-        el.addEventListener('click', async () => {
-          el.textContent = 'Updating\u2026';
-          // Clear all SW caches and unregister, then hard reload
+        const pill = document.createElement('span');
+        pill.className = 'status-pill action';
+        pill.textContent = `v${remote} — update`;
+        pill.addEventListener('click', async () => {
+          pill.textContent = 'Updating\u2026';
+          pill.style.pointerEvents = 'none';
           if ('caches' in window) {
             const keys = await caches.keys();
             await Promise.all(keys.map(k => caches.delete(k)));
@@ -1567,8 +1580,51 @@ export class HomeScreen extends HTMLElement {
           await Promise.all(regs.map(r => r.unregister()));
           location.reload();
         }, { once: true });
+        el.appendChild(pill);
+      } else {
+        el.innerHTML = '<span class="status-pill ok">up to date</span>';
       }
-    } catch { /* offline or fetch failed \u2014 silently skip */ }
+    } catch { /* offline — silently skip */ }
+  }
+
+  #updateInstallStatus() {
+    const el = this.shadowRoot.querySelector('.install-check');
+    el.innerHTML = '';
+
+    if (isInstalledPWA()) {
+      el.style.display = '';
+      el.innerHTML = '<span class="status-pill ok">installed</span>';
+      return;
+    }
+
+    const prompt = getInstallPrompt();
+    if (prompt) {
+      el.style.display = '';
+      const pill = document.createElement('span');
+      pill.className = 'status-pill action';
+      pill.textContent = 'install app';
+      pill.addEventListener('click', async () => {
+        pill.textContent = 'Installing\u2026';
+        pill.style.pointerEvents = 'none';
+        try {
+          await prompt.prompt();
+          const result = await prompt.userChoice;
+          if (result.outcome === 'accepted') {
+            clearInstallPrompt();
+            el.innerHTML = '<span class="status-pill ok">installed</span>';
+          } else {
+            pill.textContent = 'install app';
+            pill.style.pointerEvents = '';
+          }
+        } catch {
+          pill.textContent = 'install app';
+          pill.style.pointerEvents = '';
+        }
+      }, { once: true });
+      el.appendChild(pill);
+    } else {
+      el.style.display = 'none';
+    }
   }
 
   async #probeGyro() {

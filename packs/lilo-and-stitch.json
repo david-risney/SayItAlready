@@ -1,0 +1,249 @@
+{
+  "id": "lilo-and-stitch",
+  "name": "Lilo & Stitch",
+  "description": "Ohana means family!",
+  "icon": "👽",
+  "background": "linear-gradient(135deg, #1565c0, #42a5f5)",
+  "words": [
+    {
+      "text": "Stitch",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Lilo",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Nani",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Ohana",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Hawaii",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Experiment 626",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Jumba Jookiba",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Pleakley",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "David Kawena",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Surfing",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Alien",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Elvis Presley",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Hula",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Cobra Bubbles",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Grand Councilwoman",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Captain Gantu",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Ugly Duckling",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Dog",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Spaceship",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Family",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Angel",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Experiment 624",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Reuben",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Mertle Edmonds",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Hamsterviel",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Plasma Blaster",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Genetic Experiment",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Trog",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Social Worker",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Kauai",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Pelekai",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Pudge the Fish",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Rescue Lady",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Aloha",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Buggy",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Red Police Cruiser",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Peanut Butter Sandwich",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Destruction",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Four Arms",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Luau",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Experiment 625",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Sparky",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Fibber",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Experiment 221",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Nosy",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Kixx",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Slushy",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Mrs. Hasagawa",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Moses Puloki",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Elena",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Teresa",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Yuki",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Richter",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Sample",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Clip",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Mr. Stenchy",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Cannonball",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Phantasmo",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Swirly",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Dupe",
+      "tags": ["difficulty:2"]
+    }
+  ]
+}

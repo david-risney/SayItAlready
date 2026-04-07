@@ -1,4 +1,4 @@
-const CACHE_NAME = 'sayitalready-v1.14.0';
+const CACHE_NAME = 'sayitalready-v1.15.0';
 
 const PRECACHE_URLS = [
   './',
@@ -16,6 +16,7 @@ const PRECACHE_URLS = [
   './js/services/timer.js',
   './js/services/deck-store.js',
   './js/services/settings.js',
+  './js/services/install.js',
   './js/version.js',
   './packs/animals.json',
   './packs/movies.json',
@@ -36,6 +37,10 @@ const PRECACHE_URLS = [
   './packs/mario.json',
   './packs/brands-and-logos.json',
   './packs/tv-shows.json',
+  './packs/amphibia.json',
+  './packs/lilo-and-stitch.json',
+  './packs/roblox.json',
+  './packs/80s.json',
   './icons/icon.svg',
   './icons/icon-nobg.svg',
   './icons/icon-192.png',

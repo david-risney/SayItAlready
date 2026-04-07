@@ -1,0 +1,257 @@
+{
+  "id": "roblox",
+  "name": "Roblox",
+  "description": "Build, play, imagine!",
+  "icon": "🧱",
+  "background": "linear-gradient(135deg, #b71c1c, #ef5350)",
+  "words": [
+    {
+      "text": "Robux",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Adopt Me",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Blox Fruits",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Brookhaven",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Obby",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Avatar",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Tower of Hell",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Murder Mystery 2",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Piggy",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Jailbreak",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Roblox Studio",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Noob",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Oof",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Fisch",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Doors",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Dress to Impress",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Grow a Garden",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Royale High",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Pet Simulator 99",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Blade Ball",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "DevEx",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Korblox",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Headless Horseman",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Dominus",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Game Pass",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Limiteds",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Work at a Pizza Place",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Bee Swarm Simulator",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Shindo Life",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Arsenal",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Phantom Forces",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Flee the Facility",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Welcome to Bloxburg",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Da Hood",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "King Legacy",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Steal a Brainrot",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "The Strongest Battlegrounds",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Rivals",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Break In 2",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Evade",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Valkyrie Helm",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Shedletsky",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Clockwork's Shades",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Linked Sword",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "John Doe",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Erik Cassel",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Rthro",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Egg Hunt",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Luobu",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Gravity Coil",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Crossroads",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Tix",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Sparkle Time Fedora",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Builderman",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Stud",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "MeepCity",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Bluesteel",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "1x1x1x1",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Type Soul",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Catalog Heaven",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Bubble Gum Simulator",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Natural Disaster Survival",
+      "tags": ["difficulty:1"]
+    }
+  ]
+}

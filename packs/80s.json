@@ -1,0 +1,249 @@
+{
+  "id": "80s",
+  "name": "1980s",
+  "description": "Totally radical!",
+  "icon": "🕹️",
+  "background": "linear-gradient(135deg, #8e24aa, #f06292)",
+  "words": [
+    {
+      "text": "Michael Jackson",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Madonna",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Pac-Man",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Rubik's Cube",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "MTV",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Ghostbusters",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "E.T.",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Walkman",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Boombox",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Leg Warmers",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Cassette Tape",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Nintendo",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Mullet",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Star Wars",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Breakdancing",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Thriller",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Top Gun",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Aerobics",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Perm",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Prince",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Bon Jovi",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Floppy Disk",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Cabbage Patch Kids",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "DeLorean",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Jelly Shoes",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Atari",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Scrunchie",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Cyndi Lauper",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Ferris Bueller",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Shoulder Pads",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Acid Wash",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "VHS",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Footloose",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Members Only Jacket",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Duran Duran",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "The A-Team",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Knight Rider",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Fanny Pack",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Tears for Fears",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Crocodile Dundee",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Betamax",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Max Headroom",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Teddy Ruxpin",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Nagel Print",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Swatch Watch",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Speak & Spell",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Commodore 64",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Hypercolor Shirt",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Laserdisc",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Gremlins",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Jazzercise",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Garbage Pail Kids",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "New Coke",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Reaganomics",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Jheri Curl",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Trapper Keeper",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Brat Pack",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Deely Bopper",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Popples",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Koosh Ball",
+      "tags": ["difficulty:2"]
+    }
+  ]
+}

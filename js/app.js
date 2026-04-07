@@ -128,6 +128,7 @@ app.addEventListener('settings-open', () => {
 });
 
 app.addEventListener('edit-deck-open', (e) => {
+  if (routing) return;
   const deckId = e.detail?.deckId;
   pushView(deckId ? { view: 'edit', deck: deckId } : { view: 'edit' });
 });
@@ -217,6 +218,9 @@ function lockLandscape() {
 function unlockOrientation() {
   try { screen.orientation?.unlock(); } catch {}
 }
+
+/* ---- PWA install prompt ---- */
+import './services/install.js';
 
 /* ---- Service Worker registration ---- */
 if ('serviceWorker' in navigator) {

@@ -61,7 +61,7 @@ export async function fetchBuiltInPack(name) {
 
 /** Load all available decks — built-in + custom. */
 export async function loadAllDecks() {
-  const builtInNames = ['animals', 'movies', 'food', 'back-to-the-future', 'parks-and-rec', 'community', 'science', '90s-nostalgia', 'simpsons', 'among-us', 'dog-with-a-blog', 'disney-parks', 'fast-food', 'brooklyn-99', 'portal', 'video-game-characters', 'mario', 'brands-and-logos', 'tv-shows'];
+  const builtInNames = ['animals', 'movies', 'food', 'back-to-the-future', 'parks-and-rec', 'community', 'science', '90s-nostalgia', 'simpsons', 'among-us', 'dog-with-a-blog', 'disney-parks', 'fast-food', 'brooklyn-99', 'portal', 'video-game-characters', 'mario', 'brands-and-logos', 'tv-shows', 'amphibia', 'lilo-and-stitch', 'roblox', '80s'];
   const [builtIn, custom] = await Promise.all([
     Promise.all(builtInNames.map((n) => fetchBuiltInPack(n).catch(() => null))).then((r) =>
       r.filter(Boolean)

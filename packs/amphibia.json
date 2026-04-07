@@ -1,0 +1,249 @@
+{
+  "id": "amphibia",
+  "name": "Amphibia",
+  "description": "Welcome to Amphibia!",
+  "icon": "🐸",
+  "background": "linear-gradient(135deg, #2e7d32, #81c784)",
+  "words": [
+    {
+      "text": "Anne Boonchuy",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Sprig Plantar",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Hop Pop",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Polly Plantar",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Sasha Waybright",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Marcy Wu",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Calamity Box",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Wartwood",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Frog",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Newtopia",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "King Andrias",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "The Night",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Calamity Powers",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Blue Gem",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Amphibia",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Human",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Thai Food",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Best Friends",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Portal",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Sword",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Grime",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Lady Olivia",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "General Yunan",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Toad Tower",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Stumpy's Diner",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Bessie",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Mr. Boonchuy",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Mrs. Boonchuy",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Domino",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Frobo",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Barrel's Warhammer",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Plantars' Farm",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Red Gem",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Green Gem",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Newt",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Toad",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Reunion",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "True Colors",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "The Core",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Music Box",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Mayor Toadstool",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Wally Ribbiton",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Ivy Sundew",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Maddie Flour",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Loggle",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Felicia Sundew",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Tritonio Espada",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Curator Ponds",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Apothecary Gary",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Valeriana",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Olm",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Mother Olm",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Sal's Sandwiches",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Frog Soos",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Darcy",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Terri",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Dr. Jan",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Mr. X",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Aldrich",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Leif",
+      "tags": ["difficulty:2"]
+    }
+  ]
+}
