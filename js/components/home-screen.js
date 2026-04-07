@@ -22,11 +22,18 @@ template.innerHTML = `
     scroll-timeline: --home-scroll block;
     animation: bg-shift linear both;
     animation-timeline: --home-scroll;
-    animation-range: 0px 300px;
+    animation-range: 0px 2880px;
   }
   @keyframes bg-shift {
-    from { background: var(--color-bg, #1a1a2e); }
-    to   { background: #d4b8e8; }
+    0%     { background: #1a1a2e; }
+    12.5%  { background: #d4b8e8; }
+    25%    { background: #f5e6a3; }
+    37.5%  { background: #a8d8ea; }
+    50%    { background: #f5c6cb; }
+    62.5%  { background: #b5ead7; }
+    75%    { background: #ffd3b6; }
+    87.5%  { background: #c3b1e1; }
+    100%   { background: #b8e0d2; }
   }
 
   /* --- Sticky shrinking header (CSS scroll-driven) --- */
@@ -126,8 +133,10 @@ template.innerHTML = `
 
 
   @keyframes shrink-inner {
-    from { font-size: 1rem; padding: 3rem 1rem 2rem; padding-top: max(3rem, env(titlebar-area-y, 0px)); }
-    to   { font-size: 0.55rem; padding: 0.5rem 1rem 0; }
+    from { font-size: 1rem; padding: 3rem 1rem 2rem; padding-top: max(3rem, env(titlebar-area-y, 0px));
+           max-height: 11rem; }
+    to   { font-size: 0.55rem; padding: 0.5rem 1rem 0;
+           max-height: 7rem; }
   }
 
 
@@ -512,17 +521,32 @@ template.innerHTML = `
     text-align: center;
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 0.3rem;
   }
-  .settings-about .about-logo {
-    width: 4rem;
-    height: 4rem;
-    border-radius: 0.75rem;
-    align-self: center;
-  }
-  .settings-about .app-name {
-    font-size: 1.1rem;
+  .settings-about .about-header {
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+    text-decoration: none;
+    color: inherit;
+    font-size: 1.4rem;
     font-weight: 800;
+    line-height: 1.1;
+  }
+  .settings-about .about-header:hover .about-text { text-decoration: underline; }
+  .settings-about .about-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  .settings-about .about-text .accent {
+    color: var(--color-primary, #e94560);
+  }
+  .settings-about .about-logo {
+    width: 2.2em;
+    height: 2.2em;
+    flex-shrink: 0;
   }
   .settings-about .app-version {
     font-size: 0.75rem;
@@ -647,8 +671,8 @@ template.innerHTML = `
 
     <div class="settings-about">
       <a class="about-header" href="https://github.com/david-risney/SayItAlready" target="_blank" rel="noopener">
-        <img class="about-logo" src="icons/icon-nobg.svg" alt="" width="32" height="32">
-        <span class="app-name">Say It Already!</span>
+        <span class="about-text">Say It<br><span class="accent">Already</span></span>
+        <img class="about-logo" src="icons/icon-nobg.svg" alt="" width="48" height="48">
       </a>
       <div class="app-version">v${APP_VERSION} <span class="update-check"></span></div>
     </div>

@@ -212,6 +212,33 @@ template.innerHTML = `
     max-width: 50%;
   }
   .debug-overlay.visible { display: block; }
+
+  /* --- Countdown overlay --- */
+  .countdown-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-bg, #1a1a2e);
+    z-index: 25;
+    transition: opacity 300ms ease;
+  }
+  .countdown-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+  .countdown-num {
+    font-size: 8rem;
+    font-weight: 900;
+    color: var(--color-primary, #e94560);
+    animation: countdown-pop 0.4s ease;
+  }
+  @keyframes countdown-pop {
+    0%   { transform: scale(1.6); opacity: 0; }
+    60%  { transform: scale(0.95); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+  }
 </style>
 
 <div class="game">
@@ -240,6 +267,7 @@ template.innerHTML = `
 
   <div class="swipe-hint">⟵ Skip · Correct ⟶</div>
   <div class="debug-overlay"></div>
+  <div class="countdown-overlay"><span class="countdown-num">3</span></div>
 </div>
 `;
 
@@ -297,9 +325,11 @@ export class GameScreen extends HTMLElement {
     this.#index = 0;
     this.#results = [];
     this.#showWord();
-    this.#startTimer();
-    this.#startTilt();
-    this.#bindControls();
+    this.#runCountdown().then(() => {
+      this.#startTimer();
+      this.#startTilt();
+      this.#bindControls();
+    });
     this.#acquireWakeLock();
   }
 
@@ -320,6 +350,32 @@ export class GameScreen extends HTMLElement {
   #releaseWakeLock() {
     this.#wakeLock?.release();
     this.#wakeLock = null;
+  }
+
+  /* ---- Countdown ---- */
+  #runCountdown() {
+    const overlay = this.shadowRoot.querySelector('.countdown-overlay');
+    const numEl = overlay.querySelector('.countdown-num');
+    overlay.classList.remove('hidden');
+    let count = 3;
+    numEl.textContent = count;
+    return new Promise((resolve) => {
+      const tick = () => {
+        count--;
+        if (count <= 0) {
+          overlay.classList.add('hidden');
+          resolve();
+          return;
+        }
+        numEl.textContent = count;
+        // Re-trigger animation
+        numEl.style.animation = 'none';
+        numEl.offsetHeight; // force reflow
+        numEl.style.animation = '';
+        setTimeout(tick, 1000);
+      };
+      setTimeout(tick, 1000);
+    });
   }
 
   /* ---- Timer ---- */

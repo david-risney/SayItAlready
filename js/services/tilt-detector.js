@@ -73,8 +73,8 @@ export class TiltDetector {
 
   /**
    * @param {object} opts
-   * @param {function} opts.onCorrect  – nod backward (face sky)
-   * @param {function} opts.onSkip     – nod forward (face ground)
+   * @param {function} opts.onCorrect  – nod forward (face ground)
+   * @param {function} opts.onSkip     – nod backward (face sky)
    * @param {function} [opts.onDebug]  – called every event with debug data
    */
   constructor({ onCorrect, onSkip, onDebug }) {
@@ -101,13 +101,13 @@ export class TiltDetector {
     if (!this.#active) return;
     if (e.beta == null || e.gamma == null) return;
 
-    // Lock orientation on first valid reading: |beta| < 45 → landscape
+    // Always use landscape detection — game screen forces landscape orientation
     if (this.#landscape === null) {
-      this.#landscape = Math.abs(e.beta) < 45;
+      this.#landscape = true;
     }
 
-    let tiltUp = false;   // nod backward → onCorrect
-    let tiltDown = false;  // nod forward → onSkip
+    let tiltUp = false;   // nod backward → onSkip
+    let tiltDown = false;  // nod forward → onCorrect
     let inNeutral = false;
     let debugExtra = '';
 
@@ -141,10 +141,10 @@ export class TiltDetector {
     if (this.#state === 'fired') {
       if (inNeutral) this.#state = 'neutral';
     } else {
-      if (tiltUp) {
+      if (tiltDown) {
         this.#state = 'fired';
         this.#onCorrect?.();
-      } else if (tiltDown) {
+      } else if (tiltUp) {
         this.#state = 'fired';
         this.#onSkip?.();
       }

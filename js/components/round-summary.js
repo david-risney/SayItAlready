@@ -24,15 +24,25 @@ template.innerHTML = `
     font-size: 1.8rem;
     font-weight: 800;
   }
+  .score-row {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+  }
+  .score-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
   .score {
     font-size: 3rem;
     font-weight: 900;
     color: var(--color-primary, #e94560);
+    line-height: 1;
   }
   .score-label {
     color: var(--color-text-muted, #aaa);
     font-size: 0.9rem;
-    margin-top: -0.5rem;
   }
   .results-list {
     list-style: none;
@@ -69,10 +79,10 @@ template.innerHTML = `
   .diff-2 { background: #e94560; color: #fff; }
   .diff-summary {
     display: flex;
-    gap: 0.75rem;
+    flex-direction: column;
+    gap: 0.3rem;
     font-size: 0.8rem;
     color: var(--color-text-muted, #aaa);
-    margin-top: -0.5rem;
   }
   .diff-summary span {
     display: flex;
@@ -100,9 +110,13 @@ template.innerHTML = `
 
 <div class="summary">
   <h2>Round Over!</h2>
-  <div class="score">0</div>
-  <div class="score-label">correct</div>
-  <div class="diff-summary"></div>
+  <div class="score-row">
+    <div class="score-block">
+      <div class="score">0</div>
+      <div class="score-label">correct</div>
+    </div>
+    <div class="diff-summary"></div>
+  </div>
   <div class="actions">
     <button class="btn-home">🏠 Home</button>
     <button class="btn-replay">🔄 Play Again</button>
