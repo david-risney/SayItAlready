@@ -62,9 +62,23 @@ template.innerHTML = `
   .word.pop {
     animation: pop 200ms ease;
   }
+  .word.flip-up {
+    animation: flip-up 250ms ease;
+  }
+  .word.flip-down {
+    animation: flip-down 250ms ease;
+  }
   @keyframes pop {
     0%   { transform: scale(0.8); opacity: 0; }
     100% { transform: scale(1);   opacity: 1; }
+  }
+  @keyframes flip-up {
+    0%   { transform: translateY(20px) rotateX(-30deg); opacity: 0; }
+    100% { transform: translateY(0) rotateX(0);         opacity: 1; }
+  }
+  @keyframes flip-down {
+    0%   { transform: translateY(-20px) rotateX(30deg); opacity: 0; }
+    100% { transform: translateY(0) rotateX(0);          opacity: 1; }
   }
 
   /* --- Tap zones (touch mode) --- */
@@ -554,17 +568,17 @@ export class GameScreen extends HTMLElement {
     this.#index++;
   }
 
-  #showWord() {
+  #showWord(anim = 'pop') {
     const wordEl = this.shadowRoot.querySelector('.word');
     if (this.#index >= this.#words.length) {
       this.#endRound();
       return;
     }
     wordEl.textContent = wordText(this.#words[this.#index]);
-    wordEl.classList.remove('pop');
+    wordEl.classList.remove('pop', 'flip-up', 'flip-down');
     // force reflow for animation restart
     void wordEl.offsetWidth;
-    wordEl.classList.add('pop');
+    wordEl.classList.add(anim);
   }
 
   #handleCorrect() {
@@ -573,7 +587,7 @@ export class GameScreen extends HTMLElement {
     this.#audio.correct();
     this.#flashFeedback('correct');
     this.#pickNext();
-    this.#showWord();
+    this.#showWord('flip-up');
   }
 
   #handleSkip() {
@@ -582,7 +596,7 @@ export class GameScreen extends HTMLElement {
     this.#audio.skip();
     this.#flashFeedback('skip');
     this.#pickNext();
-    this.#showWord();
+    this.#showWord('flip-down');
   }
 
   #flashFeedback(type) {

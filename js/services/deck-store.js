@@ -66,7 +66,7 @@ export async function loadAllDecks() {
     Promise.all(builtInNames.map((n) => fetchBuiltInPack(n).catch(() => null))).then((r) =>
       r.filter(Boolean)
     ),
-    getAllDecks(),
+    getAllDecks().then(decks => decks.map(d => ({ ...d, custom: true }))),
   ]);
   return [...builtIn, ...custom];
 }
@@ -90,7 +90,11 @@ export function recordPlay(deckId) {
 /** Sort decks: recently played first (most recent first), then unplayed alphabetically. */
 export function sortDecksByRecency(decks) {
   const history = getPlayHistory();
+  const favs = getFavorites();
   return [...decks].sort((a, b) => {
+    const aFav = favs.has(a.id) ? 1 : 0;
+    const bFav = favs.has(b.id) ? 1 : 0;
+    if (aFav !== bFav) return bFav - aFav; // favorites first
     const aTime = history[a.id] || 0;
     const bTime = history[b.id] || 0;
     if (aTime && bTime) return bTime - aTime;
@@ -98,4 +102,27 @@ export function sortDecksByRecency(decks) {
     if (bTime) return 1;
     return (a.name || '').localeCompare(b.name || '');
   });
+}
+
+/* ---- Favorites ---- */
+const FAVORITES_KEY = 'sayitalready-favorites';
+
+/** Get set of favorite deck IDs. */
+export function getFavorites() {
+  try {
+    return new Set(JSON.parse(localStorage.getItem(FAVORITES_KEY)) || []);
+  } catch { return new Set(); }
+}
+
+/** Toggle a deck's favorite status. Returns new isFavorite state. */
+export function toggleFavorite(deckId) {
+  const favs = getFavorites();
+  if (favs.has(deckId)) { favs.delete(deckId); } else { favs.add(deckId); }
+  localStorage.setItem(FAVORITES_KEY, JSON.stringify([...favs]));
+  return favs.has(deckId);
+}
+
+/** Check if a deck is favorited. */
+export function isFavorite(deckId) {
+  return getFavorites().has(deckId);
 }

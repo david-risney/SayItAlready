@@ -1,4 +1,4 @@
-import { loadAllDecks, recordPlay, sortDecksByRecency } from '../services/deck-store.js';
+import { loadAllDecks, recordPlay, sortDecksByRecency, saveDeck, deleteDeck, toggleFavorite, isFavorite } from '../services/deck-store.js';
 import { requestTiltPermission, probeTiltAvailable } from '../services/tilt-detector.js';
 import { wordText, hasDifficultyTags, filterByDifficulty } from '../models/deck.js';
 import { getSettings, updateSettings } from '../services/settings.js';
@@ -188,6 +188,24 @@ template.innerHTML = `
     border: 2px solid transparent;
     transition: transform 200ms ease, box-shadow 200ms ease;
     text-align: center;
+    position: relative;
+  }
+  .deck-fav {
+    position: absolute;
+    top: 0.35rem;
+    right: 0.35rem;
+    font-size: 1rem;
+    line-height: 1;
+    cursor: pointer;
+    opacity: 0.3;
+    transition: opacity 150ms ease, transform 150ms ease;
+    z-index: 2;
+  }
+  .deck-fav.active {
+    opacity: 1;
+  }
+  .deck-fav:hover {
+    transform: scale(1.2);
   }
   .deck-card:hover {
     transform: scale(1.06);
@@ -196,6 +214,10 @@ template.innerHTML = `
   }
   .deck-card:active {
     transform: scale(0.97);
+  }
+  @keyframes card-in {
+    from { opacity: 0; transform: translateY(16px) scale(0.95); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
   }
   .deck-icon {
     font-size: 2.4rem;
@@ -512,6 +534,27 @@ template.innerHTML = `
     cursor: pointer;
     flex-shrink: 0;
   }
+  .timer-pills {
+    display: flex;
+    gap: 0.4rem;
+    justify-content: center;
+  }
+  .timer-pills button {
+    font-size: 0.8rem;
+    font-weight: 600;
+    border: 2px solid rgba(255 255 255 / 0.2);
+    border-radius: 999px;
+    padding: 0.35em 0.9em;
+    cursor: pointer;
+    background: transparent;
+    color: var(--color-text-muted, #aaa);
+    transition: all 150ms ease;
+  }
+  .timer-pills button.selected {
+    background: var(--color-primary, #e94560);
+    border-color: var(--color-primary, #e94560);
+    color: #fff;
+  }
   .settings-divider {
     border: none;
     border-top: 1px solid rgba(255 255 255 / 0.1);
@@ -583,6 +626,315 @@ template.innerHTML = `
     transition: background 150ms ease;
   }
   .settings-close:hover { background: rgba(255 255 255 / 0.2); color: var(--color-text, #eee); }
+
+  /* --- Import (add) card --- */
+  .deck-card-add {
+    aspect-ratio: 5 / 7;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    background: transparent;
+    border: 2px dashed rgba(255 255 255 / 0.2);
+    border-radius: var(--radius, 12px);
+    padding: 0.75rem 0.5rem;
+    cursor: pointer;
+    transition: transform 200ms ease, background 200ms ease, border-color 200ms ease;
+    text-align: center;
+    color: var(--color-text-muted, #aaa);
+  }
+  .deck-card-add:hover {
+    transform: scale(1.06);
+    background: rgba(255 255 255 / 0.06);
+    border-color: rgba(255 255 255 / 0.35);
+    color: #fff;
+  }
+  .deck-card-add:active {
+    transform: scale(0.97);
+  }
+  .deck-card-add .add-icon {
+    font-size: 2.4rem;
+    line-height: 1;
+  }
+  .deck-card-add .add-label {
+    font-weight: 700;
+    font-size: 0.8rem;
+  }
+
+  /* Import dialog */
+  .import-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+  }
+  .import-backdrop.open { display: flex; }
+  .import-dialog {
+    background: var(--color-surface, #16213e);
+    border-radius: var(--radius, 12px);
+    padding: 1.5rem;
+    position: relative;
+    max-width: 420px;
+    width: 100%;
+    max-height: 85vh;
+    overflow-y: auto;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    animation: modal-in 250ms ease;
+    border: 1px solid rgba(255 255 255 / 0.12);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+  }
+  .import-dialog h2 {
+    font-size: 1.2rem;
+    font-weight: 800;
+    margin: 0;
+    text-align: center;
+  }
+  .edit-close {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    background: rgba(255 255 255 / 0.1);
+    border: none;
+    color: var(--color-text-muted, #aaa);
+    font-size: 1.2rem;
+    line-height: 1;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 150ms ease;
+  }
+  .edit-close:hover { background: rgba(255 255 255 / 0.2); color: #fff; }
+  /* Mode tabs */
+  .edit-tabs {
+    display: flex;
+    gap: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(255 255 255 / 0.15);
+  }
+  .edit-tabs button {
+    flex: 1;
+    padding: 0.45em 0;
+    font-size: 0.8rem;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    background: transparent;
+    color: var(--color-text-muted, #aaa);
+    transition: background 150ms ease, color 150ms ease;
+  }
+  .edit-tabs button.active {
+    background: var(--color-primary, #e94560);
+    color: #fff;
+  }
+  /* Editor pane */
+  .edit-pane { display: none; flex-direction: column; gap: 0.6rem; }
+  .edit-pane.visible { display: flex; }
+  .edit-field { display: flex; flex-direction: column; gap: 0.2rem; }
+  .edit-field label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--color-text-muted, #aaa);
+  }
+  .edit-field input,
+  .edit-field textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.45rem 0.6rem;
+    border: 1px solid rgba(255 255 255 / 0.15);
+    border-radius: 6px;
+    background: rgba(0 0 0 / 0.25);
+    color: var(--color-text, #eee);
+    font-size: 0.85rem;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 200ms ease;
+  }
+  .edit-field input:focus,
+  .edit-field textarea:focus { border-color: var(--color-primary, #e94560); }
+  .edit-field input::placeholder,
+  .edit-field textarea::placeholder { color: rgba(255 255 255 / 0.3); }
+  .edit-field-row {
+    display: flex;
+    gap: 0.5rem;
+  }
+  .edit-field-row .edit-field { flex: 1; min-width: 0; }
+  .edit-color-row {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  .edit-color-row input[type="color"] {
+    width: 2.5rem;
+    height: 2.2rem;
+    border: 1px solid rgba(255 255 255 / 0.15);
+    border-radius: 6px;
+    background: rgba(0 0 0 / 0.25);
+    cursor: pointer;
+    padding: 2px;
+  }
+  .edit-color-preview {
+    flex: 1;
+    height: 2.2rem;
+    border-radius: 6px;
+    border: 1px solid rgba(255 255 255 / 0.12);
+  }
+  .edit-words-header {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--color-text-muted, #aaa);
+  }
+  .add-word-btn {
+    font-size: 0.75rem;
+    font-weight: 600;
+    background: rgba(255 255 255 / 0.1);
+    border: 1px dashed rgba(255 255 255 / 0.2);
+    border-radius: 6px;
+    color: var(--color-text-muted, #aaa);
+    padding: 0.35em 0;
+    width: 100%;
+    cursor: pointer;
+    transition: background 150ms ease;
+    margin-top: 0.15rem;
+  }
+  .add-word-btn:hover { background: rgba(255 255 255 / 0.18); color: #fff; }
+  .edit-words-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+  .edit-word-row {
+    display: flex;
+    gap: 0.35rem;
+    align-items: center;
+  }
+  .edit-word-row input {
+    flex: 1;
+    min-width: 0;
+    padding: 0.35rem 0.5rem;
+    border: 1px solid rgba(255 255 255 / 0.12);
+    border-radius: 5px;
+    background: rgba(0 0 0 / 0.2);
+    color: var(--color-text, #eee);
+    font-size: 0.8rem;
+    font-family: inherit;
+    outline: none;
+  }
+  .edit-word-row input:focus { border-color: var(--color-primary, #e94560); }
+  .edit-word-row select {
+    padding: 0.3rem;
+    border: 1px solid rgba(255 255 255 / 0.12);
+    border-radius: 5px;
+    background: rgba(0 0 0 / 0.3);
+    color: var(--color-text, #eee);
+    font-size: 0.75rem;
+    cursor: pointer;
+  }
+  .edit-word-row .remove-word {
+    background: none;
+    border: none;
+    color: rgba(255 255 255 / 0.3);
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 0 0.2em;
+    line-height: 1;
+    transition: color 150ms ease;
+  }
+  .edit-word-row .remove-word:hover { color: #f44; }
+  /* JSON pane */
+  .json-pane { display: none; flex-direction: column; gap: 0.5rem; }
+  .json-pane.visible { display: flex; }
+  .import-dialog textarea.json-textarea {
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 180px;
+    padding: 0.6rem;
+    border: 1px solid rgba(255 255 255 / 0.15);
+    border-radius: 8px;
+    background: rgba(0 0 0 / 0.25);
+    color: var(--color-text, #eee);
+    font-size: 0.8rem;
+    font-family: monospace;
+    resize: vertical;
+  }
+  .import-dialog textarea.json-textarea::placeholder { color: var(--color-text-muted, #aaa); }
+  .import-error {
+    color: #f44;
+    font-size: 0.8rem;
+    min-height: 1.2em;
+  }
+  .import-actions {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+  }
+  .import-actions button {
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    padding: 0.5em 1.2em;
+    cursor: pointer;
+    transition: background 150ms ease;
+  }
+  .import-cancel {
+    background: rgba(255 255 255 / 0.1);
+    color: var(--color-text-muted, #aaa);
+  }
+  .import-cancel:hover { background: rgba(255 255 255 / 0.2); }
+  .import-delete {
+    background: rgba(255 50 50 / 0.15);
+    color: #f66;
+    display: none;
+  }
+  .import-delete.visible { display: inline-block; }
+  .import-delete:hover { background: rgba(255 50 50 / 0.3); }
+  .import-submit {
+    background: var(--color-primary, #e94560);
+    color: #fff;
+    margin-left: auto;
+  }
+  .import-submit:hover { background: var(--color-primary-hover, #ff6b81); }
+  /* Edit overlay on deck card */
+  .deck-edit {
+    position: absolute;
+    bottom: 0.35rem;
+    right: 0.35rem;
+    font-size: 0.75rem;
+    line-height: 1;
+    cursor: pointer;
+    opacity: 0.4;
+    transition: opacity 150ms ease, transform 150ms ease;
+    z-index: 2;
+    background: rgba(0 0 0 / 0.3);
+    border: none;
+    color: #fff;
+    width: 1.6rem;
+    height: 1.6rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .deck-edit:hover { opacity: 1; transform: scale(1.15); }
 </style>
 
 <div class="home">
@@ -598,6 +950,59 @@ template.innerHTML = `
     <input class="filter-input" type="text" placeholder="Search decks…">
   </div>
   <div class="deck-list" role="listbox" aria-label="Available decks"></div>
+</div>
+
+<div class="import-backdrop">
+  <div class="import-dialog">
+    <button class="edit-close" aria-label="Close">✕</button>
+    <h2 class="edit-title">Add Deck</h2>
+
+    <div class="edit-tabs">
+      <button class="tab-editor active" data-tab="editor">Editor</button>
+      <button class="tab-json" data-tab="json">JSON</button>
+    </div>
+
+    <div class="edit-pane visible">
+      <div class="edit-field-row">
+        <div class="edit-field">
+          <label>Icon</label>
+          <input class="edit-icon" type="text" placeholder="🎲" maxlength="4">
+        </div>
+        <div class="edit-field" style="flex:3">
+          <label>Name</label>
+          <input class="edit-name" type="text" placeholder="My Deck">
+        </div>
+      </div>
+      <div class="edit-field">
+        <label>Description</label>
+        <input class="edit-desc" type="text" placeholder="A fun deck about…">
+      </div>
+      <div class="edit-field">
+        <label>Background</label>
+        <div class="edit-color-row">
+          <input class="edit-color1" type="color" value="#2d6a4f">
+          <input class="edit-color2" type="color" value="#40916c">
+          <div class="edit-color-preview"></div>
+        </div>
+      </div>
+      <div class="edit-field">
+        <div class="edit-words-header">Words</div>
+        <div class="edit-words-list"></div>
+        <button class="add-word-btn">＋ Add Word</button>
+      </div>
+    </div>
+
+    <div class="json-pane">
+      <textarea class="json-textarea" placeholder='{"id":"my-deck","name":"My Deck","icon":"🎲","words":[{"text":"Example","tags":["easy"]}]}'></textarea>
+    </div>
+
+    <div class="import-error"></div>
+    <div class="import-actions">
+      <button class="import-delete">🗑 Delete</button>
+      <button class="import-cancel">Cancel</button>
+      <button class="import-submit">Save</button>
+    </div>
+  </div>
 </div>
 
 <div class="modal-backdrop">
@@ -667,6 +1072,16 @@ template.innerHTML = `
       </div>
     </div>
 
+    <div class="settings-section">
+      <h3>Timer</h3>
+      <div class="timer-pills">
+        <button data-timer="30">30 s</button>
+        <button data-timer="60">60 s</button>
+        <button data-timer="90">90 s</button>
+        <button data-timer="120">120 s</button>
+      </div>
+    </div>
+
     <hr class="settings-divider">
 
     <div class="settings-about">
@@ -685,6 +1100,7 @@ export class HomeScreen extends HTMLElement {
   #selectedDeck = null;
   #selectedDifficulty = 1;
   #decks = [];
+  #editingDeck = null; // deck being edited (null = new deck)
 
   constructor() {
     super();
@@ -697,6 +1113,7 @@ export class HomeScreen extends HTMLElement {
     this.#bindModal();
     this.#bindFilter();
     this.#bindSettings();
+    this.#bindImport();
   }
 
   async #loadDecks() {
@@ -710,31 +1127,316 @@ export class HomeScreen extends HTMLElement {
     list.innerHTML = '';
     const q = filter.toLowerCase();
     const filtered = q ? this.#decks.filter(d => JSON.stringify(d).toLowerCase().includes(q)) : this.#decks;
-    for (const deck of filtered) {
+    for (let i = 0; i < filtered.length; i++) {
+      const deck = filtered[i];
       const card = document.createElement('div');
       card.className = 'deck-card';
       card.setAttribute('role', 'option');
       if (deck.background) {
         card.style.background = deck.background;
       }
+      const fav = isFavorite(deck.id);
       card.innerHTML = `
+        <span class="deck-fav ${fav ? 'active' : ''}" data-deck-id="${deck.id}">${fav ? '★' : '☆'}</span>
+        ${deck.custom ? '<button class="deck-edit" aria-label="Edit deck">✏️</button>' : ''}
         <span class="deck-icon">${deck.icon ?? '🃏'}</span>
         <div class="deck-info">
           <div class="deck-name">${deck.name}</div>
         </div>
       `;
+      const favBtn = card.querySelector('.deck-fav');
+      favBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleFavorite(deck.id);
+        this.#decks = sortDecksByRecency(this.#decks);
+        this.#renderDecks(this.shadowRoot.querySelector('.filter-input').value);
+      });
+      const editBtn = card.querySelector('.deck-edit');
+      if (editBtn) {
+        editBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          this.#openEditDialog(deck);
+          this.dispatchEvent(new CustomEvent('edit-deck-open', { bubbles: true, composed: true, detail: { deckId: deck.id } }));
+        });
+      }
+      card.style.animation = `card-in 300ms ease ${i * 40}ms both`;
       card.addEventListener('click', () => {
         this.#openModal(deck);
         this.dispatchEvent(new CustomEvent('deck-preview-open', { bubbles: true, composed: true, detail: { deckId: deck.id } }));
       });
       list.appendChild(card);
     }
+
+    // Always-last "add" card
+    const addCard = document.createElement('div');
+    addCard.className = 'deck-card-add';
+    addCard.innerHTML = `<span class="add-icon">＋</span><span class="add-label">Add</span>`;
+    addCard.addEventListener('click', () => this.#openImportDialog());
+    list.appendChild(addCard);
   }
 
   /* --- Modal open/close --- */
   #bindFilter() {
     const input = this.shadowRoot.querySelector('.filter-input');
     input.addEventListener('input', () => this.#renderDecks(input.value));
+  }
+
+  #bindImport() {
+    const backdrop = this.shadowRoot.querySelector('.import-backdrop');
+    const errorEl = this.shadowRoot.querySelector('.import-error');
+
+    // Close
+    this.shadowRoot.querySelector('.edit-close').addEventListener('click', () => {
+      this.#closeEditDialog();
+    });
+    this.shadowRoot.querySelector('.import-cancel').addEventListener('click', () => {
+      this.#closeEditDialog();
+    });
+    backdrop.addEventListener('click', (e) => {
+      if (e.target === backdrop) this.#closeEditDialog();
+    });
+
+    // Tab switching
+    const tabs = this.shadowRoot.querySelector('.edit-tabs');
+    tabs.addEventListener('click', (e) => {
+      const btn = e.target.closest('button[data-tab]');
+      if (!btn) return;
+      const mode = btn.dataset.tab;
+      tabs.querySelectorAll('button').forEach(b => b.classList.toggle('active', b === btn));
+      const editPane = this.shadowRoot.querySelector('.edit-pane');
+      const jsonPane = this.shadowRoot.querySelector('.json-pane');
+      editPane.classList.toggle('visible', mode === 'editor');
+      jsonPane.classList.toggle('visible', mode === 'json');
+      // Sync data between panes on switch
+      if (mode === 'json') {
+        this.shadowRoot.querySelector('.json-textarea').value =
+          JSON.stringify(this.#buildDeckFromEditor(), null, 2);
+      } else {
+        try {
+          const deck = JSON.parse(this.shadowRoot.querySelector('.json-textarea').value);
+          this.#populateEditor(deck);
+        } catch { /* keep editor as-is if JSON is invalid */ }
+      }
+    });
+
+    // Color pickers — update preview
+    const color1 = this.shadowRoot.querySelector('.edit-color1');
+    const color2 = this.shadowRoot.querySelector('.edit-color2');
+    const preview = this.shadowRoot.querySelector('.edit-color-preview');
+    const updatePreview = () => {
+      preview.style.background = `linear-gradient(135deg, ${color1.value}, ${color2.value})`;
+    };
+    color1.addEventListener('input', updatePreview);
+    color2.addEventListener('input', updatePreview);
+
+    // Add word button
+    this.shadowRoot.querySelector('.add-word-btn').addEventListener('click', () => {
+      const list = this.shadowRoot.querySelector('.edit-words-list');
+      const lastSelect = list.querySelector('.edit-word-row:last-child select');
+      const prevDiff = lastSelect ? lastSelect.value : '0';
+      this.#addWordRow('', prevDiff);
+      const last = list.querySelector('.edit-word-row:last-child input');
+      if (last) last.focus();
+    });
+
+    // Save
+    this.shadowRoot.querySelector('.import-submit').addEventListener('click', async () => {
+      errorEl.textContent = '';
+      try {
+        const isJson = this.shadowRoot.querySelector('.json-pane').classList.contains('visible');
+        if (isJson) {
+          await this.#importDeckJSON(this.shadowRoot.querySelector('.json-textarea').value.trim());
+        } else {
+          await this.#saveFromEditor();
+        }
+        this.#closeEditDialog();
+      } catch (err) {
+        errorEl.textContent = err.message;
+      }
+    });
+
+    // Delete
+    this.shadowRoot.querySelector('.import-delete').addEventListener('click', async () => {
+      if (!this.#editingDeck) return;
+      await deleteDeck(this.#editingDeck.id);
+      this.#decks = sortDecksByRecency(await loadAllDecks());
+      this.#renderDecks();
+      this.#closeEditDialog();
+    });
+  }
+
+  #closeEditDialog() {
+    this.shadowRoot.querySelector('.import-backdrop').classList.remove('open');
+    this.#editingDeck = null;
+    history.back();
+  }
+
+  /** Open editor for a new deck */
+  #openImportDialog() {
+    this.#editingDeck = null;
+    this.#resetEditor();
+    this.shadowRoot.querySelector('.edit-title').textContent = 'Add Deck';
+    this.shadowRoot.querySelector('.import-delete').classList.remove('visible');
+    this.shadowRoot.querySelector('.import-submit').textContent = 'Save';
+    this.shadowRoot.querySelector('.import-backdrop').classList.add('open');
+    this.shadowRoot.querySelector('.edit-name').focus();
+    this.dispatchEvent(new CustomEvent('edit-deck-open', { bubbles: true, composed: true, detail: { deckId: null } }));
+  }
+
+  /** Open editor pre-populated with an existing custom deck */
+  #openEditDialog(deck) {
+    this.#editingDeck = deck;
+    this.#resetEditor();
+    this.#populateEditor(deck);
+    this.shadowRoot.querySelector('.json-textarea').value = JSON.stringify(deck, null, 2);
+    this.shadowRoot.querySelector('.edit-title').textContent = 'Edit Deck';
+    this.shadowRoot.querySelector('.import-delete').classList.add('visible');
+    this.shadowRoot.querySelector('.import-submit').textContent = 'Save';
+    this.shadowRoot.querySelector('.import-backdrop').classList.add('open');
+  }
+
+  static #randomColor() {
+    const h = Math.floor(Math.random() * 360);
+    const s = 40 + Math.floor(Math.random() * 30);
+    const l = 30 + Math.floor(Math.random() * 20);
+    // Convert HSL to hex
+    const hsl2hex = (h, s, l) => {
+      s /= 100; l /= 100;
+      const a = s * Math.min(l, 1 - l);
+      const f = n => { const k = (n + h / 30) % 12; return l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1); };
+      return '#' + [f(0), f(8), f(4)].map(x => Math.round(x * 255).toString(16).padStart(2, '0')).join('');
+    };
+    return hsl2hex(h, s, l);
+  }
+
+  #updateColorPreview() {
+    const c1 = this.shadowRoot.querySelector('.edit-color1').value;
+    const c2 = this.shadowRoot.querySelector('.edit-color2').value;
+    this.shadowRoot.querySelector('.edit-color-preview').style.background =
+      `linear-gradient(135deg, ${c1}, ${c2})`;
+  }
+
+  #resetEditor() {
+    this.shadowRoot.querySelector('.import-error').textContent = '';
+    this.shadowRoot.querySelector('.edit-icon').value = '';
+    this.shadowRoot.querySelector('.edit-name').value = '';
+    this.shadowRoot.querySelector('.edit-desc').value = '';
+    const c1 = HomeScreen.#randomColor();
+    const c2 = HomeScreen.#randomColor();
+    this.shadowRoot.querySelector('.edit-color1').value = c1;
+    this.shadowRoot.querySelector('.edit-color2').value = c2;
+    this.#updateColorPreview();
+    this.shadowRoot.querySelector('.edit-words-list').innerHTML = '';
+    this.shadowRoot.querySelector('.json-textarea').value = '';
+    // Reset to editor tab
+    const tabs = this.shadowRoot.querySelector('.edit-tabs');
+    tabs.querySelectorAll('button').forEach(b => b.classList.toggle('active', b.dataset.tab === 'editor'));
+    this.shadowRoot.querySelector('.edit-pane').classList.add('visible');
+    this.shadowRoot.querySelector('.json-pane').classList.remove('visible');
+  }
+
+  #populateEditor(deck) {
+    this.shadowRoot.querySelector('.edit-icon').value = deck.icon || '';
+    this.shadowRoot.querySelector('.edit-name').value = deck.name || '';
+    this.shadowRoot.querySelector('.edit-desc').value = deck.description || '';
+    // Parse gradient colors from background string
+    const bgMatch = (deck.background || '').match(/#[0-9a-fA-F]{6}/g);
+    if (bgMatch && bgMatch.length >= 2) {
+      this.shadowRoot.querySelector('.edit-color1').value = bgMatch[0];
+      this.shadowRoot.querySelector('.edit-color2').value = bgMatch[1];
+    }
+    this.#updateColorPreview();
+    const wordsList = this.shadowRoot.querySelector('.edit-words-list');
+    wordsList.innerHTML = '';
+    if (deck.words) {
+      for (const w of deck.words) {
+        const text = typeof w === 'string' ? w : (w.text || '');
+        const diff = typeof w === 'object' && w.tags ? (w.tags.find(t => t.startsWith('difficulty:')) || '') : '';
+        const diffVal = diff ? diff.split(':')[1] : '0';
+        this.#addWordRow(text, diffVal);
+      }
+    }
+  }
+
+  #addWordRow(text = '', difficulty = '0') {
+    const list = this.shadowRoot.querySelector('.edit-words-list');
+    const row = document.createElement('div');
+    row.className = 'edit-word-row';
+    row.innerHTML = `
+      <input type="text" placeholder="Word or phrase" value="${text.replace(/"/g, '&quot;')}">
+      <select>
+        <option value="0"${difficulty === '0' ? ' selected' : ''}>Easy</option>
+        <option value="1"${difficulty === '1' ? ' selected' : ''}>Normal</option>
+        <option value="2"${difficulty === '2' ? ' selected' : ''}>Hard</option>
+      </select>
+      <button class="remove-word" aria-label="Remove">✕</button>
+    `;
+    row.querySelector('.remove-word').addEventListener('click', () => row.remove());
+    list.appendChild(row);
+  }
+
+  #buildDeckFromEditor() {
+    const name = this.shadowRoot.querySelector('.edit-name').value.trim();
+    const id = this.#editingDeck?.id ||
+      (name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') + '-' + Math.floor(Math.random() * 9000 + 1000));
+    const icon = this.shadowRoot.querySelector('.edit-icon').value.trim() || undefined;
+    const description = this.shadowRoot.querySelector('.edit-desc').value.trim() || undefined;
+    const c1 = this.shadowRoot.querySelector('.edit-color1').value;
+    const c2 = this.shadowRoot.querySelector('.edit-color2').value;
+    const background = `linear-gradient(135deg, ${c1}, ${c2})`;
+    const wordRows = this.shadowRoot.querySelectorAll('.edit-words-list .edit-word-row');
+    const words = [];
+    for (const row of wordRows) {
+      const text = row.querySelector('input').value.trim();
+      if (!text) continue;
+      const diff = row.querySelector('select').value;
+      const tags = diff !== '' ? [`difficulty:${diff}`] : [];
+      words.push(tags.length ? { text, tags } : { text });
+    }
+    return { id, name, icon, description, background, words, custom: true };
+  }
+
+  async #saveFromEditor() {
+    const deck = this.#buildDeckFromEditor();
+    if (!deck.name) throw new Error('Name is required');
+    if (deck.words.length === 0) throw new Error('Add at least one word');
+    await saveDeck(deck);
+    this.#decks = sortDecksByRecency(await loadAllDecks());
+    this.#renderDecks();
+    const saved = this.#decks.find(d => d.id === deck.id);
+    if (saved) {
+      this.#openModal(saved);
+      this.dispatchEvent(new CustomEvent('deck-preview-open', { bubbles: true, composed: true, detail: { deckId: saved.id } }));
+    }
+  }
+
+  /** Validate and import a deck from JSON string. */
+  async #importDeckJSON(raw) {
+    let deck;
+    try { deck = JSON.parse(raw); } catch { throw new Error('Invalid JSON'); }
+    if (!deck || typeof deck !== 'object') throw new Error('Deck must be a JSON object');
+    if (typeof deck.id !== 'string' || !deck.id.trim()) throw new Error('Missing "id" (string)');
+    if (typeof deck.name !== 'string' || !deck.name.trim()) throw new Error('Missing "name" (string)');
+    if (!Array.isArray(deck.words) || deck.words.length === 0) throw new Error('Missing "words" array');
+    for (const w of deck.words) {
+      if (typeof w === 'string') continue; // allow plain strings
+      if (!w || typeof w !== 'object') throw new Error('Each word must be string or {text, tags?}');
+      if (typeof w.text !== 'string' || !w.text.trim()) throw new Error('Each word object needs a "text" property');
+    }
+    // Normalize: ensure words are objects
+    deck.words = deck.words.map(w => typeof w === 'string' ? { text: w } : w);
+    // Mark as custom
+    deck.custom = true;
+    await saveDeck(deck);
+    // Reload deck list
+    this.#decks = sortDecksByRecency(await loadAllDecks());
+    this.#renderDecks();
+    // Open the newly imported deck
+    const imported = this.#decks.find(d => d.id === deck.id);
+    if (imported) {
+      this.#openModal(imported);
+      this.dispatchEvent(new CustomEvent('deck-preview-open', { bubbles: true, composed: true, detail: { deckId: imported.id } }));
+    }
   }
 
   #bindSettings() {
@@ -782,6 +1484,19 @@ export class HomeScreen extends HTMLElement {
     chkSound.addEventListener('change', () => updateSettings({ soundEnabled: chkSound.checked }));
     chkVibration.addEventListener('change', () => updateSettings({ vibrationEnabled: chkVibration.checked }));
     chkDebug.addEventListener('change', () => updateSettings({ debugOverlay: chkDebug.checked }));
+
+    // Timer duration pills
+    const timerPills = this.shadowRoot.querySelector('.timer-pills');
+    const timerDuration = settings.timerDuration || 60;
+    timerPills.querySelectorAll('button').forEach(b =>
+      b.classList.toggle('selected', parseInt(b.dataset.timer, 10) === timerDuration));
+    timerPills.addEventListener('click', (e) => {
+      const btn = e.target.closest('button[data-timer]');
+      if (!btn) return;
+      const dur = parseInt(btn.dataset.timer, 10);
+      updateSettings({ timerDuration: dur });
+      timerPills.querySelectorAll('button').forEach(b => b.classList.toggle('selected', b === btn));
+    });
 
   }
 
@@ -937,9 +1652,27 @@ export class HomeScreen extends HTMLElement {
     this.#openSettingsUI();
   }
 
+  /** Open the editor for a deck by ID, or blank for new. */
+  openEditor(deckId) {
+    if (deckId) {
+      const deck = this.#decks?.find(d => d.id === deckId);
+      if (deck && deck.custom) this.#openEditDialog(deck);
+      else this.#openImportDialog();
+    } else {
+      this.#openImportDialog();
+    }
+  }
+
+  /** Import a deck from a JSON string (used by deep-link import). */
+  async importFromJSON(json) {
+    return this.#importDeckJSON(json);
+  }
+
   closeDialogs() {
     this.#closeModal();
+    this.#editingDeck = null;
     this.shadowRoot.querySelector('.settings-backdrop')?.classList.remove('open');
+    this.shadowRoot.querySelector('.import-backdrop')?.classList.remove('open');
   }
 
   async #startGame() {

@@ -106,9 +106,32 @@ template.innerHTML = `
   .btn-home { background: var(--color-surface, #16213e); }
   .btn-replay { background: var(--color-primary, #e94560); }
   .btn-replay:hover { background: var(--color-primary-hover, #ff6b81); }
+
+  /* --- Confetti --- */
+  .confetti-container {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 100;
+  }
+  .confetti-piece {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    top: -10px;
+    animation: confetti-fall linear forwards;
+  }
+  @keyframes confetti-fall {
+    0%   { transform: translateY(0) rotate(0deg) scale(1); opacity: 1; }
+    80%  { opacity: 1; }
+    100% { transform: translateY(100vh) rotate(720deg) scale(0.5); opacity: 0; }
+  }
 </style>
 
 <div class="summary">
+  <div class="confetti-container"></div>
   <h2>Round Over!</h2>
   <div class="score-row">
     <div class="score-block">
@@ -185,6 +208,28 @@ export class RoundSummary extends HTMLElement {
       `;
       list.appendChild(li);
     }
+
+    // Confetti burst for good scores
+    if (correctCount >= 5) this.#spawnConfetti(correctCount);
+  }
+
+  #spawnConfetti(count) {
+    const container = this.shadowRoot.querySelector('.confetti-container');
+    const colors = ['#e94560', '#2ecc71', '#f39c12', '#3498db', '#9b59b6', '#1abc9c', '#ff6b81'];
+    const pieces = Math.min(count * 6, 60);
+    for (let i = 0; i < pieces; i++) {
+      const el = document.createElement('div');
+      el.className = 'confetti-piece';
+      el.style.left = `${Math.random() * 100}%`;
+      el.style.background = colors[Math.floor(Math.random() * colors.length)];
+      el.style.animationDuration = `${1.5 + Math.random() * 1.5}s`;
+      el.style.animationDelay = `${Math.random() * 0.6}s`;
+      el.style.width = `${6 + Math.random() * 6}px`;
+      el.style.height = `${6 + Math.random() * 6}px`;
+      container.appendChild(el);
+    }
+    // Clean up after animation
+    setTimeout(() => { container.innerHTML = ''; }, 4000);
   }
 }
 

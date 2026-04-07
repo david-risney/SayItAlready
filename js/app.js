@@ -52,6 +52,9 @@ function showHome(opts = {}) {
 
   if (opts.openDeck) {
     home.addEventListener('decks-loaded', () => home.openDeckById(opts.openDeck), { once: true });
+  } else if (opts.openEditor) {
+    const deckId = opts.openEditor === true ? null : opts.openEditor;
+    home.addEventListener('decks-loaded', () => home.openEditor(deckId), { once: true });
   } else if (opts.openSettings) {
     home.addEventListener('decks-loaded', () => home.openSettings(), { once: true });
   }
@@ -62,7 +65,7 @@ function showGame(deck, tiltGranted = false, difficulty = 2, controlMode = 'touc
   app.innerHTML = '';
   const game = document.createElement('game-screen');
   game.deck = deck;
-  game.duration = 60;
+  game.duration = getSettings().timerDuration;
   game.tiltGranted = tiltGranted;
   game.controlMode = controlMode;
   game.difficulty = difficulty;
@@ -124,6 +127,11 @@ app.addEventListener('settings-open', () => {
   pushView({ view: 'settings' });
 });
 
+app.addEventListener('edit-deck-open', (e) => {
+  const deckId = e.detail?.deckId;
+  pushView(deckId ? { view: 'edit', deck: deckId } : { view: 'edit' });
+});
+
 app.addEventListener('game-paused', () => {
   if (routing) return;
   const game = app.querySelector('game-screen');
@@ -147,6 +155,9 @@ window.addEventListener('popstate', async () => {
   switch (p.view) {
     case 'settings':
       if (home) { home.openSettings(); } else { showHome({ openSettings: true }); }
+      break;
+    case 'edit':
+      if (home) { home.openEditor(p.deck); } else { showHome({ openEditor: p.deck || true }); }
       break;
     case 'deck':
       if (home) { home.openDeckById(p.deck); } else { showHome({ openDeck: p.deck }); }
@@ -222,6 +233,10 @@ if ('serviceWorker' in navigator) {
       replaceView({ view: 'settings' });
       showHome({ openSettings: true });
       break;
+    case 'edit':
+      replaceView(p.deck ? { view: 'edit', deck: p.deck } : { view: 'edit' });
+      showHome({ openEditor: p.deck || true });
+      break;
     case 'deck':
       replaceView({ view: 'deck', deck: p.deck });
       showHome({ openDeck: p.deck });
@@ -264,5 +279,24 @@ if ('serviceWorker' in navigator) {
     default:
       replaceView({ view: 'main' });
       showHome();
+  }
+
+  // Deep-link import via hash: #import/BASE64_JSON
+  const hash = location.hash;
+  if (hash.startsWith('#import/')) {
+    const encoded = hash.slice('#import/'.length);
+    try {
+      const json = atob(encoded);
+      // Wait for home-screen to finish loading decks
+      const home = app.querySelector('home-screen');
+      if (home) {
+        const doImport = () => home.importFromJSON(json).catch(err => console.warn('Import failed:', err));
+        home.addEventListener('decks-loaded', doImport, { once: true });
+      }
+    } catch (err) {
+      console.warn('Invalid import link:', err);
+    }
+    // Strip the hash so it doesn't re-trigger
+    history.replaceState(history.state, '', location.pathname + location.search);
   }
 })();

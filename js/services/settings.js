@@ -4,6 +4,7 @@ const DEFAULTS = {
   soundEnabled: true,
   vibrationEnabled: true,
   controlMode: 'gyro', // 'gyro' | 'touch' | 'swipe'
+  timerDuration: 60,    // seconds: 30 | 60 | 90 | 120
   debugOverlay: false,
 };
 
