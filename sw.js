@@ -1,4 +1,4 @@
-const CACHE_NAME = 'sayitalready-v1.15.0';
+const CACHE_NAME = 'sayitalready-v1.16.0';
 
 const PRECACHE_URLS = [
   './',
@@ -17,6 +17,8 @@ const PRECACHE_URLS = [
   './js/services/deck-store.js',
   './js/services/settings.js',
   './js/services/install.js',
+  './js/services/compress.js',
+  './js/vendor/qrcode.js',
   './js/version.js',
   './packs/animals.json',
   './packs/movies.json',

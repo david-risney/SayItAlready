@@ -4,6 +4,7 @@ import './components/round-summary.js';
 import './components/deck-picker.js';
 import { loadAllDecks } from './services/deck-store.js';
 import { getSettings } from './services/settings.js';
+import { decompressFromBase64 } from './services/compress.js';
 import { requestTiltPermission, probeTiltAvailable } from './services/tilt-detector.js';
 
 const app = document.getElementById('app');
@@ -55,8 +56,12 @@ function showHome(opts = {}) {
   } else if (opts.openEditor) {
     const deckId = opts.openEditor === true ? null : opts.openEditor;
     home.addEventListener('decks-loaded', () => home.openEditor(deckId), { once: true });
+  } else if (opts.openEditorWithDeck) {
+    home.addEventListener('decks-loaded', () => home.openEditorWithDeck(opts.openEditorWithDeck), { once: true });
   } else if (opts.openSettings) {
     home.addEventListener('decks-loaded', () => home.openSettings(), { once: true });
+  } else if (opts.openHelp) {
+    home.addEventListener('decks-loaded', () => home.openHelp(), { once: true });
   }
 }
 
@@ -127,6 +132,11 @@ app.addEventListener('settings-open', () => {
   pushView({ view: 'settings' });
 });
 
+app.addEventListener('help-open', () => {
+  if (routing) return;
+  pushView({ view: 'help' });
+});
+
 app.addEventListener('edit-deck-open', (e) => {
   if (routing) return;
   const deckId = e.detail?.deckId;
@@ -156,6 +166,9 @@ window.addEventListener('popstate', async () => {
   switch (p.view) {
     case 'settings':
       if (home) { home.openSettings(); } else { showHome({ openSettings: true }); }
+      break;
+    case 'help':
+      if (home) { home.openHelp(); } else { showHome({ openHelp: true }); }
       break;
     case 'edit':
       if (home) { home.openEditor(p.deck); } else { showHome({ openEditor: p.deck || true }); }
@@ -238,8 +251,25 @@ if ('serviceWorker' in navigator) {
       showHome({ openSettings: true });
       break;
     case 'edit':
-      replaceView(p.deck ? { view: 'edit', deck: p.deck } : { view: 'edit' });
-      showHome({ openEditor: p.deck || true });
+      if (p.add) {
+        try {
+          const json = await decompressFromBase64(p.add);
+          const deck = JSON.parse(json);
+          replaceView({ view: 'edit' });
+          showHome({ openEditorWithDeck: deck });
+        } catch (err) {
+          console.warn('Invalid add data:', err);
+          replaceView({ view: 'edit' });
+          showHome({ openEditor: true });
+        }
+      } else {
+        replaceView(p.deck ? { view: 'edit', deck: p.deck } : { view: 'edit' });
+        showHome({ openEditor: p.deck || true });
+      }
+      break;
+    case 'help':
+      replaceView({ view: 'help' });
+      showHome({ openHelp: true });
       break;
     case 'deck':
       replaceView({ view: 'deck', deck: p.deck });

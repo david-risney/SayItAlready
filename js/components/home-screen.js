@@ -1,9 +1,11 @@
-import { loadAllDecks, recordPlay, sortDecksByRecency, saveDeck, deleteDeck, toggleFavorite, isFavorite } from '../services/deck-store.js';
+import { loadAllDecks, recordPlay, getPlayHistory, sortDecksByRecency, saveDeck, deleteDeck, toggleFavorite, isFavorite } from '../services/deck-store.js';
 import { requestTiltPermission, probeTiltAvailable } from '../services/tilt-detector.js';
 import { wordText, hasDifficultyTags, filterByDifficulty } from '../models/deck.js';
 import { getSettings, updateSettings } from '../services/settings.js';
 import { APP_VERSION } from '../version.js';
 import { getInstallPrompt, clearInstallPrompt, isInstalledPWA } from '../services/install.js';
+import { compressToBase64 } from '../services/compress.js';
+import { qrcodeSVG } from '../vendor/qrcode.js';
 
 const template = document.createElement('template');
 template.innerHTML = `
@@ -646,6 +648,187 @@ template.innerHTML = `
   }
   .settings-close:hover { background: rgba(255 255 255 / 0.2); color: var(--color-text, #eee); }
 
+  /* --- How to Play card --- */
+  .deck-card-htp {
+    aspect-ratio: 5 / 7;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    background: linear-gradient(135deg, #0a1628, #1a2744);
+    border: 2px solid rgba(255 255 255 / 0.15);
+    border-radius: var(--radius, 12px);
+    padding: 0.75rem 0.5rem;
+    cursor: pointer;
+    transition: transform 200ms ease, border-color 200ms ease;
+    text-align: center;
+    color: #fff;
+  }
+  .deck-card-htp:hover {
+    transform: scale(1.06);
+    border-color: rgba(255 255 255 / 0.35);
+  }
+  .deck-card-htp:active { transform: scale(0.97); }
+  .deck-card-htp .htp-icon { font-size: 2.4rem; line-height: 1; }
+  .deck-card-htp .htp-label { font-weight: 700; font-size: 0.8rem; }
+
+  /* --- How to Play dialog --- */
+  .htp-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+  }
+  .htp-backdrop.open { display: flex; }
+  .htp-dialog {
+    background: var(--color-surface, #16213e);
+    border-radius: var(--radius, 12px);
+    max-width: 340px;
+    width: 100%;
+    padding: 1.5rem;
+    position: relative;
+    animation: modal-in 250ms ease;
+    border: 1px solid rgba(255 255 255 / 0.12);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+    max-height: 85vh;
+    overflow-y: auto;
+  }
+  .htp-dialog h2 {
+    margin: 0 0 1rem;
+    font-size: 1.3rem;
+    font-weight: 800;
+    text-align: center;
+  }
+  .htp-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    counter-reset: step;
+  }
+  .htp-step {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+  }
+  .htp-step-num {
+    counter-increment: step;
+    flex-shrink: 0;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: var(--color-primary, #e94560);
+    color: #fff;
+    font-weight: 800;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .htp-step-num::before { content: counter(step); }
+  .htp-step-body h3 {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 2rem;
+  }
+  .htp-step-body p {
+    margin: 0.2rem 0 0;
+    font-size: 0.8rem;
+    color: rgba(255 255 255 / 0.7);
+    line-height: 1.4;
+  }
+  .htp-close {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    background: rgba(255 255 255 / 0.1);
+    border: none;
+    color: var(--color-text-muted, #aaa);
+    font-size: 1.2rem;
+    line-height: 1;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 150ms ease;
+  }
+  .htp-close:hover { background: rgba(255 255 255 / 0.2); color: var(--color-text, #eee); }
+  .htp-got-it {
+    display: block;
+    margin: 1.25rem auto 0;
+    background: var(--color-primary, #e94560);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 700;
+    border: none;
+    border-radius: var(--radius, 12px);
+    padding: 0.6em 2em;
+    cursor: pointer;
+    transition: background 200ms ease;
+  }
+  .htp-got-it:hover { background: var(--color-primary-hover, #ff6b81); }
+
+  .htp-page { display: none; }
+  .htp-page.active { display: block; }
+  .htp-page h2 {
+    margin: 0 0 0.5rem;
+    font-size: 1.3rem;
+    font-weight: 800;
+    text-align: center;
+  }
+  .htp-page .htp-intro {
+    text-align: center;
+    font-size: 0.85rem;
+    color: rgba(255 255 255 / 0.7);
+    margin: 0 0 1rem;
+  }
+  .htp-page .htp-section-intro {
+    font-size: 0.85rem;
+    color: rgba(255 255 255 / 0.7);
+    margin: 0 0 1rem;
+    line-height: 1.4;
+  }
+  .htp-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.25rem;
+    gap: 0.5rem;
+  }
+  .htp-nav-btn {
+    background: rgba(255 255 255 / 0.1);
+    border: none;
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 700;
+    border-radius: var(--radius, 12px);
+    padding: 0.5em 1.2em;
+    cursor: pointer;
+    transition: background 150ms ease;
+  }
+  .htp-nav-btn:hover { background: rgba(255 255 255 / 0.2); }
+  .htp-nav-btn.hidden { visibility: hidden; }
+  .htp-dots {
+    display: flex;
+    gap: 0.4rem;
+  }
+  .htp-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: rgba(255 255 255 / 0.25);
+    transition: background 150ms ease;
+  }
+  .htp-dot.active { background: var(--color-primary, #e94560); }
+
   /* --- Import (add) card --- */
   .deck-card-add {
     aspect-ratio: 5 / 7;
@@ -881,6 +1064,36 @@ template.innerHTML = `
   /* JSON pane */
   .json-pane { display: none; flex-direction: column; gap: 0.5rem; }
   .json-pane.visible { display: flex; }
+  /* QR pane */
+  .qr-pane { display: none; flex-direction: column; gap: 0.6rem; align-items: center; padding: 0.5rem 0; }
+  .qr-pane.visible { display: flex; }
+  .qr-output { width: 100%; max-width: 220px; }
+  .qr-output svg { width: 100%; height: auto; border-radius: 8px; }
+  .qr-url-row { display: flex; gap: 0.3rem; width: 100%; }
+  .qr-url {
+    flex: 1;
+    padding: 0.35rem 0.5rem;
+    border: 1px solid rgba(255 255 255 / 0.15);
+    border-radius: 6px;
+    background: rgba(0 0 0 / 0.25);
+    color: var(--color-text, #eee);
+    font-size: 0.75rem;
+    outline: none;
+    min-width: 0;
+  }
+  .qr-copy {
+    padding: 0.35rem 0.5rem;
+    border: 1px solid rgba(255 255 255 / 0.15);
+    border-radius: 6px;
+    background: rgba(0 0 0 / 0.25);
+    color: var(--color-text, #eee);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background 150ms ease;
+    flex-shrink: 0;
+  }
+  .qr-copy:hover { background: rgba(255 255 255 / 0.15); }
+  .qr-error { color: #f44; font-size: 0.8rem; text-align: center; }
   .import-dialog textarea.json-textarea {
     width: 100%;
     box-sizing: border-box;
@@ -979,6 +1192,7 @@ template.innerHTML = `
     <div class="edit-tabs">
       <button class="tab-editor active" data-tab="editor">Editor</button>
       <button class="tab-json" data-tab="json">JSON</button>
+      <button class="tab-qr" data-tab="qr">QR Code</button>
     </div>
 
     <div class="edit-pane visible">
@@ -1015,12 +1229,150 @@ template.innerHTML = `
       <textarea class="json-textarea" placeholder='{"id":"my-deck","name":"My Deck","icon":"🎲","words":[{"text":"Example","tags":["easy"]}]}'></textarea>
     </div>
 
+    <div class="qr-pane">
+      <div class="qr-output"></div>
+      <div class="qr-url-row">
+        <input class="qr-url" type="text" readonly>
+        <button class="qr-copy" title="Copy link">📋</button>
+      </div>
+      <div class="qr-error"></div>
+    </div>
+
     <div class="import-error"></div>
     <div class="import-actions">
       <button class="import-delete">🗑 Delete</button>
       <button class="import-cancel">Cancel</button>
       <button class="import-submit">Save</button>
     </div>
+  </div>
+</div>
+
+<div class="htp-backdrop">
+  <div class="htp-dialog">
+    <button class="htp-close" aria-label="Close">✕</button>
+
+    <div class="htp-page active" data-page="0">
+      <h2>How to Play</h2>
+      <p class="htp-intro">A party guessing game to play with a group!</p>
+      <div class="htp-steps">
+        <div class="htp-step">
+          <div class="htp-step-num"></div>
+          <div class="htp-step-body">
+            <h3>Pick a Deck</h3>
+            <p>Choose a theme your group knows — movies, TV shows, games, and more.</p>
+          </div>
+        </div>
+        <div class="htp-step">
+          <div class="htp-step-num"></div>
+          <div class="htp-step-body">
+            <h3>Hold Phone to Forehead</h3>
+            <p>Place the phone on your forehead so everyone else can see the word — but you can't!</p>
+          </div>
+        </div>
+        <div class="htp-step">
+          <div class="htp-step-num"></div>
+          <div class="htp-step-body">
+            <h3>Friends Give Clues</h3>
+            <p>Your friends describe the word without saying it. They can talk, act, or make sounds.</p>
+          </div>
+        </div>
+        <div class="htp-step">
+          <div class="htp-step-num"></div>
+          <div class="htp-step-body">
+            <h3>Tilt to Answer</h3>
+            <p>Got it? Tilt the phone down. Too hard? Tilt up to skip. You can also swipe or tap buttons.</p>
+          </div>
+        </div>
+        <div class="htp-step">
+          <div class="htp-step-num"></div>
+          <div class="htp-step-body">
+            <h3>Beat the Clock</h3>
+            <p>Get as many words as you can before time runs out!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="htp-page" data-page="1">
+      <h2>Settings</h2>
+      <p class="htp-section-intro">Tap the ⚙️ gear icon to open Settings and customize your experience.</p>
+      <div class="htp-steps">
+        <div class="htp-step">
+          <div class="htp-step-num"></div>
+          <div class="htp-step-body">
+            <h3>Controls</h3>
+            <p>Choose how to answer: <b>Tilt</b> the phone, <b>Swipe</b> on screen, or use on-screen <b>Buttons</b>. Keyboard controls are also available on desktop.</p>
+          </div>
+        </div>
+        <div class="htp-step">
+          <div class="htp-step-num"></div>
+          <div class="htp-step-body">
+            <h3>Timer</h3>
+            <p>Set the round length — 30, 60, 90, or 120 seconds. Shorter rounds are faster and more frantic!</p>
+          </div>
+        </div>
+        <div class="htp-step">
+          <div class="htp-step-num"></div>
+          <div class="htp-step-body">
+            <h3>Sound &amp; Vibration</h3>
+            <p>Toggle sound effects and haptic feedback on or off.</p>
+          </div>
+        </div>
+        <div class="htp-step">
+          <div class="htp-step-num"></div>
+          <div class="htp-step-body">
+            <h3>Install &amp; Update</h3>
+            <p>Install the app for offline play. When an update is available, a button appears to refresh.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="htp-page" data-page="2">
+      <h2>Custom Decks</h2>
+      <p class="htp-section-intro">Create your own decks or import decks shared by friends!</p>
+      <div class="htp-steps">
+        <div class="htp-step">
+          <div class="htp-step-num"></div>
+          <div class="htp-step-body">
+            <h3>Tap the ＋ Add Card</h3>
+            <p>At the end of the deck list, tap the + card to open the deck editor.</p>
+          </div>
+        </div>
+        <div class="htp-step">
+          <div class="htp-step-num"></div>
+          <div class="htp-step-body">
+            <h3>Use the Editor</h3>
+            <p>Give your deck a name, pick an icon and colors, then add words with Easy / Medium / Hard difficulty.</p>
+          </div>
+        </div>
+        <div class="htp-step">
+          <div class="htp-step-num"></div>
+          <div class="htp-step-body">
+            <h3>Or Paste JSON</h3>
+            <p>Switch to the JSON tab to paste a deck shared with you, or export your own deck as JSON to share.</p>
+          </div>
+        </div>
+        <div class="htp-step">
+          <div class="htp-step-num"></div>
+          <div class="htp-step-body">
+            <h3>Edit &amp; Delete</h3>
+            <p>Custom decks show a ✏️ button on the card. Tap it to edit or delete the deck anytime.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="htp-nav">
+      <button class="htp-nav-btn htp-prev hidden">← Back</button>
+      <div class="htp-dots">
+        <div class="htp-dot active"></div>
+        <div class="htp-dot"></div>
+        <div class="htp-dot"></div>
+      </div>
+      <button class="htp-nav-btn htp-next">Next →</button>
+    </div>
+    <button class="htp-got-it">Got It!</button>
   </div>
 </div>
 
@@ -1136,6 +1488,7 @@ export class HomeScreen extends HTMLElement {
     this.#bindFilter();
     this.#bindSettings();
     this.#bindImport();
+    this.#bindHowToPlay();
   }
 
   async #loadDecks() {
@@ -1149,6 +1502,17 @@ export class HomeScreen extends HTMLElement {
     list.innerHTML = '';
     const q = filter.toLowerCase();
     const filtered = q ? this.#decks.filter(d => JSON.stringify(d).toLowerCase().includes(q)) : this.#decks;
+
+    const htpSeen = localStorage.getItem('sayitalready-htp-seen') === '1' || Object.keys(getPlayHistory()).length > 0;
+    const htpCard = this.#createHtpCard();
+
+    // If not seen, place HTP card first
+    if (!htpSeen) {
+      htpCard.style.animation = `card-in 300ms ease 0ms both`;
+      list.appendChild(htpCard);
+    }
+
+    const offset = htpSeen ? 0 : 1;
     for (let i = 0; i < filtered.length; i++) {
       const deck = filtered[i];
       const card = document.createElement('div');
@@ -1181,12 +1545,18 @@ export class HomeScreen extends HTMLElement {
           this.dispatchEvent(new CustomEvent('edit-deck-open', { bubbles: true, composed: true, detail: { deckId: deck.id } }));
         });
       }
-      card.style.animation = `card-in 300ms ease ${i * 40}ms both`;
+      card.style.animation = `card-in 300ms ease ${(i + offset) * 40}ms both`;
       card.addEventListener('click', () => {
         this.#openModal(deck);
         this.dispatchEvent(new CustomEvent('deck-preview-open', { bubbles: true, composed: true, detail: { deckId: deck.id } }));
       });
       list.appendChild(card);
+    }
+
+    // If already seen, place HTP card at end (before Add)
+    if (htpSeen) {
+      htpCard.style.animation = `card-in 300ms ease ${filtered.length * 40}ms both`;
+      list.appendChild(htpCard);
     }
 
     // Always-last "add" card
@@ -1195,6 +1565,62 @@ export class HomeScreen extends HTMLElement {
     addCard.innerHTML = `<span class="add-icon">＋</span><span class="add-label">Add</span>`;
     addCard.addEventListener('click', () => this.#openImportDialog());
     list.appendChild(addCard);
+  }
+
+  #createHtpCard() {
+    const card = document.createElement('div');
+    card.className = 'deck-card-htp';
+    card.innerHTML = `<span class="htp-icon">❓</span><span class="htp-label">How to Play</span>`;
+    card.addEventListener('click', () => this.#openHowToPlay());
+    return card;
+  }
+
+  #openHowToPlay() {
+    this._htpShowPage?.();
+    this.shadowRoot.querySelector('.htp-backdrop').classList.add('open');
+    this.dispatchEvent(new CustomEvent('help-open', { bubbles: true, composed: true }));
+  }
+
+  #closeHowToPlay() {
+    this.shadowRoot.querySelector('.htp-backdrop').classList.remove('open');
+    if (localStorage.getItem('sayitalready-htp-seen') !== '1') {
+      localStorage.setItem('sayitalready-htp-seen', '1');
+      this.#renderDecks(this.shadowRoot.querySelector('.filter-input').value);
+    }
+    history.back();
+  }
+
+  #bindHowToPlay() {
+    const backdrop = this.shadowRoot.querySelector('.htp-backdrop');
+    this.shadowRoot.querySelector('.htp-close').addEventListener('click', () => this.#closeHowToPlay());
+    this.shadowRoot.querySelector('.htp-got-it').addEventListener('click', () => this.#closeHowToPlay());
+    backdrop.addEventListener('click', (e) => {
+      if (e.target === backdrop) this.#closeHowToPlay();
+    });
+
+    const pages = this.shadowRoot.querySelectorAll('.htp-page');
+    const dots = this.shadowRoot.querySelectorAll('.htp-dot');
+    const prev = this.shadowRoot.querySelector('.htp-prev');
+    const next = this.shadowRoot.querySelector('.htp-next');
+    const gotIt = this.shadowRoot.querySelector('.htp-got-it');
+    let current = 0;
+    const total = pages.length;
+
+    const showPage = (i) => {
+      current = i;
+      pages.forEach((p, idx) => p.classList.toggle('active', idx === i));
+      dots.forEach((d, idx) => d.classList.toggle('active', idx === i));
+      prev.classList.toggle('hidden', i === 0);
+      next.classList.toggle('hidden', i === total - 1);
+      gotIt.style.display = i === total - 1 ? '' : 'none';
+      this.shadowRoot.querySelector('.htp-dialog').scrollTop = 0;
+    };
+
+    prev.addEventListener('click', () => { if (current > 0) showPage(current - 1); });
+    next.addEventListener('click', () => { if (current < total - 1) showPage(current + 1); });
+
+    // Reset to first page when opened
+    this._htpShowPage = () => showPage(0);
   }
 
   /* --- Modal open/close --- */
@@ -1227,18 +1653,32 @@ export class HomeScreen extends HTMLElement {
       tabs.querySelectorAll('button').forEach(b => b.classList.toggle('active', b === btn));
       const editPane = this.shadowRoot.querySelector('.edit-pane');
       const jsonPane = this.shadowRoot.querySelector('.json-pane');
+      const qrPane = this.shadowRoot.querySelector('.qr-pane');
       editPane.classList.toggle('visible', mode === 'editor');
       jsonPane.classList.toggle('visible', mode === 'json');
+      qrPane.classList.toggle('visible', mode === 'qr');
       // Sync data between panes on switch
       if (mode === 'json') {
         this.shadowRoot.querySelector('.json-textarea').value =
           JSON.stringify(this.#buildDeckFromEditor(), null, 2);
+      } else if (mode === 'qr') {
+        this.#generateQR();
       } else {
         try {
           const deck = JSON.parse(this.shadowRoot.querySelector('.json-textarea').value);
           this.#populateEditor(deck);
         } catch { /* keep editor as-is if JSON is invalid */ }
       }
+    });
+
+    // Copy QR URL
+    this.shadowRoot.querySelector('.qr-copy').addEventListener('click', () => {
+      const url = this.shadowRoot.querySelector('.qr-url').value;
+      if (url) navigator.clipboard.writeText(url).then(() => {
+        const btn = this.shadowRoot.querySelector('.qr-copy');
+        btn.textContent = '✓';
+        setTimeout(() => btn.textContent = '📋', 1500);
+      });
     });
 
     // Color pickers — update preview
@@ -1291,6 +1731,31 @@ export class HomeScreen extends HTMLElement {
     this.shadowRoot.querySelector('.import-backdrop').classList.remove('open');
     this.#editingDeck = null;
     history.back();
+  }
+
+  async #generateQR() {
+    const output = this.shadowRoot.querySelector('.qr-output');
+    const urlEl = this.shadowRoot.querySelector('.qr-url');
+    const errEl = this.shadowRoot.querySelector('.qr-error');
+    output.innerHTML = '';
+    urlEl.value = '';
+    errEl.textContent = '';
+    try {
+      const deck = this.#buildDeckFromEditor();
+      if (!deck.name) throw new Error('Add a name first');
+      if (!deck.words.length) throw new Error('Add some words first');
+      const json = JSON.stringify(deck);
+      const compressed = await compressToBase64(json);
+      const base = location.origin + location.pathname;
+      const url = `${base}?view=edit&add=${compressed}`;
+      urlEl.value = url;
+      const svg = qrcodeSVG(url);
+      output.innerHTML = svg;
+    } catch (err) {
+      errEl.textContent = err.message === 'data too large for QR code'
+        ? 'Deck has too many words for a QR code'
+        : (err.message || 'Could not generate QR code');
+    }
   }
 
   /** Open editor for a new deck */
@@ -1355,6 +1820,10 @@ export class HomeScreen extends HTMLElement {
     tabs.querySelectorAll('button').forEach(b => b.classList.toggle('active', b.dataset.tab === 'editor'));
     this.shadowRoot.querySelector('.edit-pane').classList.add('visible');
     this.shadowRoot.querySelector('.json-pane').classList.remove('visible');
+    this.shadowRoot.querySelector('.qr-pane').classList.remove('visible');
+    this.shadowRoot.querySelector('.qr-output').innerHTML = '';
+    this.shadowRoot.querySelector('.qr-url').value = '';
+    this.shadowRoot.querySelector('.qr-error').textContent = '';
   }
 
   #populateEditor(deck) {
@@ -1708,6 +2177,15 @@ export class HomeScreen extends HTMLElement {
     this.#openSettingsUI();
   }
 
+  openHelp() {
+    this._htpShowPage?.();
+    this.shadowRoot.querySelector('.htp-backdrop').classList.add('open');
+    if (localStorage.getItem('sayitalready-htp-seen') !== '1') {
+      localStorage.setItem('sayitalready-htp-seen', '1');
+      this.#renderDecks(this.shadowRoot.querySelector('.filter-input').value);
+    }
+  }
+
   /** Open the editor for a deck by ID, or blank for new. */
   openEditor(deckId) {
     if (deckId) {
@@ -1717,6 +2195,13 @@ export class HomeScreen extends HTMLElement {
     } else {
       this.#openImportDialog();
     }
+  }
+
+  /** Open editor pre-populated with deck data (used by QR share links). */
+  openEditorWithDeck(deckData) {
+    this.#openImportDialog();
+    this.#populateEditor(deckData);
+    this.shadowRoot.querySelector('.json-textarea').value = JSON.stringify(deckData, null, 2);
   }
 
   /** Import a deck from a JSON string (used by deep-link import). */
@@ -1729,6 +2214,7 @@ export class HomeScreen extends HTMLElement {
     this.#editingDeck = null;
     this.shadowRoot.querySelector('.settings-backdrop')?.classList.remove('open');
     this.shadowRoot.querySelector('.import-backdrop')?.classList.remove('open');
+    this.shadowRoot.querySelector('.htp-backdrop')?.classList.remove('open');
   }
 
   async #startGame() {
