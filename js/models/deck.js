@@ -26,11 +26,6 @@ export function filterByDifficulty(words, maxDifficulty) {
   return words.filter(w => wordDifficulty(w) <= maxDifficulty);
 }
 
-/** Create a new deck object with defaults. */
-export function createDeck({ id, name, description = '', icon = '🃏', background = '', words = [] } = {}) {
-  return { id, name, description, icon, background, words: [...words] };
-}
-
 /** Shuffle an array in place (Fisher-Yates) and return it. */
 export function shuffle(arr) {
   for (let i = arr.length - 1; i > 0; i--) {

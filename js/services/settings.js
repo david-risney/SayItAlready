@@ -26,12 +26,3 @@ export function updateSettings(partial) {
   cache = s;
   localStorage.setItem(SETTINGS_KEY, JSON.stringify(s));
 }
-
-export function resetAllState() {
-  localStorage.clear();
-  cache = null;
-  const req = indexedDB.deleteDatabase('SayItAlreadyDB');
-  req.onsuccess = () => location.reload();
-  req.onerror = () => location.reload();
-  req.onblocked = () => location.reload();
-}

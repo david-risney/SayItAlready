@@ -2,7 +2,10 @@ const DB_NAME = 'SayItAlreadyDB';
 const DB_VERSION = 1;
 const STORE_NAME = 'decks';
 
+let dbInstance = null;
+
 function openDB() {
+  if (dbInstance) return Promise.resolve(dbInstance);
   return new Promise((resolve, reject) => {
     const req = indexedDB.open(DB_NAME, DB_VERSION);
     req.onupgradeneeded = () => {
@@ -11,7 +14,7 @@ function openDB() {
         db.createObjectStore(STORE_NAME, { keyPath: 'id' });
       }
     };
-    req.onsuccess = () => resolve(req.result);
+    req.onsuccess = () => { dbInstance = req.result; resolve(dbInstance); };
     req.onerror = () => reject(req.error);
   });
 }
@@ -30,16 +33,8 @@ function tx(mode, fn) {
 }
 
 /** Get all custom decks. */
-export function getAllDecks() {
-  return openDB().then(
-    (db) =>
-      new Promise((resolve, reject) => {
-        const t = db.transaction(STORE_NAME, 'readonly');
-        const req = t.objectStore(STORE_NAME).getAll();
-        req.onsuccess = () => resolve(req.result);
-        req.onerror = () => reject(req.error);
-      })
-  );
+function getAllDecks() {
+  return tx('readonly', (store) => store.getAll());
 }
 
 /** Save (put) a deck. */
@@ -53,7 +48,7 @@ export function deleteDeck(id) {
 }
 
 /** Fetch a built-in pack JSON file. */
-export async function fetchBuiltInPack(name) {
+async function fetchBuiltInPack(name) {
   const res = await fetch(`./packs/${name}.json`);
   if (!res.ok) throw new Error(`Pack not found: ${name}`);
   return res.json();

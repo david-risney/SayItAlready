@@ -47,19 +47,6 @@ html, body {
   flex-direction: column;
 }
 
-/* ===== Utility ===== */
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
 /* ===== Buttons ===== */
 button {
   font-family: inherit;
@@ -73,29 +60,6 @@ button {
 
 button:active {
   transform: scale(0.96);
-}
-
-.btn-primary {
-  background: var(--color-primary);
-  color: #fff;
-  font-size: var(--font-size-lg);
-  font-weight: 700;
-}
-
-.btn-primary:hover {
-  background: var(--color-primary-hover);
-}
-
-/* ===== Screen layout (shared by all screen components) ===== */
-.screen {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  padding: var(--spacing);
-  text-align: center;
-  gap: var(--spacing);
 }
 
 /* ===== Animations ===== */

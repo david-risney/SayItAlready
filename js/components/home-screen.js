@@ -628,7 +628,8 @@ template.innerHTML = `
     background: var(--color-primary-hover, #ff6b81);
   }
 
-  .settings-close {
+  /* --- Shared dialog close button --- */
+  .dialog-close {
     position: absolute;
     top: 0.75rem;
     right: 0.75rem;
@@ -646,7 +647,7 @@ template.innerHTML = `
     justify-content: center;
     transition: background 150ms ease;
   }
-  .settings-close:hover { background: rgba(255 255 255 / 0.2); color: var(--color-text, #eee); }
+  .dialog-close:hover { background: rgba(255 255 255 / 0.2); color: var(--color-text, #eee); }
 
   /* --- How to Play card --- */
   .deck-card-htp {
@@ -742,25 +743,6 @@ template.innerHTML = `
     color: rgba(255 255 255 / 0.7);
     line-height: 1.4;
   }
-  .htp-close {
-    position: absolute;
-    top: 0.75rem;
-    right: 0.75rem;
-    background: rgba(255 255 255 / 0.1);
-    border: none;
-    color: var(--color-text-muted, #aaa);
-    font-size: 1.2rem;
-    line-height: 1;
-    width: 2rem;
-    height: 2rem;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 150ms ease;
-  }
-  .htp-close:hover { background: rgba(255 255 255 / 0.2); color: var(--color-text, #eee); }
   .htp-got-it {
     display: block;
     margin: 1.25rem auto 0;
@@ -899,25 +881,6 @@ template.innerHTML = `
     margin: 0;
     text-align: center;
   }
-  .edit-close {
-    position: absolute;
-    top: 0.75rem;
-    right: 0.75rem;
-    background: rgba(255 255 255 / 0.1);
-    border: none;
-    color: var(--color-text-muted, #aaa);
-    font-size: 1.2rem;
-    line-height: 1;
-    width: 2rem;
-    height: 2rem;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 150ms ease;
-  }
-  .edit-close:hover { background: rgba(255 255 255 / 0.2); color: #fff; }
   /* Mode tabs */
   .edit-tabs {
     display: flex;
@@ -1186,7 +1149,7 @@ template.innerHTML = `
 
 <div class="import-backdrop">
   <div class="import-dialog">
-    <button class="edit-close" aria-label="Close">✕</button>
+    <button class="edit-close dialog-close" aria-label="Close">✕</button>
     <h2 class="edit-title">Add Deck</h2>
 
     <div class="edit-tabs">
@@ -1249,7 +1212,7 @@ template.innerHTML = `
 
 <div class="htp-backdrop">
   <div class="htp-dialog">
-    <button class="htp-close" aria-label="Close">✕</button>
+    <button class="htp-close dialog-close" aria-label="Close">✕</button>
 
     <div class="htp-page active" data-page="0">
       <h2>How to Play</h2>
@@ -1398,7 +1361,7 @@ template.innerHTML = `
 
 <div class="settings-backdrop">
   <div class="settings-dialog">
-    <button class="settings-close" aria-label="Close">✕</button>
+    <button class="settings-close dialog-close" aria-label="Close">✕</button>
 
     <div class="settings-about">
       <a class="about-header" href="https://github.com/david-risney/SayItAlready" target="_blank" rel="noopener">
@@ -1522,14 +1485,30 @@ export class HomeScreen extends HTMLElement {
         card.style.background = deck.background;
       }
       const fav = isFavorite(deck.id);
-      card.innerHTML = `
-        <span class="deck-fav ${fav ? 'active' : ''}" data-deck-id="${deck.id}">${fav ? '★' : '☆'}</span>
-        ${deck.custom ? '<button class="deck-edit" aria-label="Edit deck">✏️</button>' : ''}
-        <span class="deck-icon">${deck.icon ?? '🃏'}</span>
-        <div class="deck-info">
-          <div class="deck-name">${deck.name}</div>
-        </div>
-      `;
+      const favSpan = document.createElement('span');
+      favSpan.className = `deck-fav ${fav ? 'active' : ''}`;
+      favSpan.dataset.deckId = deck.id;
+      favSpan.textContent = fav ? '★' : '☆';
+      card.appendChild(favSpan);
+      if (deck.custom) {
+        const editBtn = document.createElement('button');
+        editBtn.className = 'deck-edit';
+        editBtn.setAttribute('aria-label', 'Edit deck');
+        editBtn.textContent = '✏️';
+        card.appendChild(editBtn);
+      }
+      const iconSpan = document.createElement('span');
+      iconSpan.className = 'deck-icon';
+      iconSpan.textContent = deck.icon ?? '🃏';
+      card.appendChild(iconSpan);
+      const info = document.createElement('div');
+      info.className = 'deck-info';
+      const nameDiv = document.createElement('div');
+      nameDiv.className = 'deck-name';
+      nameDiv.textContent = deck.name;
+      info.appendChild(nameDiv);
+      card.appendChild(info);
+
       const favBtn = card.querySelector('.deck-fav');
       favBtn.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -1853,16 +1832,24 @@ export class HomeScreen extends HTMLElement {
     const list = this.shadowRoot.querySelector('.edit-words-list');
     const row = document.createElement('div');
     row.className = 'edit-word-row';
-    row.innerHTML = `
-      <input type="text" placeholder="Word or phrase" value="${text.replace(/"/g, '&quot;')}">
-      <select>
-        <option value="0"${difficulty === '0' ? ' selected' : ''}>Easy</option>
-        <option value="1"${difficulty === '1' ? ' selected' : ''}>Normal</option>
-        <option value="2"${difficulty === '2' ? ' selected' : ''}>Hard</option>
-      </select>
-      <button class="remove-word" aria-label="Remove">✕</button>
-    `;
-    row.querySelector('.remove-word').addEventListener('click', () => row.remove());
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.placeholder = 'Word or phrase';
+    input.value = text;
+    const select = document.createElement('select');
+    for (const [val, label] of [['0','Easy'],['1','Normal'],['2','Hard']]) {
+      const opt = document.createElement('option');
+      opt.value = val;
+      opt.textContent = label;
+      if (val === difficulty) opt.selected = true;
+      select.appendChild(opt);
+    }
+    const removeBtn = document.createElement('button');
+    removeBtn.className = 'remove-word';
+    removeBtn.setAttribute('aria-label', 'Remove');
+    removeBtn.textContent = '✕';
+    removeBtn.addEventListener('click', () => row.remove());
+    row.append(input, select, removeBtn);
     list.appendChild(row);
   }
 
@@ -2164,7 +2151,12 @@ export class HomeScreen extends HTMLElement {
       ? filterByDifficulty(this.#selectedDeck.words, this.#selectedDifficulty)
       : this.#selectedDeck.words;
     const sample = [...pool].sort(() => Math.random() - 0.5).slice(0, 3);
-    examples.innerHTML = sample.map(w => `<span>${wordText(w)}</span>`).join('');
+    examples.innerHTML = '';
+    for (const w of sample) {
+      const span = document.createElement('span');
+      span.textContent = wordText(w);
+      examples.appendChild(span);
+    }
   }
 
   /* ---- Public API for router ---- */

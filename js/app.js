@@ -1,7 +1,6 @@
 import './components/home-screen.js';
 import './components/game-screen.js';
 import './components/round-summary.js';
-import './components/deck-picker.js';
 import { loadAllDecks } from './services/deck-store.js';
 import { getSettings } from './services/settings.js';
 import { decompressFromBase64 } from './services/compress.js';
