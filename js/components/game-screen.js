@@ -125,15 +125,18 @@ export class GameScreen extends HTMLElement {
     overlay.classList.remove('hidden');
     let count = 3;
     numEl.textContent = count;
+    navigator.vibrate?.(100);
     return new Promise((resolve) => {
       const tick = () => {
         count--;
         if (count <= 0) {
           overlay.classList.add('hidden');
+          navigator.vibrate?.(200);
           resolve();
           return;
         }
         numEl.textContent = count;
+        navigator.vibrate?.(100);
         // Re-trigger animation
         numEl.style.animation = 'none';
         numEl.offsetHeight; // force reflow
