@@ -1,2 +1,5 @@
 .certs/
+.claude/
+.playwright/
+.playwright-cli/
 node_modules/

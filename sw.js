@@ -1,11 +1,16 @@
-const CACHE_NAME = 'sayitalready-v1.17.0';
+const CACHE_NAME = 'sayitalready-v1.18.0';
 
 const PRECACHE_URLS = [
   './',
   './index.html',
+  './game.html',
   './manifest.json',
   './css/styles.css',
+  './css/home-screen.css',
+  './css/game-screen.css',
+  './css/round-summary.css',
   './js/app.js',
+  './js/game-app.js',
   './js/components/home-screen.js',
   './js/components/game-screen.js',
   './js/components/round-summary.js',
@@ -83,6 +88,14 @@ self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
   if (url.searchParams.get('cache') === 'off') {
     return; // fall through to default browser fetch
+  }
+  // For navigation requests, strip query params so game.html?deck=X hits the cached game.html
+  if (event.request.mode === 'navigate') {
+    const stripped = new Request(url.origin + url.pathname, event.request);
+    event.respondWith(
+      caches.match(stripped).then((cached) => cached || fetch(event.request))
+    );
+    return;
   }
   event.respondWith(
     caches.match(event.request).then((cached) => cached || fetch(event.request))

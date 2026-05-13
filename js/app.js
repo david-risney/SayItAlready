@@ -1,23 +1,8 @@
 import './components/home-screen.js';
-import './components/game-screen.js';
-import './components/round-summary.js';
-import { loadAllDecks } from './services/deck-store.js';
-import { getSettings } from './services/settings.js';
 import { decompressFromBase64 } from './services/compress.js';
-import { requestTiltPermission, probeTiltAvailable } from './services/tilt-detector.js';
 
 const app = document.getElementById('app');
-let allDecks = null;
 let routing = false; // true while handling popstate, suppresses URL side-effects
-
-async function ensureDecks() {
-  if (!allDecks) allDecks = await loadAllDecks();
-  return allDecks;
-}
-
-function findDeck(decks, id) {
-  return decks.find(d => d.id === id || d.name === id);
-}
 
 /* ---- URL state helpers ---- */
 function buildQuery(params) {
@@ -43,9 +28,16 @@ function getViewParams() {
   return obj;
 }
 
+/* ---- Redirect legacy game URLs to game.html ---- */
+function redirectToGame(deckId) {
+  if (!deckId) return false;
+  const params = new URLSearchParams({ deck: deckId });
+  location.replace(`game?${params}`);
+  return true;
+}
+
 /* ---- Simple view router ---- */
 function showHome(opts = {}) {
-  unlockOrientation();
   app.innerHTML = '';
   const home = document.createElement('home-screen');
   app.appendChild(home);
@@ -64,61 +56,9 @@ function showHome(opts = {}) {
   }
 }
 
-function showGame(deck, tiltGranted = false, difficulty = 2, controlMode = 'touch') {
-  lockLandscape();
-  app.innerHTML = '';
-  const game = document.createElement('game-screen');
-  game.deck = deck;
-  game.duration = getSettings().timerDuration;
-  game.tiltGranted = tiltGranted;
-  game.controlMode = controlMode;
-  game.difficulty = difficulty;
-  app.appendChild(game);
-}
-
-function showSummary(deck, results) {
-  unlockOrientation();
-  app.innerHTML = '';
-  const summary = document.createElement('round-summary');
-  summary.data = { deck, results };
-  app.appendChild(summary);
-}
-
-async function startGameFromDeckId(deckId, startPaused = false) {
-  const decks = await ensureDecks();
-  const deck = findDeck(decks, deckId);
-  if (!deck) { replaceView({ view: 'main' }); showHome(); return; }
-  const controlMode = getSettings().controlMode;
-  let tiltAvailable = false;
-  if (controlMode === 'gyro') {
-    const permGranted = await requestTiltPermission();
-    tiltAvailable = permGranted ? await probeTiltAvailable(1500) : false;
-  }
-  showGame(deck, tiltAvailable, 2, controlMode);
-  if (startPaused) {
-    const game = app.querySelector('game-screen');
-    game?.showPause();
-  }
-}
-
 /* ---- Event delegation ---- */
-app.addEventListener('start-game', (e) => {
-  const { deck, tiltGranted, difficulty } = e.detail;
-  const controlMode = e.detail.controlMode ?? getSettings().controlMode;
-  pushView({ view: 'game', deck: deck.id });
-  showGame(deck, tiltGranted, difficulty, controlMode);
-});
-
-app.addEventListener('round-end', (e) => {
-  const { deck, results } = e.detail;
-  const data = btoa(JSON.stringify(results));
-  replaceView({ view: 'results', deck: deck.id, data });
-  showSummary(deck, results);
-});
-
 app.addEventListener('go-home', () => {
   pushView({ view: 'main' });
-  unlockOrientation();
   showHome();
 });
 
@@ -142,20 +82,6 @@ app.addEventListener('edit-deck-open', (e) => {
   pushView(deckId ? { view: 'edit', deck: deckId } : { view: 'edit' });
 });
 
-app.addEventListener('game-paused', () => {
-  if (routing) return;
-  const game = app.querySelector('game-screen');
-  const deckId = game?.deck?.id;
-  if (deckId) pushView({ view: 'game-paused', deck: deckId });
-});
-
-app.addEventListener('game-resumed', () => {
-  if (routing) return;
-  // Pop back to the game URL — but only if we're on game-paused
-  const p = getViewParams();
-  if (p.view === 'game-paused') history.back();
-});
-
 /* ---- Back button ---- */
 window.addEventListener('popstate', async () => {
   routing = true;
@@ -175,61 +101,21 @@ window.addEventListener('popstate', async () => {
     case 'deck':
       if (home) { home.openDeckById(p.deck); } else { showHome({ openDeck: p.deck }); }
       break;
-    case 'results': {
-      if (p.data && p.deck) {
-        const decks = await ensureDecks();
-        const deck = findDeck(decks, p.deck);
-        if (deck) {
-          try {
-            const results = JSON.parse(atob(p.data));
-            showSummary(deck, results);
-            return;
-          } catch {}
-        }
-      }
+    // Legacy game URLs — redirect to game.html
+    case 'game':
+    case 'game-paused':
+      if (p.deck) { redirectToGame(p.deck); return; }
       if (home) { home.closeDialogs(); } else { showHome(); }
       break;
-    }
-    case 'game-paused': {
-      const game = app.querySelector('game-screen');
-      if (game) {
-        // Already on game screen with pause overlay — ensure it's shown
-        game.showPause();
-      } else if (p.deck) {
-        // No game in progress, start a new one paused
-        await startGameFromDeckId(p.deck, true);
-      } else {
-        showHome();
-      }
+    case 'results':
+      // Results can't be replayed from a URL — just go home
+      if (home) { home.closeDialogs(); } else { showHome(); }
       break;
-    }
-    case 'game': {
-      const game = app.querySelector('game-screen');
-      if (game) {
-        // Back from pause overlay → resume
-        game.hidePause();
-      } else if (p.deck) {
-        await startGameFromDeckId(p.deck);
-      } else if (home) {
-        home.closeDialogs();
-      } else {
-        showHome();
-      }
-      break;
-    }
     default:
       if (home) { home.closeDialogs(); } else { showHome(); }
   }
   } finally { routing = false; }
 });
-
-/* ---- Orientation helpers ---- */
-function lockLandscape() {
-  try { screen.orientation?.lock('landscape').catch(() => {}); } catch {}
-}
-function unlockOrientation() {
-  try { screen.orientation?.unlock(); } catch {}
-}
 
 /* ---- PWA install prompt ---- */
 import './services/install.js';
@@ -274,40 +160,16 @@ if ('serviceWorker' in navigator) {
       replaceView({ view: 'deck', deck: p.deck });
       showHome({ openDeck: p.deck });
       break;
-    case 'results': {
-      if (p.data && p.deck) {
-        const decks = await ensureDecks();
-        const deck = findDeck(decks, p.deck);
-        if (deck) {
-          try {
-            const results = JSON.parse(atob(p.data));
-            replaceView({ view: 'results', deck: p.deck, data: p.data });
-            showSummary(deck, results);
-            return;
-          } catch {}
-        }
-      }
+    // Legacy game URLs — redirect to game.html
+    case 'game':
+    case 'game-paused':
+      if (p.deck && redirectToGame(p.deck)) return;
       replaceView({ view: 'main' });
       showHome();
       break;
-    }
-    case 'game':
-      if (p.deck) {
-        replaceView({ view: 'game', deck: p.deck });
-        await startGameFromDeckId(p.deck);
-      } else {
-        replaceView({ view: 'main' });
-        showHome();
-      }
-      break;
-    case 'game-paused':
-      if (p.deck) {
-        replaceView({ view: 'game-paused', deck: p.deck });
-        await startGameFromDeckId(p.deck, true);
-      } else {
-        replaceView({ view: 'main' });
-        showHome();
-      }
+    case 'results':
+      replaceView({ view: 'main' });
+      showHome();
       break;
     default:
       replaceView({ view: 'main' });
