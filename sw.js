@@ -1,4 +1,4 @@
-const CACHE_NAME = 'sayitalready-v1.19.0';
+const CACHE_NAME = 'sayitalready-v1.20.0';
 
 const PRECACHE_URLS = [
   './',
@@ -48,6 +48,7 @@ const PRECACHE_URLS = [
   './packs/lilo-and-stitch.json',
   './packs/roblox.json',
   './packs/80s.json',
+  './packs/sanrio.json',
   './icons/icon.svg',
   './icons/icon-nobg.svg',
   './icons/icon-192.png',

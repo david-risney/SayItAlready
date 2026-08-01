@@ -12,7 +12,7 @@ A Heads Up!–style party word game. Pick a deck, hold your phone up, and get yo
 
 ## Features
 
-- 24 built-in themed decks (movies, TV shows, games, food, and more)
+- 25 built-in themed decks (movies, TV shows, games, food, and more)
 - Gyro, swipe, or button controls
 - Adjustable round timer
 - Create and edit custom decks
