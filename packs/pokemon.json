@@ -1,0 +1,249 @@
+{
+  "id": "pokemon",
+  "name": "Pokémon",
+  "description": "Gotta guess 'em all!",
+  "icon": "⚡",
+  "background": "linear-gradient(135deg, #ffcb05, #2a75bb)",
+  "words": [
+    {
+      "text": "Pikachu",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Charizard",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Charmander",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Squirtle",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Bulbasaur",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Eevee",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Mewtwo",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Mew",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Jigglypuff",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Meowth",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Psyduck",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Snorlax",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Gengar",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Lucario",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Greninja",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Dragonite",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Gyarados",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Blastoise",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Venusaur",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Magikarp",
+      "tags": ["difficulty:0"]
+    },
+    {
+      "text": "Raichu",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Vulpix",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Ninetales",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Arcanine",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Lapras",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Ditto",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Jolteon",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Flareon",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Espeon",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Umbreon",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Scizor",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Tyranitar",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Lugia",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Ho-Oh",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Gardevoir",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Rayquaza",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Piplup",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Infernape",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Sylveon",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Mimikyu",
+      "tags": ["difficulty:1"]
+    },
+    {
+      "text": "Mudkip",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Blaziken",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Sceptile",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Metagross",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Absol",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Milotic",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Garchomp",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Luxray",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Darkrai",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Zoroark",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Chandelure",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Decidueye",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Rowlet",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Lycanroc",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Toxtricity",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Dragapult",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Sprigatito",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Fuecoco",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Ceruledge",
+      "tags": ["difficulty:2"]
+    },
+    {
+      "text": "Ogerpon",
+      "tags": ["difficulty:2"]
+    }
+  ]
+}

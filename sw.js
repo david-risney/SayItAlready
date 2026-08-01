@@ -42,6 +42,7 @@ const PRECACHE_URLS = [
   './packs/portal.json',
   './packs/video-game-characters.json',
   './packs/mario.json',
+  './packs/pokemon.json',
   './packs/brands-and-logos.json',
   './packs/tv-shows.json',
   './packs/amphibia.json',
